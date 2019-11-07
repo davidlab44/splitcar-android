@@ -1,5 +1,6 @@
 package com.globant.splitcar.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -8,8 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.globant.splitcar.R
 import com.globant.splitcar.adapters.RoutesAdapter
 import com.globant.splitcar.model.addRoutes
-import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.activity_main.fab
+import kotlinx.android.synthetic.main.activity_main.fabMakeRoute
 import kotlinx.android.synthetic.main.activity_main.toolbar
 import kotlinx.android.synthetic.main.content_main.recyclerViewRoutes
 
@@ -21,9 +21,9 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         recyclerViewRoutes.layoutManager = LinearLayoutManager(this)
         recyclerViewRoutes.adapter = RoutesAdapter(addRoutes(), this)
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
+        fabMakeRoute.setOnClickListener {
+            val intent: Intent = RouteActivity.createIntent(this@MainActivity)
+            startActivity(intent)
         }
     }
 

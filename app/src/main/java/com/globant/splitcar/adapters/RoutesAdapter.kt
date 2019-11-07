@@ -7,12 +7,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.globant.splitcar.R
 import com.globant.splitcar.model.Route
+import kotlinx.android.synthetic.main.activity_route.view.TextViewTimeRoute
 import kotlinx.android.synthetic.main.route_list_item.view.textViewCarSeat
 import kotlinx.android.synthetic.main.route_list_item.view.textViewDateRoute
 import kotlinx.android.synthetic.main.route_list_item.view.textViewDestinationRoute
 import kotlinx.android.synthetic.main.route_list_item.view.textViewDriverName
 import kotlinx.android.synthetic.main.route_list_item.view.textViewTimeRoute
-
 
 class RoutesAdapter(private val items: ArrayList<Route>, private val context: Context) : RecyclerView.Adapter<ViewHolder>() {
 
