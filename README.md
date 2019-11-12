@@ -60,16 +60,69 @@ Implement an application in Android Studio with Kotlin to share the travel route
 ## User Historys
 
 #
-![Alt Text](https://github.globant.com/storage/user/2520/files/dc4ae400-ffe5-11e9-8161-3ad5ae68f531)
-#
-![Alt Text](https://github.globant.com/storage/user/2520/files/f1c00e00-ffe5-11e9-8489-b39a4a2717ba)
+Historia ver el listado de las rutas disponibles
+Como usuario
+Quiero visualizar cada ruta con las siguientes propiedades: propietario de la ruta origen de la ruta destino de la ruta fecha de la ruta hora de la ruta cupos disponibles de la ruta
+Para identificar fácilmente la ruta en la que estoy interesado
 
+#
+Historia realizar una búsqueda de los sitios principales de referencia destino que han sido digitados al crear una ruta
+Como usuario
+Quiero filtrar los sitios principales de referencia destino que son de interés para que aparezcan en el listado sólo las rutas disponibles por las que va a pasar la ruta
+Para identificar fácilmente sólo las rutas de interés y poderlas seleccionar
+#
+Historia crear una ruta
+Como usuario
+Quiero adicionar una ruta por medio de un boton flotante y me lleve a otro fragmento con las siguientes propiedades: propietario de la ruta, origen de la ruta, destino de la ruta, fecha de la ruta, hora de la ruta, cupos disponibles de la ruta
+Para identificar fácilmente la ruta en la que estoy interesado
 
-## Use Cases
 #
-![Alt Text](https://github.globant.com/storage/user/2520/files/e0c4cc00-ffe8-11e9-8f58-74987216cc23)
+Historia fragmento de crear una ruta
+Como usuario
+Quiero una vista con un formulario editable en el que pueda crear una ruta con los siguientes propiedades: propietario de la ruta, fecha de la ruta, hora de la ruta, origen de la ruta, destino de la ruta, cupos disponibles, lugar de encuentro para salida de la ruta, referencia de destino y un historial de los anteriores viajes
+Para crear una ruta con todos los datos que necesita un usuario con perfil pasajero y se pueda unir a mi ruta
 #
-![Alt Text](https://github.globant.com/storage/user/2520/files/fcc86d80-ffe8-11e9-9ad6-5b007d1aa68a)
+Historia precargar datos de creación de ruta en la vista de creación de ruta
+Como usuario
+Quiero que en la vista de creación de ruta pueda acceder a los viajes anteriores
+Para poder precargar fácilmente de mis viajes anteriores la información de la hora, origen, destino, cupos, lugar de encuentro y referencia de destino
 #
-![Alt Text](https://github.globant.com/storage/user/2520/files/149ff180-ffe9-11e9-928e-fe6544291a4e)
-
+Historia confirmar los datos de creación de ruta fragmento de crear una ruta
+Como usuario
+Quiero tener un botón para confirmar todos los datos al crear una ruta
+Para confirmar todos los datos de creación de una ruta y que se guarden
+#
+Historia seleccionar la fecha, seleccionar la hora, seleccionar los cupos fragmento de crear una ruta
+Como usuario
+Quiero tener la posibilidad de seleccionar la fecha seleccionar la hora y seleccionar los cupos sin necesidad de digitarlos
+Para fácilmente crear una ruta seleccionando fecha hora y cupos
+#
+Historia digitar la referencia destino que son todos los lugares principales por los que voy a pasar al realizar mi ruta
+Como usuario
+Quiero tener la posibilidad de escribir los lugares principales por los que voy a pasar al realizar mi ruta
+Para que al usuario pasajero pueda realizar una búsqueda de interés por los sitios principales de la ruta que estoy creando
+#
+Historia modificar una ruta creada
+Como usuario
+Quiero tener la opción de modificar el nombre del propietario de una ruta, la fecha de partida de la ruta, la hora de partida de la ruta, el lugar de origen de una ruta, el lugar de destino de la ruta, los cupos disponibles de una ruta, el lugar de encuentro de la ruta, la referencia destino de una ruta
+Para tener la opción de corregir una ruta en caso de alguna equivocación
+#
+Historia eliminar una ruta creada
+Como usuario
+Quiero tener la opción de eliminar una ruta
+Para tener la opción de borrar una ruta en caso de alguna equivocación
+#
+Historia unirse a una ruta
+Como usuario
+Quiero tener la opción de unirme a una ruta seleccionando una ruta disponible del listado en la vista principal, lanzando otro fragmento de unirse a la ruta
+Para poder conectarme con el propietario que creó la ruta
+#
+Historia fragmento de unirse a una ruta
+Como usuario
+Quiero una vista con un formulario de información en el que pueda visualizar una ruta seleccionada con los siguientes propiedades: propietario de la ruta, fecha de la ruta, hora de la ruta, origen de la ruta, destino de la ruta, cupos disponibles, lugar de encuentro para salida de la ruta, referencia de destino, cuenta regresiva
+Para poder unirme a la ruta de interés
+#
+Historia alerta próxima a la hora de salida
+Como usuario
+Quiero faltando 15 minutos en la hora de salida de la ruta emitirá un sonido y/o vibración faltando 15 minutos de la hora de partida de la ruta
+Para llegar puntualmente al lugar de encuentro de salida de la ruta
