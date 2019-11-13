@@ -43,18 +43,14 @@ Implement an application in Android Studio with Kotlin to share the travel route
 ### KOTLIN Programming Language
 ### Android architecture components
 
-
-
-
-
 #
-![Alt Text](https://github.globant.com/storage/user/2520/files/6a729a80-ffe5-11e9-8fba-4e1c17b80845)
+![Alt Text](https://github.globant.com/storage/user/2520/files/0e71cc80-060a-11ea-8765-a75ba2a7d1d9)
 #
-![Alt Text](https://github.globant.com/storage/user/2520/files/8b3af000-ffe5-11e9-8411-a986d572498a)
+![Alt Text](https://github.globant.com/storage/user/2520/files/33fed600-060a-11ea-9547-833cad67cefd)
 #
-![Alt Text](https://github.globant.com/storage/user/2520/files/a148b080-ffe5-11e9-9597-6c877bc2d0a8)
+![Alt Text](https://github.globant.com/storage/user/2520/files/4b3dc380-060a-11ea-9a3e-7a6409e503d4)
 #
-![Alt Text](https://github.globant.com/storage/user/2520/files/cc330480-ffe5-11e9-9bba-8a70b0f7407d)
+![Alt Text](https://github.globant.com/storage/user/2520/files/5ee92a00-060a-11ea-91f9-770f8b67ae7f)
 
 
 ## User Historys
