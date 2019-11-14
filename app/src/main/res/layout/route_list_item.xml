@@ -64,7 +64,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textViewDateRoute" />
 
             <TextView
-                android:id="@+id/textViewCarSeat"
+                android:id="@+id/spinnerCarSeat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"

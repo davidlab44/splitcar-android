@@ -6,10 +6,13 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
+import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import com.globant.splitcar.R
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_route.constraintLayoutActivityRoute
+import kotlinx.android.synthetic.main.activity_route.spinnerCarSeat
+import kotlinx.android.synthetic.main.activity_route.spinnerMeetingPlace
 import kotlinx.android.synthetic.main.activity_route.textViewDateRoute
 import kotlinx.android.synthetic.main.activity_route.textViewTimeRoute
 import java.text.SimpleDateFormat
@@ -19,16 +22,22 @@ import java.util.Calendar
 import java.util.Locale
 
 class RouteActivity : AppCompatActivity() {
-
+    private val carSeat = arrayOf(1, 2, 3, 4)
+    private val meetingPlace = arrayOf("Salida S3", "Salida S2", "Salida S1", "Tostao", "Globant P1", "Globant S2")
     private var calendar = Calendar.getInstance()
     private val currentDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))
     private val currentTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss"))
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_route)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.title = "Make a Route"
+        supportActionBar?.title = "Crea tu Ruta"
+        val arrayAdapter = ArrayAdapter(this@RouteActivity, android.R.layout.simple_spinner_item, carSeat)
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinnerCarSeat.adapter = arrayAdapter
+        val arrayAdapterMeetingPlace = ArrayAdapter(this@RouteActivity, android.R.layout.simple_spinner_item, meetingPlace)
+        arrayAdapterMeetingPlace.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinnerMeetingPlace.adapter = arrayAdapterMeetingPlace
         textViewDateRoute.text = currentDate
         textViewTimeRoute.text = currentTime
         val onDateSetListener = DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
@@ -48,7 +57,7 @@ class RouteActivity : AppCompatActivity() {
         }
         textViewTimeRoute.setOnClickListener {
             TimePickerDialog(this@RouteActivity, onTimeSetListener, calendar.get(Calendar.HOUR), calendar.get(Calendar.MINUTE),
-                    false).show()
+                    true).show()
         }
     }
 

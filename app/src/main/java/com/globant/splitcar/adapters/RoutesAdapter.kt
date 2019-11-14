@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.globant.splitcar.R
 import com.globant.splitcar.model.Route
-import kotlinx.android.synthetic.main.route_list_item.view.textViewCarSeat
+import kotlinx.android.synthetic.main.route_list_item.view.spinnerCarSeat
 import kotlinx.android.synthetic.main.route_list_item.view.textViewDateRoute
 import kotlinx.android.synthetic.main.route_list_item.view.textViewDestinationRoute
 import kotlinx.android.synthetic.main.route_list_item.view.textViewDriverName
@@ -37,5 +37,5 @@ class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     val destinationRoute = view.textViewDestinationRoute
     val dateRoute = view.textViewDateRoute
     val timeRoute = view.textViewTimeRoute
-    val carSeat = view.textViewCarSeat
+    val carSeat = view.spinnerCarSeat
 }
