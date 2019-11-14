@@ -38,7 +38,7 @@ class RouteActivity : AppCompatActivity() {
             updateDateInTextViewDateRoute()
         }
         val onTimeSetListener = TimePickerDialog.OnTimeSetListener { _, hour, minute ->
-            calendar.set(Calendar.HOUR, hour)
+            calendar.set(Calendar.HOUR_OF_DAY, hour)
             calendar.set(Calendar.MINUTE, minute)
             updateTimeInTextViewDateRoute()
         }
@@ -48,7 +48,7 @@ class RouteActivity : AppCompatActivity() {
         }
         textViewTimeRoute.setOnClickListener {
             TimePickerDialog(this@RouteActivity, onTimeSetListener, calendar.get(Calendar.HOUR), calendar.get(Calendar.MINUTE),
-                    true).show()
+                    false).show()
         }
     }
 
@@ -58,8 +58,8 @@ class RouteActivity : AppCompatActivity() {
     }
 
     private fun updateTimeInTextViewDateRoute() {
-        textViewTimeRoute.text = SimpleDateFormat("HH:mm", Locale.US).format(calendar.time)
-        Snackbar.make(constraintLayoutActivityRoute, SimpleDateFormat("HH:mm", Locale.US).format(calendar.time), Snackbar.LENGTH_LONG).show()
+        textViewTimeRoute.text = SimpleDateFormat("HH:mm a", Locale.US).format(calendar.time)
+        Snackbar.make(constraintLayoutActivityRoute, SimpleDateFormat("HH:mm a", Locale.US).format(calendar.time), Snackbar.LENGTH_LONG).show()
     }
 
     override fun onOptionsItemSelected(menuItem: MenuItem): Boolean {
