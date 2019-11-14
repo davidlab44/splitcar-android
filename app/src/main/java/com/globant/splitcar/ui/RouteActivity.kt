@@ -1,14 +1,17 @@
 package com.globant.splitcar.ui
 
 import android.app.DatePickerDialog
+import android.app.TimePickerDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.globant.splitcar.R
+import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.activity_route.constraintLayoutActivityRoute
 import kotlinx.android.synthetic.main.activity_route.textViewDateRoute
+import kotlinx.android.synthetic.main.activity_route.textViewTimeRoute
 import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -25,27 +28,38 @@ class RouteActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_route)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.title = "Crear una Ruta"
-        val textViewDateRoute = findViewById<TextView>(R.id.textViewDateRoute)
-        val textViewTimeRoute = findViewById<TextView>(R.id.textViewTimeRoute)
+        supportActionBar?.title = "Make a Route"
         textViewDateRoute.text = currentDate
         textViewTimeRoute.text = currentTime
-        val dateSetListener = DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
+        val onDateSetListener = DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
             calendar.set(Calendar.YEAR, year)
             calendar.set(Calendar.MONTH, monthOfYear)
             calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
-            updateDateInView()
+            updateDateInTextViewDateRoute()
+        }
+        val onTimeSetListener = TimePickerDialog.OnTimeSetListener { _, hour, minute ->
+            calendar.set(Calendar.HOUR, hour)
+            calendar.set(Calendar.MINUTE, minute)
+            updateTimeInTextViewDateRoute()
         }
         textViewDateRoute.setOnClickListener {
-            DatePickerDialog(this@RouteActivity, dateSetListener, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
+            DatePickerDialog(this@RouteActivity, onDateSetListener, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
                     calendar.get(Calendar.DAY_OF_MONTH)).show()
+        }
+        textViewTimeRoute.setOnClickListener {
+            TimePickerDialog(this@RouteActivity, onTimeSetListener, calendar.get(Calendar.HOUR), calendar.get(Calendar.MINUTE),
+                    true).show()
         }
     }
 
-    private fun updateDateInView() {
-        val myFormat = "dd/mm/yyyy" // mention the format you need
-        val sdf = SimpleDateFormat(myFormat, Locale.US)
-        textViewDateRoute.text = sdf.format(calendar.time)
+    private fun updateDateInTextViewDateRoute() {
+        textViewDateRoute.text = SimpleDateFormat("dd/MM/yyyy", Locale.US).format(calendar.time)
+        Snackbar.make(constraintLayoutActivityRoute, SimpleDateFormat("dd/MM/yyyy", Locale.US).format(calendar.time), Snackbar.LENGTH_LONG).show()
+    }
+
+    private fun updateTimeInTextViewDateRoute() {
+        textViewTimeRoute.text = SimpleDateFormat("HH:mm", Locale.US).format(calendar.time)
+        Snackbar.make(constraintLayoutActivityRoute, SimpleDateFormat("HH:mm", Locale.US).format(calendar.time), Snackbar.LENGTH_LONG).show()
     }
 
     override fun onOptionsItemSelected(menuItem: MenuItem): Boolean {
