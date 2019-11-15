@@ -46,11 +46,11 @@ Implement an application in Android Studio with Kotlin to share the travel route
 #
 ![Alt Text](https://github.globant.com/storage/user/2520/files/0e71cc80-060a-11ea-8765-a75ba2a7d1d9)
 #
-![Alt Text](https://github.globant.com/storage/user/2520/files/33fed600-060a-11ea-9547-833cad67cefd)
+![Alt Text](https://github.globant.com/storage/user/2520/files/d3ae9680-07b9-11ea-9314-6873c68559a8)
 #
-![Alt Text](https://github.globant.com/storage/user/2520/files/4b3dc380-060a-11ea-9a3e-7a6409e503d4)
+![Alt Text](https://github.globant.com/storage/user/2520/files/fb056380-07b9-11ea-8919-4cb0db6e998c)
 #
-![Alt Text](https://github.globant.com/storage/user/2520/files/5ee92a00-060a-11ea-91f9-770f8b67ae7f)  
+![Alt Text](https://github.globant.com/storage/user/2520/files/11abba80-07ba-11ea-9076-a97c7903bbc6)  
 
 
 ## Use cases   
