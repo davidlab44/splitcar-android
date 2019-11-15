@@ -6,11 +6,196 @@
     android:orientation="vertical"
     android:padding="4dp">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="4dp">
+
+        <TextView
+            android:id="@+id/textViewYourTrip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tu Viaje" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayoutActivityRoute"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border">
+
+                <EditText
+                    android:id="@+id/editTextDriverName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:hint="Ingrese su correo electrónico"
+                    android:inputType="textEmailAddress"
+                    app:layout_constraintStart_toEndOf="@+id/imageViewRouteDestination2"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <AutoCompleteTextView
+                    android:id="@+id/autoCompleteTextViewDestinationRoute"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:hint="Ingrese el destino de su ruta"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toEndOf="@+id/imageViewRouteDestination"
+                    app:layout_constraintTop_toTopOf="@+id/imageViewRouteDestination" />
+
+                <TextView
+                    android:id="@+id/textViewDateRoute"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="4dp"
+                    android:text="EditText"
+                    android:textColor="#0097A7"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toEndOf="@+id/imageViewDateRoute"
+                    app:layout_constraintTop_toBottomOf="@id/autoCompleteTextViewDestinationRoute" />
+
+                <TextView
+                    android:id="@+id/textViewTimeRoute"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="4dp"
+                    android:text="EditText"
+                    android:textColor="#0097A7"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toEndOf="@+id/textView4"
+                    app:layout_constraintTop_toBottomOf="@id/textViewDateRoute" />
+
+                <ImageView
+                    android:id="@+id/imageViewRouteDestination"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginTop="4dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/editTextDriverName"
+                    app:srcCompat="@android:drawable/presence_online" />
+
+                <ImageView
+                    android:id="@+id/imageViewRouteDestination2"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@android:drawable/ic_menu_edit" />
+
+                <ImageView
+                    android:id="@+id/imageViewRouteDestination3"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="4dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/editTextMeetingPlace"
+                    app:srcCompat="@android:drawable/checkbox_on_background" />
+
+                <ImageView
+                    android:id="@+id/imageViewDateRoute"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginTop="4dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/autoCompleteTextViewDestinationRoute"
+                    app:srcCompat="@android:drawable/ic_menu_month" />
+
+                <ImageView
+                    android:id="@+id/imageViewTimeRoute"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginTop="4dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewDateRoute"
+                    app:srcCompat="@android:drawable/ic_lock_idle_alarm" />
+
+                <Spinner
+                    android:id="@+id/spinnerCarSeat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center_horizontal"
+                    android:minWidth="128dp"
+                    android:textColor="#0097A7"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toEndOf="@+id/textView"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewTimeRoute" />
+
+                <EditText
+                    android:id="@+id/editTextMeetingPlace"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="4dp"
+                    android:hint="Cúal es el lugar de Encuentro"
+                    android:textColor="#0097A7"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toEndOf="@+id/imageViewRoute2"
+                    app:layout_constraintTop_toBottomOf="@+id/spinnerCarSeat" />
+
+                <ImageView
+                    android:id="@+id/imageViewCarSeat"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginTop="4dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewTimeRoute"
+                    app:srcCompat="@android:drawable/ic_menu_upload" />
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="4dp"
+                    android:text="Cupos:"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toEndOf="@+id/imageViewCarSeat"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewTimeRoute" />
+
+                <ImageView
+                    android:id="@+id/imageViewRoute2"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginTop="4dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imageViewCarSeat"
+                    app:srcCompat="@android:drawable/ic_menu_myplaces" />
+
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="24dp"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="4dp"
+                    android:text="Elige una hora"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toEndOf="@+id/imageViewTimeRoute"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewDateRoute" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+
     <TextView
-        android:id="@+id/textViewYourTrip"
+        android:id="@+id/TextViewDestinationReference"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Tu Viaje" />
+        android:text="Referencia Destino" />
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -18,159 +203,24 @@
         android:layout_margin="8dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayoutActivityRoute"
+            android:id="@+id/constraintLayoutDestinationReference"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/border">
 
             <EditText
-                android:id="@+id/editTextDriverName"
+                android:id="@+id/editTextDestinationReference"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
-                android:hint="Ingrese su correo electrónico"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="4dp"
+                android:hint="Un punto de referencia indicando el lugar al que te diriges"
                 android:inputType="textEmailAddress"
-                app:layout_constraintStart_toEndOf="@+id/imageViewRouteDestination2"
-                app:layout_constraintTop_toTopOf="parent" />
-            android:layout_marginStart="4dp"
-            android:hint="Ingrese su correo electrónico"
-            android:inputType="textEmailAddress"
-            android:textSize="18sp"
-            app:layout_constraintStart_toEndOf="@+id/imageViewRouteDestination2"
-            app:layout_constraintTop_toTopOf="@+id/imageViewRouteDestination2" />
-
-            <AutoCompleteTextView
-                android:id="@+id/autoCompleteTextViewDestinationRoute"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:hint="Ingrese el destino de su ruta"
-                android:textSize="18sp"
-                app:layout_constraintStart_toEndOf="@+id/imageViewRouteDestination"
-                app:layout_constraintTop_toTopOf="@+id/imageViewRouteDestination" />
-
-            <TextView
-                android:id="@+id/textViewTimeRoute"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="4dp"
-                android:text="EditText"
-                android:textColor="#0097A7"
-                android:textSize="18sp"
-                app:layout_constraintStart_toEndOf="@+id/textView4"
-                app:layout_constraintTop_toBottomOf="@+id/autoCompleteTextViewDestinationRoute" />
-
-            <ImageView
-                android:id="@+id/imageViewRouteDestination"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginTop="4dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextDriverName"
-                app:srcCompat="@android:drawable/presence_online" />
-
-            <ImageView
-                android:id="@+id/imageViewRouteDestination2"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginTop="8dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@android:drawable/ic_menu_edit" />
-
-            <ImageView
-                android:id="@+id/imageViewRouteDestination3"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_marginTop="4dp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:textSize="13dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/spinnerMeetingPlace"
-                app:srcCompat="@android:drawable/checkbox_on_background" />
-
-            <ImageView
-                android:id="@+id/imageViewTimeRoute"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginTop="4dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/autoCompleteTextViewDestinationRoute"
-                app:srcCompat="@android:drawable/ic_lock_idle_alarm" />
-
-            <Spinner
-                android:id="@+id/spinnerCarSeat"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="4dp"
-                android:textColor="#0097A7"
-                android:textSize="18sp"
-                app:layout_constraintStart_toEndOf="@+id/textView"
-                app:layout_constraintTop_toBottomOf="@+id/textViewTimeRoute" />
-
-            <Spinner
-                android:id="@+id/spinnerMeetingPlace"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="4dp"
-                android:textColor="#0097A7"
-                android:textSize="18sp"
-                app:layout_constraintStart_toEndOf="@+id/textViewMeetingPlace"
-                app:layout_constraintTop_toBottomOf="@+id/spinnerCarSeat" />
-
-            <ImageView
-                android:id="@+id/imageViewCarSeat"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginTop="4dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewTimeRoute"
-                app:srcCompat="@android:drawable/ic_menu_upload" />
-
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="4dp"
-                android:text="Cupos:"
-                android:textSize="18sp"
-                app:layout_constraintStart_toEndOf="@+id/imageViewCarSeat"
-                app:layout_constraintTop_toBottomOf="@+id/textViewTimeRoute" />
-
-            <ImageView
-                android:id="@+id/imageViewRoute2"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginTop="4dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageViewCarSeat"
-                app:srcCompat="@android:drawable/ic_menu_myplaces" />
-
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="wrap_content"
-                android:layout_height="24dp"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="4dp"
-                android:text="Elige una hora"
-                android:textSize="18sp"
-                app:layout_constraintStart_toEndOf="@+id/imageViewTimeRoute"
-                app:layout_constraintTop_toBottomOf="@+id/autoCompleteTextViewDestinationRoute" />
-
-            <TextView
-                android:id="@+id/textViewMeetingPlace"
-                android:layout_width="wrap_content"
-                android:layout_height="24dp"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="4dp"
-                android:text="Lugar de Encuentro"
-                android:textSize="18sp"
-                app:layout_constraintStart_toEndOf="@+id/imageViewRoute2"
-                app:layout_constraintTop_toBottomOf="@+id/textView" />
+                app:layout_constraintTop_toTopOf="parent" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
