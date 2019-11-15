@@ -71,71 +71,42 @@ Implement an application in Android Studio with Kotlin to share the travel route
 ![Alt Text](https://github.globant.com/storage/user/2520/files/28fd7300-0615-11ea-894b-1fd89ed0b788)
 #  
 
-## User Historys  
+## User Stories  
  
 #
 #
 Historia ver el listado de las rutas disponibles  
 Como usuario  
-Quiero visualizar cada ruta con las siguientes propiedades: propietario de la ruta origen de la ruta destino de la ruta   fecha de la ruta hora de la ruta cupos disponibles de la ruta
+Quiero visualizar cada ruta con las siguientes propiedades: propietario, origen, destino, fecha, hora y cupos disponibles  
 Para identificar fácilmente la ruta en la que estoy interesado  
 #  
-Historia realizar una búsqueda de los sitios principales de referencia destino que han sido digitados al crear una ruta  
+Historia realizar una búsqueda de los sitios principales de referencia destino  
 Como usuario  
-Quiero filtrar los sitios principales de referencia destino que son de interés para que aparezcan en el listado sólo las   rutas disponibles por las que va a pasar la ruta
-Para identificar fácilmente sólo las rutas de interés y poderlas seleccionar  
+Quiero filtrar los sitios principales de referencia destino que son de interés para que aparezcan en el listado sólo las rutas disponibles  
+Para que al usuario pasajero pueda realizar una búsqueda de interés por los sitios principales de la ruta que estoy   creando
 #  
 Historia crear una ruta  
 Como usuario  
-Quiero adicionar una ruta por medio de un boton flotante y me lleve a otro fragmento con las siguientes propiedades:   propietario de la ruta, origen de la ruta, destino de la ruta, fecha de la ruta, hora de la ruta, cupos disponibles de la ruta
-Para identificar fácilmente la ruta en la que estoy interesado  
-#  
-Historia fragmento de crear una ruta  
-Como usuario  
-Quiero una vista con un formulario editable en el que pueda crear una ruta con los siguientes propiedades: propietario   de la ruta, fecha de la ruta, hora de la ruta, origen de la ruta, destino de la ruta, cupos disponibles, lugar de encuentro para salida de la ruta, referencia de destino y un historial de los anteriores viajes 
-Para crear una ruta con todos los datos que necesita un usuario con perfil pasajero y se pueda unir a mi ruta  
-#  
-Historia precargar datos de creación de ruta en la vista de creación de ruta  
-Como usuario  
+Quiero crear una ruta en una vista con un formulario editable en el que pueda crear una ruta con los siguientes propiedades: propietario, destino, hora, cupos disponibles, lugar de encuentro, referencia de destino y un historial de los anteriores viajes  
 Quiero que en la vista de creación de ruta pueda acceder a los viajes anteriores  
-Para poder precargar fácilmente de mis viajes anteriores la información de la hora, origen, destino, cupos, lugar de   encuentro y referencia de destino
-#  
-Historia confirmar los datos de creación de ruta fragmento de crear una ruta  
-Como usuario  
 Quiero tener un botón para confirmar todos los datos al crear una ruta  
-Para confirmar todos los datos de creación de una ruta y que se guarden  
-#  
-Historia seleccionar la fecha, seleccionar la hora, seleccionar los cupos fragmento de crear una ruta  
-Como usuario  
-Quiero tener la posibilidad de seleccionar la fecha seleccionar la hora y seleccionar los cupos sin necesidad de   digitarlos
-Para fácilmente crear una ruta seleccionando fecha hora y cupos  
-#  
-Historia digitar la referencia destino que son todos los lugares principales por los que voy a pasar al realizar mi ruta  
-Como usuario  
+Quiero poder precargar fácilmente de mis viajes anteriores la información de la hora, origen, destino, cupos, lugar de   encuentro y referencia de destino
+Quiero tener la posibilidad de seleccionar la fecha seleccionar la hora y seleccionar los cupos sin necesidad de   digitarlos  
 Quiero tener la posibilidad de escribir los lugares principales por los que voy a pasar al realizar mi ruta  
-Para que al usuario pasajero pueda realizar una búsqueda de interés por los sitios principales de la ruta que estoy   creando
-#  
-Historia modificar una ruta creada  
-Como usuario  
-Quiero tener la opción de modificar el nombre del propietario de una ruta, la fecha de partida de la ruta, la hora de   partida de la ruta, el lugar de origen de una ruta, el lugar de destino de la ruta, los cupos disponibles de una ruta, el lugar de encuentro de la ruta, la referencia destino de una ruta
-Para tener la opción de corregir una ruta en caso de alguna equivocación  
+Para crear una ruta con todos los datos que necesita un usuario con perfil pasajero  
 #  
 Historia eliminar una ruta creada  
 Como usuario  
 Quiero tener la opción de eliminar una ruta  
-Para tener la opción de borrar una ruta en caso de alguna equivocación  
+Para tener la opción de borrar una ruta  
 #  
 Historia unirse a una ruta  
 Como usuario  
-Quiero tener la opción de unirme a una ruta seleccionando una ruta disponible del listado en la vista principal,   lanzando otro fragmento de unirse a la ruta
-Para poder conectarme con el propietario que creó la ruta  
-#  
-Historia fragmento de unirse a una ruta  
-Como usuario  
-Quiero una vista con un formulario de información en el que pueda visualizar una ruta seleccionada con los siguientes   propiedades: propietario de la ruta, fecha de la ruta, hora de la ruta, origen de la ruta, destino de la ruta, cupos disponibles, lugar de encuentro para salida de la ruta, referencia de destino, cuenta regresiva
-Para poder unirme a la ruta de interés  
+Quiero tener la opción de unirme a una ruta seleccionando una ruta disponible del listado en la vista principal
+Quiero una vista en la que pueda visualizar una ruta seleccionada con los siguientes propiedades: propietario, fecha, hora, origen, destino, cupos disponibles, lugar de encuentro para salida, referencia de destino
+Para poder unirme a la ruta que creó un propietario  
 #  
 Historia alerta próxima a la hora de salida  
 Como usuario  
-Quiero faltando 15 minutos en la hora de salida de la ruta emitirá un sonido y/o vibración faltando 15 minutos de la   hora de partida de la ruta
-Para llegar puntualmente al lugar de encuentro de salida de la ruta  
+Quiero una notificación antes de 15 minutos de la hora de salida mediante un sonido y/o vibración  
+Para llegar puntualmente al lugar de encuentro de salida  
