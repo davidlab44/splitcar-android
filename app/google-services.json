@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "504451269161",
+    "firebase_url": "https://splitcar-42100.firebaseio.com",
+    "project_id": "splitcar-42100",
+    "storage_bucket": "splitcar-42100.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:504451269161:android:5933820afb3fff4d06d238",
+        "android_client_info": {
+          "package_name": "com.globant.splitcar"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "504451269161-9r1ptceclm1j0fj5nkcf7847n1b7oqid.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.globant.splitcar",
+            "certificate_hash": "ba596adb7ef777dab4c9a297dc2989afe92fe7df"
+          }
+        },
+        {
+          "client_id": "504451269161-2284al8rfmvqron215bl0912u67tiljf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDiLtpdYnR_XDWrlb_Qs974L8J4Z7i3KUE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "504451269161-2284al8rfmvqron215bl0912u67tiljf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
