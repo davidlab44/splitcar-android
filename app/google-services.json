@@ -15,6 +15,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "504451269161-lovqr1tu7g8celto5cg9uv9uodlhatau.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.globant.splitcar",
+            "certificate_hash": "adf6886f168bc1148cf63425731ce625af1e174f"
+          }
+        },
+        {
+          "client_id": "504451269161-tq0d7a9jlbarqls4gn7lt2365e938v7l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.globant.splitcar",
+            "certificate_hash": "d480d9a405364492951762740cf0e136b8dce710"
+          }
+        },
+        {
           "client_id": "504451269161-9r1ptceclm1j0fj5nkcf7847n1b7oqid.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
