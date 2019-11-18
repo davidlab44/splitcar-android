@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.globant.splitcar.R
 import com.globant.splitcar.adapters.RoutesAdapter
-import com.globant.splitcar.model.addRoutes
+import com.globant.splitcar.model.addAllRoutes
 import kotlinx.android.synthetic.main.activity_main.fabMakeRoute
 import kotlinx.android.synthetic.main.activity_main.toolbar
 import kotlinx.android.synthetic.main.content_main.recyclerViewRoutes
@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
         recyclerViewRoutes.layoutManager = LinearLayoutManager(this)
-        recyclerViewRoutes.adapter = RoutesAdapter(addRoutes(), this)
+        recyclerViewRoutes.adapter = RoutesAdapter(addAllRoutes(), this)
         fabMakeRoute.setOnClickListener {
             val intent: Intent = RouteActivity.createIntent(this@MainActivity)
             startActivity(intent)

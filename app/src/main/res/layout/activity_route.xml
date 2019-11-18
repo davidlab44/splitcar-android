@@ -16,7 +16,7 @@
             android:id="@+id/textViewYourTrip"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Tu Viaje" />
+            android:text="@string/your_trip" />
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
@@ -30,13 +30,14 @@
                 android:background="@drawable/border">
 
                 <EditText
-                    android:id="@+id/editTextDriverName"
+                    android:id="@+id/editTextUser"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
-                    android:hint="Ingrese su correo electrónico"
+                    android:autofillHints=" @gmail.com"
+                    android:hint="@string/enter_your_email"
                     android:inputType="textEmailAddress"
-                    app:layout_constraintStart_toEndOf="@+id/imageViewRouteDestination2"
+                    app:layout_constraintStart_toEndOf="@+id/imageViewRouteUser"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <AutoCompleteTextView
@@ -44,7 +45,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
-                    android:hint="Ingrese el destino de su ruta"
+                    android:hint="@string/destination_route"
                     android:textSize="18sp"
                     app:layout_constraintStart_toEndOf="@+id/imageViewRouteDestination"
                     app:layout_constraintTop_toTopOf="@+id/imageViewRouteDestination" />
@@ -55,7 +56,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
                     android:layout_marginTop="4dp"
-                    android:text="EditText"
+                    android:text=""
                     android:textColor="#0097A7"
                     android:textSize="18sp"
                     app:layout_constraintStart_toEndOf="@+id/imageViewDateRoute"
@@ -67,10 +68,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
                     android:layout_marginTop="4dp"
-                    android:text="EditText"
+                    android:text=""
                     android:textColor="#0097A7"
                     android:textSize="18sp"
-                    app:layout_constraintStart_toEndOf="@+id/textView4"
+                    app:layout_constraintStart_toEndOf="@+id/textViewPickTimeRoute"
                     app:layout_constraintTop_toBottomOf="@id/textViewDateRoute" />
 
                 <ImageView
@@ -78,24 +79,27 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_marginTop="4dp"
+                    android:contentDescription="@string/route_destination"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/editTextDriverName"
+                    app:layout_constraintTop_toBottomOf="@+id/editTextUser"
                     app:srcCompat="@android:drawable/presence_online" />
 
                 <ImageView
-                    android:id="@+id/imageViewRouteDestination2"
+                    android:id="@+id/imageViewRouteUser"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_marginTop="8dp"
+                    android:contentDescription="@string/route_user"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@android:drawable/ic_menu_edit" />
 
                 <ImageView
-                    android:id="@+id/imageViewRouteDestination3"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
+                    android:id="@+id/imageViewSaveRoute"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:layout_marginTop="4dp"
+                    android:contentDescription="@string/save_route"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -107,6 +111,7 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_marginTop="4dp"
+                    android:contentDescription="@string/date_route"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/autoCompleteTextViewDestinationRoute"
                     app:srcCompat="@android:drawable/ic_menu_month" />
@@ -116,6 +121,7 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_marginTop="4dp"
+                    android:contentDescription="@string/time_route"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textViewDateRoute"
                     app:srcCompat="@android:drawable/ic_lock_idle_alarm" />
@@ -130,7 +136,7 @@
                     android:minWidth="128dp"
                     android:textColor="#0097A7"
                     android:textSize="18sp"
-                    app:layout_constraintStart_toEndOf="@+id/textView"
+                    app:layout_constraintStart_toEndOf="@+id/textViewCarSeat"
                     app:layout_constraintTop_toBottomOf="@+id/textViewTimeRoute" />
 
                 <EditText
@@ -139,10 +145,12 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
                     android:layout_marginTop="4dp"
-                    android:hint="Cúal es el lugar de Encuentro"
+                    android:autofillHints="@string/meeting_place"
+                    android:hint="@string/meeting_place"
                     android:textColor="#0097A7"
                     android:textSize="18sp"
-                    app:layout_constraintStart_toEndOf="@+id/imageViewRoute2"
+                    android:inputType="text"
+                    app:layout_constraintStart_toEndOf="@+id/imageViewRouteMeetingPlace"
                     app:layout_constraintTop_toBottomOf="@+id/spinnerCarSeat" />
 
                 <ImageView
@@ -152,35 +160,37 @@
                     android:layout_marginTop="4dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textViewTimeRoute"
+                    android:contentDescription="@string/car_seat"
                     app:srcCompat="@android:drawable/ic_menu_upload" />
 
                 <TextView
-                    android:id="@+id/textView"
+                    android:id="@+id/textViewCarSeat"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
                     android:layout_marginTop="4dp"
-                    android:text="Cupos:"
+                    android:text="@string/car_seat"
                     android:textSize="18sp"
                     app:layout_constraintStart_toEndOf="@+id/imageViewCarSeat"
                     app:layout_constraintTop_toBottomOf="@+id/textViewTimeRoute" />
 
                 <ImageView
-                    android:id="@+id/imageViewRoute2"
+                    android:id="@+id/imageViewRouteMeetingPlace"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_marginTop="4dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/imageViewCarSeat"
+                    android:contentDescription="@string/meeting_place"
                     app:srcCompat="@android:drawable/ic_menu_myplaces" />
 
                 <TextView
-                    android:id="@+id/textView4"
+                    android:id="@+id/textViewPickTimeRoute"
                     android:layout_width="wrap_content"
                     android:layout_height="24dp"
                     android:layout_marginStart="4dp"
                     android:layout_marginTop="4dp"
-                    android:text="Elige una hora"
+                    android:text="@string/pick_time"
                     android:textSize="18sp"
                     app:layout_constraintStart_toEndOf="@+id/imageViewTimeRoute"
                     app:layout_constraintTop_toBottomOf="@+id/textViewDateRoute" />
@@ -195,7 +205,7 @@
         android:id="@+id/TextViewDestinationReference"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Referencia Destino" />
+        android:text="@string/destination_reference" />
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -215,11 +225,12 @@
                 android:layout_marginStart="4dp"
                 android:layout_marginTop="4dp"
                 android:layout_marginEnd="4dp"
-                android:hint="Un punto de referencia indicando el lugar al que te diriges"
+                android:autofillHints="@string/destination_reference"
                 android:inputType="textEmailAddress"
-                android:textSize="13dp"
+                android:hint="@string/point_of_reference"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                android:textSize="13sp"
                 app:layout_constraintTop_toTopOf="parent" />
 
 

@@ -8,8 +8,15 @@ import android.view.MenuItem
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import com.globant.splitcar.R
+import com.globant.splitcar.model.Route
+import com.globant.splitcar.model.addRoutes
+import com.globant.splitcar.model.routes
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.activity_route.autoCompleteTextViewDestinationRoute
 import kotlinx.android.synthetic.main.activity_route.constraintLayoutActivityRoute
+import kotlinx.android.synthetic.main.activity_route.editTextDestinationReference
+import kotlinx.android.synthetic.main.activity_route.editTextUser
+import kotlinx.android.synthetic.main.activity_route.imageViewSaveRoute
 import kotlinx.android.synthetic.main.activity_route.spinnerCarSeat
 import kotlinx.android.synthetic.main.activity_route.textViewDateRoute
 import kotlinx.android.synthetic.main.activity_route.textViewTimeRoute
@@ -42,6 +49,18 @@ class RouteActivity : AppCompatActivity() {
         textViewTimeRoute.setOnClickListener {
             TimePickerDialog(this@RouteActivity, onTimeSetListener, calendar.get(Calendar.HOUR), calendar.get(Calendar.MINUTE),
                     false).show()
+        }
+        imageViewSaveRoute.setOnClickListener {
+            val route = Route(routes.size + 1,
+                    editTextUser.text.toString(),
+                    autoCompleteTextViewDestinationRoute.text.toString(),
+                    "Vizcaya",
+                    com.globant.splitcar.model.currentDate,
+                    textViewTimeRoute.text.toString(),
+                    spinnerCarSeat.selectedItem.toString(),
+                    editTextDestinationReference.text.toString())
+            addRoutes(route)
+            finish()
         }
     }
 

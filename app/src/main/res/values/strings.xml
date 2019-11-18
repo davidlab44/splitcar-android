@@ -1,5 +1,17 @@
 <resources>
     <string name="app_name">Split Car</string>
     <string name="action_settings">Settings</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="your_trip">Tu Viaje</string>
+    <string name="enter_your_email">Ingrese su correo electrónico</string>
+    <string name="destination_route">Ingrese el destino de su ruta</string>
+    <string name="route_destination">Ruta Destino</string>
+    <string name="route_user">Usuario de ruta</string>
+    <string name="save_route">Guardar ruta</string>
+    <string name="date_route">Ruta de fecha</string>
+    <string name="time_route">Ruta del tiempo</string>
+    <string name="meeting_place">Cúal es el lugar de Encuentro</string>
+    <string name="car_seat">Cupos Disponibles</string>
+    <string name="pick_time">Elige una hora</string>
+    <string name="destination_reference">Referencia Destino</string>
+    <string name="point_of_reference">Un punto de referencia indicando el lugar al que te diriges</string>
 </resources>
