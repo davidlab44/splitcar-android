@@ -7,5 +7,5 @@ data class Route(
         var originRoute: String,
         var dateRoute: String,
         var timeRoute: String,
-        var carSeat: String,
+        var carSeat: Int,
         var destinationReference: String)

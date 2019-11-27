@@ -12,6 +12,7 @@ import com.globant.splitcar.model.Route
 import com.globant.splitcar.model.addRoutes
 import com.globant.splitcar.model.routes
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_route.autoCompleteTextViewDestinationRoute
 import kotlinx.android.synthetic.main.activity_route.constraintLayoutActivityRoute
 import kotlinx.android.synthetic.main.activity_route.editTextDestinationReference
@@ -28,6 +29,7 @@ import java.util.Calendar
 import java.util.Locale
 
 class RouteActivity : AppCompatActivity() {
+    val firestore = FirebaseFirestore.getInstance()
     private val carSeat = arrayOf(1, 2, 3, 4)
     private var calendar = Calendar.getInstance()
     private val currentDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))
@@ -60,10 +62,11 @@ class RouteActivity : AppCompatActivity() {
                     "Vizcaya",
                     com.globant.splitcar.model.currentDate,
                     textViewTimeRoute.text.toString(),
-                    spinnerCarSeat.selectedItem.toString(),
+                    spinnerCarSeat.selectedItem as Int,
                     editTextDestinationReference.text.toString())
             addRoutes(route)
             Snackbar.make(linearLayoutActivityRoute, "$route", Snackbar.LENGTH_LONG).show()
+            saveFireStore()
             finish()
         }
     }
@@ -82,6 +85,26 @@ class RouteActivity : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(menuItem)
     }
+
+
+    private fun saveFireStore() {
+
+        val id = routes.size + 1
+        val route = Route(routes.size + 1,
+                editTextUser.text.toString(),
+                autoCompleteTextViewDestinationRoute.text.toString(),
+                "Vizcaya",
+                com.globant.splitcar.model.currentDate,
+                textViewTimeRoute.text.toString(),
+                spinnerCarSeat.selectedItem as Int,
+                editTextDestinationReference.text.toString())
+
+        firestore
+                .collection("Route")
+                .document("$id")
+                .set(route)
+    }
+
 
     companion object {
         fun createIntent(context: Context): Intent {

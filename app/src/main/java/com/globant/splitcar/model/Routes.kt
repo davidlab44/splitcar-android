@@ -12,7 +12,7 @@ val route1 = Route(1,
         "Vizcaya",
         currentDate,
         "17:00",
-        "4",
+        4,
         "")
 val route2 = Route(2,
         "claudia.acevedo@globant.com",
@@ -20,7 +20,7 @@ val route2 = Route(2,
         "Vizcaya",
         currentDate,
         "16:30",
-        "4",
+        4,
         "Av Regional, Parque norte, Jardín botánico, Est. Universidad UdeA, Campo Valdes, Manrique Central")
 val route3 = Route(3,
         "s.mejia@globant.com",
@@ -28,7 +28,7 @@ val route3 = Route(3,
         "Vizcaya",
         currentDate,
         "19:00",
-        "4",
+        4,
         "Las palmas, Exposiciones, La 33 hasta la UPB (Laureles)")
 
 fun addRoutes(route: Route) {
