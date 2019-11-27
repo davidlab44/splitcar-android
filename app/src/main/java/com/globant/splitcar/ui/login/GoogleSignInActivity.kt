@@ -23,6 +23,7 @@ import kotlinx.android.synthetic.main.activity_google.signOutAndDisconnect
 import kotlinx.android.synthetic.main.activity_google.signOutButton
 import kotlinx.android.synthetic.main.activity_google.status
 
+
 /**
  * Demonstrate Firebase Authentication using a Google ID Token.
  */
@@ -39,7 +40,10 @@ class GoogleSignInActivity : BaseActivity(), View.OnClickListener {
         signInButton.setOnClickListener(this)
         signOutButton.setOnClickListener(this)
         goToSplitCarButton.setOnClickListener {
-            startActivity(Intent(applicationContext, MainActivity::class.java))
+            val intent = Intent(this@GoogleSignInActivity, MainActivity::class.java)
+            val userName = auth.currentUser?.displayName
+            intent.putExtra("userName", userName)
+            startActivity(intent)
         }
 //        disconnectButton.setOnClickListener(this)
         // [START config_signin]
@@ -103,7 +107,8 @@ class GoogleSignInActivity : BaseActivity(), View.OnClickListener {
                     } else {
                         // If sign in fails, display a message to the user.
                         Log.w(TAG, "signInWithCredential:failure", task.exception)
-                        Snackbar.make(main_layout, "Authentication Failed.", Snackbar.LENGTH_SHORT).show()
+                        Snackbar.make(main_layout, "Authentication Failed.", Snackbar.LENGTH_SHORT)
+                                .show()
                         updateUI(null)
                     }
                     // [START_EXCLUDE]

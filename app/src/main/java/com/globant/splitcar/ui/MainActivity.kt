@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.globant.splitcar.R
 import com.globant.splitcar.adapters.RoutesAdapter
 import com.globant.splitcar.model.addAllRoutes
+import com.globant.splitcar.model.showAllRoutes
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -25,17 +26,24 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-//        setSupportActionBar(toolbar)
         recyclerViewRoutes.layoutManager = LinearLayoutManager(this)
         recyclerViewRoutes.adapter = RoutesAdapter(addAllRoutes(), this)
         fabMakeRoute.setOnClickListener {
+            val userName = intent.getStringExtra("userName")
             val intent: Intent = RouteActivity.createIntent(this@MainActivity)
+            intent.putExtra("userName", userName)
             startActivity(intent)
             basicReadWrite()
         }
     }
 
-    fun basicReadWrite() {
+    override fun onPause() {
+        super.onPause()
+        recyclerViewRoutes.layoutManager = LinearLayoutManager(this)
+        recyclerViewRoutes.adapter = RoutesAdapter(showAllRoutes(), this)
+    }
+
+    private fun basicReadWrite() {
         // [START write_message]
         // Write a message to the database
         val database = FirebaseDatabase.getInstance().reference

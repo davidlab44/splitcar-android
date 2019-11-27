@@ -8,6 +8,7 @@
     android:weightSum="4">
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="3"
@@ -50,6 +51,7 @@
             android:id="@+id/detail"
             style="@style/ThemeOverlay.MyTextDetail"
             tools:text="Firebase User ID: 123456789abc" />
+
     </LinearLayout>
 
     <RelativeLayout

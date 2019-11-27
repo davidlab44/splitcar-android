@@ -17,6 +17,7 @@ import kotlinx.android.synthetic.main.activity_route.constraintLayoutActivityRou
 import kotlinx.android.synthetic.main.activity_route.editTextDestinationReference
 import kotlinx.android.synthetic.main.activity_route.editTextUser
 import kotlinx.android.synthetic.main.activity_route.imageViewSaveRoute
+import kotlinx.android.synthetic.main.activity_route.linearLayoutActivityRoute
 import kotlinx.android.synthetic.main.activity_route.spinnerCarSeat
 import kotlinx.android.synthetic.main.activity_route.textViewDateRoute
 import kotlinx.android.synthetic.main.activity_route.textViewTimeRoute
@@ -39,6 +40,8 @@ class RouteActivity : AppCompatActivity() {
         val arrayAdapter = ArrayAdapter(this@RouteActivity, android.R.layout.simple_spinner_item, carSeat)
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinnerCarSeat.adapter = arrayAdapter
+        val userName = intent.getStringExtra("userName")
+        editTextUser.text = userName
         textViewDateRoute.text = currentDate
         textViewTimeRoute.text = currentTime
         val onTimeSetListener = TimePickerDialog.OnTimeSetListener { _, hour, minute ->
@@ -60,6 +63,7 @@ class RouteActivity : AppCompatActivity() {
                     spinnerCarSeat.selectedItem.toString(),
                     editTextDestinationReference.text.toString())
             addRoutes(route)
+            Snackbar.make(linearLayoutActivityRoute, "$route", Snackbar.LENGTH_LONG).show()
             finish()
         }
     }

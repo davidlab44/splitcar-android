@@ -4,7 +4,7 @@ package com.globant.splitcar.model
 import java.text.SimpleDateFormat
 import java.util.Calendar
 
-val currentDate = SimpleDateFormat.getDateTimeInstance().format(Calendar.getInstance().time)
+val currentDate: String = SimpleDateFormat.getDateTimeInstance().format(Calendar.getInstance().time)
 val routes: ArrayList<Route> = ArrayList()
 val route1 = Route(1,
         "phillip.coombs@globant.com",
@@ -39,5 +39,9 @@ fun addAllRoutes(): ArrayList<Route> {
     routes.add(route1)
     routes.add(route2)
     routes.add(route3)
+    return routes
+}
+
+fun showAllRoutes(): ArrayList<Route> {
     return routes
 }
