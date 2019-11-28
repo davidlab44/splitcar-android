@@ -14,6 +14,7 @@ import com.globant.splitcar.model.routes
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_route.autoCompleteTextViewDestinationRoute
+import kotlinx.android.synthetic.main.activity_route.button
 import kotlinx.android.synthetic.main.activity_route.constraintLayoutActivityRoute
 import kotlinx.android.synthetic.main.activity_route.editTextDestinationReference
 import kotlinx.android.synthetic.main.activity_route.editTextUser
@@ -29,12 +30,13 @@ import java.util.Calendar
 import java.util.Locale
 
 class RouteActivity : AppCompatActivity() {
-    val firestore = FirebaseFirestore.getInstance()
+    private val firebaseFirestore = FirebaseFirestore.getInstance()
     private val carSeat = arrayOf(1, 2, 3, 4)
     private var calendar = Calendar.getInstance()
     private val currentDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))
     private val currentTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss"))
     override fun onCreate(savedInstanceState: Bundle?) {
+        val userName = intent.getStringExtra("userName")
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_route)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -42,7 +44,6 @@ class RouteActivity : AppCompatActivity() {
         val arrayAdapter = ArrayAdapter(this@RouteActivity, android.R.layout.simple_spinner_item, carSeat)
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinnerCarSeat.adapter = arrayAdapter
-        val userName = intent.getStringExtra("userName")
         editTextUser.text = userName
         textViewDateRoute.text = currentDate
         textViewTimeRoute.text = currentTime
@@ -69,7 +70,12 @@ class RouteActivity : AppCompatActivity() {
             saveFireStore()
             finish()
         }
+        button.setOnClickListener {
+            readFireStore()
+//            Snackbar.make(constraintLayoutActivityRoute, readFireStore().driverName, Snackbar.LENGTH_LONG).show()
+        }
     }
+
 
     private fun updateTimeInTextViewDateRoute() {
         textViewTimeRoute.text = SimpleDateFormat("HH:mm a", Locale.US).format(calendar.time)
@@ -86,25 +92,34 @@ class RouteActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(menuItem)
     }
 
+    private fun readFireStore() {
+        val userName = editTextUser.text.toString()
+        val documentReference = firebaseFirestore
+                .collection("Route")
+                .document(userName)
+        documentReference
+                .get()
+                .addOnSuccessListener { documentSnapshot ->
+                    val route = documentSnapshot.toObject(Route::class.java)
+                }
+    }
 
     private fun saveFireStore() {
-
         val id = routes.size + 1
-        val route = Route(routes.size + 1,
-                editTextUser.text.toString(),
+        val userName = editTextUser.text.toString()
+        val route = Route(id,
+                userName,
                 autoCompleteTextViewDestinationRoute.text.toString(),
                 "Vizcaya",
                 com.globant.splitcar.model.currentDate,
                 textViewTimeRoute.text.toString(),
                 spinnerCarSeat.selectedItem as Int,
                 editTextDestinationReference.text.toString())
-
-        firestore
+        firebaseFirestore
                 .collection("Route")
-                .document("$id")
+                .document(userName)
                 .set(route)
     }
-
 
     companion object {
         fun createIntent(context: Context): Intent {
