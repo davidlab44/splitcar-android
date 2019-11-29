@@ -4,6 +4,7 @@ import android.app.TimePickerDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
@@ -14,7 +15,6 @@ import com.globant.splitcar.model.routes
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_route.autoCompleteTextViewDestinationRoute
-import kotlinx.android.synthetic.main.activity_route.button
 import kotlinx.android.synthetic.main.activity_route.constraintLayoutActivityRoute
 import kotlinx.android.synthetic.main.activity_route.editTextDestinationReference
 import kotlinx.android.synthetic.main.activity_route.editTextUser
@@ -31,8 +31,9 @@ import java.util.Locale
 
 class RouteActivity : AppCompatActivity() {
     private val firebaseFirestore = FirebaseFirestore.getInstance()
-    private val carSeat = arrayOf(1, 2, 3, 4)
+    private val carSeat: Array<Long> = arrayOf(1, 2, 3, 4)
     private var calendar = Calendar.getInstance()
+    private var route: Route? = null
     private val currentDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))
     private val currentTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss"))
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,25 +58,22 @@ class RouteActivity : AppCompatActivity() {
                     false).show()
         }
         imageViewSaveRoute.setOnClickListener {
-            val route = Route(routes.size + 1,
+            val route = Route(
+                    (routes.size + 1).toLong(),
                     editTextUser.text.toString(),
                     autoCompleteTextViewDestinationRoute.text.toString(),
                     "Vizcaya",
                     com.globant.splitcar.model.currentDate,
                     textViewTimeRoute.text.toString(),
-                    spinnerCarSeat.selectedItem as Int,
-                    editTextDestinationReference.text.toString())
+                    spinnerCarSeat.selectedItem as Long,
+                    editTextDestinationReference.text.toString()
+            )
             addRoutes(route)
             Snackbar.make(linearLayoutActivityRoute, "$route", Snackbar.LENGTH_LONG).show()
             saveFireStore()
             finish()
         }
-        button.setOnClickListener {
-            readFireStore()
-//            Snackbar.make(constraintLayoutActivityRoute, readFireStore().driverName, Snackbar.LENGTH_LONG).show()
-        }
     }
-
 
     private fun updateTimeInTextViewDateRoute() {
         textViewTimeRoute.text = SimpleDateFormat("HH:mm a", Locale.US).format(calendar.time)
@@ -92,7 +90,8 @@ class RouteActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(menuItem)
     }
 
-    private fun readFireStore() {
+    private fun readFireStore()//:Route?
+    {
         val userName = editTextUser.text.toString()
         val documentReference = firebaseFirestore
                 .collection("Route")
@@ -100,24 +99,28 @@ class RouteActivity : AppCompatActivity() {
         documentReference
                 .get()
                 .addOnSuccessListener { documentSnapshot ->
-                    val route = documentSnapshot.toObject(Route::class.java)
+                    route = documentSnapshot.toObject(Route::class.java)
+                    Log.d("Main", route.toString())
+//                    transferDocumentReference
                 }
     }
 
     private fun saveFireStore() {
-        val id = routes.size + 1
+        val id: Long = routes.size + 1.toLong()
         val userName = editTextUser.text.toString()
-        val route = Route(id,
+        val route = Route(
+                id,
                 userName,
                 autoCompleteTextViewDestinationRoute.text.toString(),
                 "Vizcaya",
                 com.globant.splitcar.model.currentDate,
                 textViewTimeRoute.text.toString(),
-                spinnerCarSeat.selectedItem as Int,
-                editTextDestinationReference.text.toString())
+                spinnerCarSeat.selectedItem as Long,
+                editTextDestinationReference.text.toString()
+        )
         firebaseFirestore
                 .collection("Route")
-                .document(userName)
+                .document("$userName")
                 .set(route)
     }
 

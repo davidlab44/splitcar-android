@@ -1,13 +1,12 @@
 package com.globant.splitcar.model
 
 data class Route(
-        var id: Int,
+        var id: Long,
         var driverName: String,
         var destinationRoute: String,
         var originRoute: String,
         var dateRoute: String,
         var timeRoute: String,
-        var carSeat: Int,
-        var destinationReference: String)
-
-
+        var carSeat: Long,
+        var destinationReference: String
+)

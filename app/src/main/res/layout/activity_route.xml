@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="4dp">
 
     <LinearLayout
+        android:id="@+id/linearLayoutActivityRoute"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:id="@+id/linearLayoutActivityRoute"
         android:padding="4dp">
 
         <TextView
@@ -137,9 +136,9 @@
                     android:layout_marginTop="4dp"
                     android:autofillHints="@string/meeting_place"
                     android:hint="@string/meeting_place"
+                    android:inputType="text"
                     android:textColor="#0097A7"
                     android:textSize="18sp"
-                    android:inputType="text"
                     app:layout_constraintStart_toEndOf="@+id/imageViewRouteMeetingPlace"
                     app:layout_constraintTop_toBottomOf="@+id/spinnerCarSeat" />
 
@@ -148,9 +147,9 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_marginTop="4dp"
+                    android:contentDescription="@string/car_seat"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textViewTimeRoute"
-                    android:contentDescription="@string/car_seat"
                     app:srcCompat="@android:drawable/ic_menu_upload" />
 
                 <TextView
@@ -169,9 +168,9 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_marginTop="4dp"
+                    android:contentDescription="@string/meeting_place"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/imageViewCarSeat"
-                    android:contentDescription="@string/meeting_place"
                     app:srcCompat="@android:drawable/ic_menu_myplaces" />
 
                 <TextView
@@ -215,11 +214,11 @@
                 android:layout_marginTop="4dp"
                 android:layout_marginEnd="4dp"
                 android:autofillHints="@string/destination_reference"
-                android:inputType="textEmailAddress"
                 android:hint="@string/point_of_reference"
+                android:inputType="textEmailAddress"
+                android:textSize="13sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                android:textSize="13sp"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
@@ -232,15 +231,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/editTextDestinationReference"
                 app:srcCompat="@android:drawable/checkbox_on_background" />
-
-            <Button
-                android:id="@+id/button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Button"
-                tools:layout_editor_absoluteX="243dp"
-                tools:layout_editor_absoluteY="48dp" />
-
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

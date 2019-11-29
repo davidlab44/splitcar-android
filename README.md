@@ -1,5 +1,5 @@
 # Split Car
-## A simple project for share your route on Kotlin MVVM + live data + room + firebase + clean architecture
+## A simple project for share your route on Kotlin MVVM + live com.globant.splitcar.data + room + firebase + clean architecture
 
 ### With Split Car you can get an economical trip in minutes.
 ### Split Car allows you to request a car at the touch of a button and be picked up by a friendly driver who will take you to your destination immediately. Get trips from our partners instead of taking a taxi or waiting for the bus and enjoy a cozy, affordable and memorable trip today!
