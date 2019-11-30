@@ -8,15 +8,19 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.globant.splitcar.R
-import com.globant.splitcar.adapters.RoutesAdapter
+import com.globant.splitcar.RouteEvents
+import com.globant.splitcar.adapters.RouteListAdapter
 import com.globant.splitcar.model.Route
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.android.synthetic.main.activity_main.coordinatorLayoutMainActivity
 import kotlinx.android.synthetic.main.activity_main.fabMakeRoute
 import kotlinx.android.synthetic.main.content_main.recyclerViewRoutes
 
+class MainActivity : AppCompatActivity(), RouteEvents {
 
-class MainActivity : AppCompatActivity() {
     private val firebaseFirestore = FirebaseFirestore.getInstance()
+    private lateinit var routeListAdapter: RouteListAdapter
 
     companion object {
         private const val TAG = "KotlinActivity"
@@ -25,10 +29,10 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        routeListAdapter = RouteListAdapter(this)
         recyclerViewRoutes.layoutManager = LinearLayoutManager(this)
-
-
         val localList = mutableListOf<Route>()
+
         firebaseFirestore.collection("Route")
                 .get()
                 .addOnSuccessListener { result ->
@@ -46,20 +50,26 @@ class MainActivity : AppCompatActivity() {
                             localList.add(route)
                         }
                     }
-                    recyclerViewRoutes.adapter = RoutesAdapter(localList, this)
+                    recyclerViewRoutes.adapter = routeListAdapter
+                    routeListAdapter.addAll(localList)
                 }
                 .addOnFailureListener { exception ->
                     Log.d(TAG, "Error getting documents: ", exception)
                 }
 
-
-//         recyclerViewRoutes.adapter = RoutesAdapter(addAllRoutes(), this)
         fabMakeRoute.setOnClickListener {
             val userName = intent.getStringExtra("userName")
             val intent: Intent = RouteActivity.createIntent(this@MainActivity)
             intent.putExtra("userName", userName)
             startActivity(intent)
         }
+    }
+
+    override fun onItemClicked(route: Route) {
+        Snackbar.make(coordinatorLayoutMainActivity, "$route", Snackbar.LENGTH_LONG).show()
+//        val intent: Intent = DetailMovieActivity.createIntent(this@MainActivity)
+//        intent.putExtra(ID_MOVIE, movieReview.id)
+//        startActivity(intent)
     }
 
     override fun onResume() {
@@ -83,7 +93,8 @@ class MainActivity : AppCompatActivity() {
                             localList.add(route)
                         }
                     }
-                    recyclerViewRoutes.adapter = RoutesAdapter(localList, this)
+                    recyclerViewRoutes.adapter = routeListAdapter
+
                 }
                 .addOnFailureListener { exception ->
                     Log.d(TAG, "Error getting documents: ", exception)
