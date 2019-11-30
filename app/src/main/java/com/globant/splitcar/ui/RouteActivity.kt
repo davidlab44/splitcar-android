@@ -4,7 +4,6 @@ import android.app.TimePickerDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
@@ -37,7 +36,7 @@ class RouteActivity : AppCompatActivity() {
     private val currentDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))
     private val currentTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss"))
     override fun onCreate(savedInstanceState: Bundle?) {
-        val userName = intent.getStringExtra("userName")
+        val email = intent.getStringExtra("email")
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_route)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -45,7 +44,7 @@ class RouteActivity : AppCompatActivity() {
         val arrayAdapter = ArrayAdapter(this@RouteActivity, android.R.layout.simple_spinner_item, carSeat)
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinnerCarSeat.adapter = arrayAdapter
-        editTextUser.text = userName
+        editTextUser.text = email
         textViewDateRoute.text = currentDate
         textViewTimeRoute.text = currentTime
         val onTimeSetListener = TimePickerDialog.OnTimeSetListener { _, hour, minute ->
@@ -90,27 +89,12 @@ class RouteActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(menuItem)
     }
 
-    private fun readFireStore()//:Route?
-    {
-        val userName = editTextUser.text.toString()
-        val documentReference = firebaseFirestore
-                .collection("Route")
-                .document(userName)
-        documentReference
-                .get()
-                .addOnSuccessListener { documentSnapshot ->
-                    route = documentSnapshot.toObject(Route::class.java)
-                    Log.d("Main", route.toString())
-//                    transferDocumentReference
-                }
-    }
-
     private fun saveFireStore() {
         val id: Long = routes.size + 1.toLong()
-        val userName = editTextUser.text.toString()
+        val email = editTextUser.text.toString()
         val route = Route(
                 id,
-                userName,
+                email,
                 autoCompleteTextViewDestinationRoute.text.toString(),
                 "Vizcaya",
                 com.globant.splitcar.model.currentDate,
@@ -120,7 +104,7 @@ class RouteActivity : AppCompatActivity() {
         )
         firebaseFirestore
                 .collection("Route")
-                .document("$userName")
+                .document("$email")
                 .set(route)
     }
 

@@ -58,9 +58,9 @@ class MainActivity : AppCompatActivity(), RouteEvents {
                 }
 
         fabMakeRoute.setOnClickListener {
-            val userName = intent.getStringExtra("userName")
+            val email = intent.getStringExtra("email")
             val intent: Intent = RouteActivity.createIntent(this@MainActivity)
-            intent.putExtra("userName", userName)
+            intent.putExtra("email", email)
             startActivity(intent)
         }
     }

@@ -41,8 +41,8 @@ class GoogleSignInActivity : BaseActivity(), View.OnClickListener {
         signOutButton.setOnClickListener(this)
         goToSplitCarButton.setOnClickListener {
             val intent = Intent(this@GoogleSignInActivity, MainActivity::class.java)
-            val userName = auth.currentUser?.displayName
-            intent.putExtra("userName", userName)
+            val email = auth.currentUser?.email
+            intent.putExtra("email", email)
             startActivity(intent)
         }
 //        disconnectButton.setOnClickListener(this)
