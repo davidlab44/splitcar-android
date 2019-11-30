@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="4dp">
+
+    <LinearLayout
+        android:id="@+id/linearLayoutActivityRoute"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="4dp">
+
+        <TextView
+            android:id="@+id/textViewYourTrip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/your_trip" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayoutActivityRoute"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border">
+
+                <TextView
+                    android:id="@+id/textViewTextUser"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:autofillHints=" @gmail.com"
+                    android:hint="@string/enter_your_email"
+                    android:inputType="textEmailAddress"
+                    app:layout_constraintStart_toEndOf="@+id/imageViewRouteUser"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/autoCompleteTextViewDestinationRoute"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:hint="@string/destination_route"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toEndOf="@+id/imageViewRouteDestination"
+                    app:layout_constraintTop_toTopOf="@+id/imageViewRouteDestination" />
+
+                <TextView
+                    android:id="@+id/textViewDateRoute"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="4dp"
+                    android:text=""
+                    android:textColor="#0097A7"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toEndOf="@+id/imageViewDateRoute"
+                    app:layout_constraintTop_toBottomOf="@id/autoCompleteTextViewDestinationRoute" />
+
+                <TextView
+                    android:id="@+id/textViewTimeRoute"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="4dp"
+                    android:text=""
+                    android:textColor="#0097A7"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toEndOf="@+id/textViewPickTimeRoute"
+                    app:layout_constraintTop_toBottomOf="@id/textViewDateRoute" />
+
+                <ImageView
+                    android:id="@+id/imageViewRouteDestination"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginTop="4dp"
+                    android:contentDescription="@string/route_destination"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewTextUser"
+                    app:srcCompat="@android:drawable/presence_online" />
+
+                <ImageView
+                    android:id="@+id/imageViewRouteUser"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginTop="8dp"
+                    android:contentDescription="@string/route_user"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@android:drawable/ic_menu_edit" />
+
+                <ImageView
+                    android:id="@+id/imageViewDateRoute"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginTop="4dp"
+                    android:contentDescription="@string/date_route"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/autoCompleteTextViewDestinationRoute"
+                    app:srcCompat="@android:drawable/ic_menu_month" />
+
+                <ImageView
+                    android:id="@+id/imageViewTimeRoute"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginTop="4dp"
+                    android:contentDescription="@string/time_route"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewDateRoute"
+                    app:srcCompat="@android:drawable/ic_lock_idle_alarm" />
+
+                <TextView
+                    android:id="@+id/textViewCarSeatAvaiable"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center_horizontal"
+                    android:minWidth="128dp"
+                    android:textColor="#0097A7"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toEndOf="@+id/textViewCarSeat"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewTimeRoute" />
+
+                <TextView
+                    android:id="@+id/editTextMeetingPlace"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="4dp"
+                    android:autofillHints="@string/meeting_place"
+                    android:hint="@string/meeting_place"
+                    android:inputType="text"
+                    android:textColor="#0097A7"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toEndOf="@+id/imageViewRouteMeetingPlace"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewCarSeat" />
+
+                <TextView
+                    android:id="@+id/editTextDestinationReference"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="4dp"
+                    android:autofillHints="@string/destination_reference"
+                    android:hint="@string/point_of_reference"
+                    android:inputType="textEmailAddress"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/editTextMeetingPlace" />
+
+                <ImageView
+                    android:id="@+id/imageViewCarSeat"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginTop="4dp"
+                    android:contentDescription="@string/car_seat"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewTimeRoute"
+                    app:srcCompat="@android:drawable/ic_menu_upload" />
+
+                <TextView
+                    android:id="@+id/textViewCarSeat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="4dp"
+                    android:text="@string/car_seat"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toEndOf="@+id/imageViewCarSeat"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewTimeRoute" />
+
+                <ImageView
+                    android:id="@+id/imageViewRouteMeetingPlace"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginTop="4dp"
+                    android:contentDescription="@string/meeting_place"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imageViewCarSeat"
+                    app:srcCompat="@android:drawable/ic_menu_myplaces" />
+
+                <TextView
+                    android:id="@+id/textViewPickTimeRoute"
+                    android:layout_width="wrap_content"
+                    android:layout_height="24dp"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="4dp"
+                    android:text="@string/pick_time"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toEndOf="@+id/imageViewTimeRoute"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewDateRoute" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayoutDestinationReference"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/border">
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/imageViewSaveRoute"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:text="Unirse"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@android:drawable/checkbox_on_background" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>
