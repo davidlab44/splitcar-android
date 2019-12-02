@@ -12,11 +12,20 @@ import com.globant.splitcar.model.Route
 import com.globant.splitcar.model.routes
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.activity_route1.*
+import kotlinx.android.synthetic.main.activity_route1.autoCompleteTextViewDestinationRoute
+import kotlinx.android.synthetic.main.activity_route1.constraintLayoutActivityRoute
+import kotlinx.android.synthetic.main.activity_route1.editTextDestinationReference
+import kotlinx.android.synthetic.main.activity_route1.editTextMeetingPlace
+import kotlinx.android.synthetic.main.activity_route1.editTextUser
+import kotlinx.android.synthetic.main.activity_route1.imageViewSaveRoute
+import kotlinx.android.synthetic.main.activity_route1.spinnerCarSeat
+import kotlinx.android.synthetic.main.activity_route1.textViewDateRoute
+import kotlinx.android.synthetic.main.activity_route1.textViewTimeRoute
 import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
-import java.util.*
+import java.util.Calendar
+import java.util.Locale
 
 class RouteActivity : AppCompatActivity() {
     private val firebaseFirestore = FirebaseFirestore.getInstance()
@@ -77,7 +86,7 @@ class RouteActivity : AppCompatActivity() {
                 id,
                 email,
                 autoCompleteTextViewDestinationRoute.text.toString(),
-            "IUSH",
+                "Vizcaya",
                 com.globant.splitcar.model.currentDate,
                 textViewTimeRoute.text.toString(),
                 spinnerCarSeat.selectedItem as Long,

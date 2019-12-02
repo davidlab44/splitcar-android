@@ -10,9 +10,14 @@ import com.globant.splitcar.R
 import com.globant.splitcar.model.Route
 import com.globant.splitcar.utils.ID_USER
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.activity_join_route.*
-import kotlinx.android.synthetic.main.activity_route1.editTextDestinationReference
-import kotlinx.android.synthetic.main.activity_route1.editTextMeetingPlace
+import kotlinx.android.synthetic.main.activity_join_route.buttonSaveRoute
+import kotlinx.android.synthetic.main.activity_join_route.textViewCarSeatAvaiable
+import kotlinx.android.synthetic.main.activity_join_route.textViewDateRoute
+import kotlinx.android.synthetic.main.activity_join_route.textViewDestinationReference
+import kotlinx.android.synthetic.main.activity_join_route.textViewDestinationRoute
+import kotlinx.android.synthetic.main.activity_join_route.textViewPickTimeRoute
+import kotlinx.android.synthetic.main.activity_join_route.textViewPlace
+import kotlinx.android.synthetic.main.activity_join_route.textViewTextUser
 
 class JoinRouteActivity : AppCompatActivity() {
     private val firebaseFirestore = FirebaseFirestore.getInstance()
@@ -21,42 +26,42 @@ class JoinRouteActivity : AppCompatActivity() {
         setContentView(R.layout.activity_join_route)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = "Unirse a la Ruta"
-        imageViewSaveRoute.setOnClickListener {
-
-        }
         val email = intent.getStringExtra(ID_USER)
         val idRoute = firebaseFirestore.collection("Route").document(email)
         idRoute.get()
-            .addOnSuccessListener { document ->
-                if (document != null) {
-                    val id = document.data?.get("id") as Long
-                    val driverName = document.data?.get("driverName") as String
-                    val destinationRoute = document.data?.get("destinationRoute") as String
-                    val originRoute = document.data?.get("originRoute") as String
-                    val dateRoute = document.data?.get("dateRoute") as String
-                    val timeRoute = document.data?.get("timeRoute") as String
-                    val carSeat = document.data?.get("carSeat") as Long
-                    val meetingPlace = document.data?.get("meetingPlace") as String
-                    val destinationReference = document.data?.get("destinationReference") as String
-                    val route = Route(
-                        id,
-                        driverName,
-                        destinationRoute,
-                        originRoute,
-                        dateRoute,
-                        timeRoute,
-                        carSeat,
-                        destinationReference,
-                        meetingPlace
-                    )
-                    bindRoute(route)
-                } else {
-                    Log.d("Document_Null", "No such document")
+                .addOnSuccessListener { document ->
+                    if (document != null) {
+                        val id = document.data?.get("id") as Long
+                        val driverName = document.data?.get("driverName") as String
+                        val destinationRoute = document.data?.get("destinationRoute") as String
+                        val originRoute = document.data?.get("originRoute") as String
+                        val dateRoute = document.data?.get("dateRoute") as String
+                        val timeRoute = document.data?.get("timeRoute") as String
+                        val carSeat = document.data?.get("carSeat") as Long
+                        val meetingPlace = document.data?.get("meetingPlace") as String
+                        val destinationReference = document.data?.get("destinationReference") as String
+                        val route = Route(
+                                id,
+                                driverName,
+                                destinationRoute,
+                                originRoute,
+                                dateRoute,
+                                timeRoute,
+                                carSeat,
+                                destinationReference,
+                                meetingPlace
+                        )
+                        bindRoute(route)
+                    } else {
+                        Log.d("Document_Null", "No such document")
+                    }
                 }
-            }
-            .addOnFailureListener { exception ->
-                Log.d("Failed", "get failed with ", exception)
-            }
+                .addOnFailureListener { exception ->
+                    Log.d("Failed", "get failed with ", exception)
+                }
+        buttonSaveRoute.setOnClickListener {
+            updateCarSeatRoutetoFirestore(email)
+        }
     }
 
     private fun bindRoute(route: Route) {
@@ -65,11 +70,20 @@ class JoinRouteActivity : AppCompatActivity() {
         textViewDateRoute.text = route.dateRoute
         textViewPickTimeRoute.text = route.timeRoute
         textViewCarSeatAvaiable.text = route.carSeat.toString()
-        editTextMeetingPlace.text = route.meetingPlace
-        editTextDestinationReference.text = route.destinationReference
+        textViewPlace.text = route.meetingPlace
+        textViewDestinationReference.text = route.destinationReference
     }
 
-    private fun updateCarSeatRoutetoFirestore(route: Route) {
+    private fun updateCarSeatRoutetoFirestore(email: String) {
+        val idRoute = firebaseFirestore.collection("Route").document(email)
+        idRoute.get().addOnSuccessListener { document ->
+            if (document != null) {
+                val carSeat = document.data?.get("carSeat") as Long
+                idRoute.update(mapOf("carSeat" to carSeat - 1))
+                finish()
+            }
+        }
+
     }
 
     override fun onOptionsItemSelected(menuItem: MenuItem): Boolean {

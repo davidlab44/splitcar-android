@@ -131,7 +131,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/textViewTimeRoute" />
 
                 <TextView
-                    android:id="@+id/editTextMeetingPlace"
+                    android:id="@+id/textViewPlace"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
@@ -145,7 +145,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/textViewCarSeat" />
 
                 <TextView
-                    android:id="@+id/editTextDestinationReference"
+                    android:id="@+id/textViewDestinationReference"
                     android:layout_width="wrap_content"
                     android:layout_height="200dp"
                     android:inputType="text"
@@ -153,7 +153,7 @@
                     android:textSize="18sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/editTextMeetingPlace" />
+                    app:layout_constraintTop_toBottomOf="@+id/textViewPlace" />
 
 
                 <ImageView
@@ -217,7 +217,7 @@
 
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/imageViewSaveRoute"
+                android:id="@+id/buttonSaveRoute"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
