@@ -8,14 +8,13 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.globant.splitcar.R
-import com.globant.splitcar.RouteEvents
 import com.globant.splitcar.adapters.RouteListAdapter
 import com.globant.splitcar.model.Route
+import com.globant.splitcar.utils.ID_USER
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.activity_main.coordinatorLayoutMainActivity
-import kotlinx.android.synthetic.main.activity_main.fabMakeRoute
-import kotlinx.android.synthetic.main.content_main.recyclerViewRoutes
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.content_main.*
 
 class MainActivity : AppCompatActivity(), RouteEvents {
 
@@ -31,7 +30,7 @@ class MainActivity : AppCompatActivity(), RouteEvents {
         setContentView(R.layout.activity_main)
         routeListAdapter = RouteListAdapter(this)
         recyclerViewRoutes.layoutManager = LinearLayoutManager(this)
-        val localList = mutableListOf<Route>()
+        val mutableListRoute = mutableListOf<Route>()
 
         firebaseFirestore.collection("Route")
                 .get()
@@ -44,14 +43,27 @@ class MainActivity : AppCompatActivity(), RouteEvents {
                         val dateRoute = document.data?.get("dateRoute") as String
                         val timeRoute = document.data?.get("timeRoute") as String
                         val carSeat = document.data?.get("carSeat") as Long
+                        val meetingPlace = document.data?.get("meetingPlace") as String
                         val destinationReference = document.data?.get("destinationReference") as String
-                        val route = id?.let { Route(it, driverName, destinationRoute, originRoute, dateRoute, timeRoute, carSeat, destinationReference) }
+                        val route = id?.let {
+                            Route(
+                                it,
+                                driverName,
+                                destinationRoute,
+                                originRoute,
+                                dateRoute,
+                                timeRoute,
+                                carSeat,
+                                destinationReference,
+                                meetingPlace
+                            )
+                        }
                         if (route != null) {
-                            localList.add(route)
+                            mutableListRoute.add(route)
                         }
                     }
                     recyclerViewRoutes.adapter = routeListAdapter
-                    routeListAdapter.addAll(localList)
+                    routeListAdapter.addAll(mutableListRoute)
                 }
                 .addOnFailureListener { exception ->
                     Log.d(TAG, "Error getting documents: ", exception)
@@ -67,9 +79,9 @@ class MainActivity : AppCompatActivity(), RouteEvents {
 
     override fun onItemClicked(route: Route) {
         Snackbar.make(coordinatorLayoutMainActivity, "$route", Snackbar.LENGTH_LONG).show()
-//        val intent: Intent = DetailMovieActivity.createIntent(this@MainActivity)
-//        intent.putExtra(ID_MOVIE, movieReview.id)
-//        startActivity(intent)
+        val intent: Intent = JoinRouteActivity.createIntent(this@MainActivity)
+        intent.putExtra(ID_USER, route.driverName)
+        startActivity(intent)
     }
 
     override fun onResume() {
@@ -87,8 +99,21 @@ class MainActivity : AppCompatActivity(), RouteEvents {
                         val dateRoute = document.data?.get("dateRoute") as String
                         val timeRoute = document.data?.get("timeRoute") as String
                         val carSeat = document.data?.get("carSeat") as Long
+                        val meetingPlace = document.data?.get("meetingPlace") as String
                         val destinationReference = document.data?.get("destinationReference") as String
-                        val route = id?.let { Route(it, driverName, destinationRoute, originRoute, dateRoute, timeRoute, carSeat, destinationReference) }
+                        val route = id?.let {
+                            Route(
+                                it,
+                                driverName,
+                                destinationRoute,
+                                originRoute,
+                                dateRoute,
+                                timeRoute,
+                                carSeat,
+                                destinationReference,
+                                meetingPlace
+                            )
+                        }
                         if (route != null) {
                             localList.add(route)
                         }

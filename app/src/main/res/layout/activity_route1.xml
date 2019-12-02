@@ -31,23 +31,24 @@
                 android:background="@drawable/border">
 
                 <TextView
-                    android:id="@+id/textViewTextUser"
+                    android:id="@+id/editTextUser"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
+                    android:layout_marginTop="6dp"
                     android:autofillHints=" @gmail.com"
-                    android:hint="@string/your_email"
+                    android:hint="@string/enter_your_email"
                     android:inputType="textEmailAddress"
                     android:textSize="18sp"
                     app:layout_constraintStart_toEndOf="@+id/imageViewRouteUser"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/textViewDestinationRoute"
+                <AutoCompleteTextView
+                    android:id="@+id/autoCompleteTextViewDestinationRoute"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
-                    android:hint="@string/from_cloud_destination_route"
+                    android:hint="@string/destination_route"
                     android:textSize="18sp"
                     app:layout_constraintStart_toEndOf="@+id/imageViewRouteDestination"
                     app:layout_constraintTop_toTopOf="@+id/imageViewRouteDestination" />
@@ -58,12 +59,11 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
                     android:layout_marginTop="4dp"
-                    android:hint="@string/date_route"
                     android:text=""
                     android:textColor="#0097A7"
                     android:textSize="18sp"
                     app:layout_constraintStart_toEndOf="@+id/imageViewDateRoute"
-                    app:layout_constraintTop_toBottomOf="@id/textViewDestinationRoute" />
+                    app:layout_constraintTop_toBottomOf="@id/autoCompleteTextViewDestinationRoute" />
 
                 <TextView
                     android:id="@+id/textViewTimeRoute"
@@ -84,7 +84,7 @@
                     android:layout_marginTop="4dp"
                     android:contentDescription="@string/route_destination"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textViewTextUser"
+                    app:layout_constraintTop_toBottomOf="@+id/editTextUser"
                     app:srcCompat="@android:drawable/presence_online" />
 
                 <ImageView
@@ -104,7 +104,7 @@
                     android:layout_marginTop="4dp"
                     android:contentDescription="@string/date_route"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textViewDestinationRoute"
+                    app:layout_constraintTop_toBottomOf="@+id/autoCompleteTextViewDestinationRoute"
                     app:srcCompat="@android:drawable/ic_menu_month" />
 
                 <ImageView
@@ -117,8 +117,8 @@
                     app:layout_constraintTop_toBottomOf="@+id/textViewDateRoute"
                     app:srcCompat="@android:drawable/ic_lock_idle_alarm" />
 
-                <TextView
-                    android:id="@+id/textViewCarSeatAvaiable"
+                <Spinner
+                    android:id="@+id/spinnerCarSeat"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
@@ -130,31 +130,19 @@
                     app:layout_constraintStart_toEndOf="@+id/textViewCarSeat"
                     app:layout_constraintTop_toBottomOf="@+id/textViewTimeRoute" />
 
-                <TextView
+                <EditText
                     android:id="@+id/editTextMeetingPlace"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
                     android:layout_marginTop="4dp"
                     android:autofillHints="@string/meeting_place"
+                    android:hint="@string/meeting_place"
                     android:inputType="text"
-                    android:text="@string/meeting_place"
                     android:textColor="#0097A7"
                     android:textSize="18sp"
                     app:layout_constraintStart_toEndOf="@+id/imageViewRouteMeetingPlace"
-                    app:layout_constraintTop_toBottomOf="@+id/textViewCarSeat" />
-
-                <TextView
-                    android:id="@+id/editTextDestinationReference"
-                    android:layout_width="wrap_content"
-                    android:layout_height="200dp"
-                    android:inputType="text"
-                    android:hint="@string/point_of_reference"
-                    android:textSize="18sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/editTextMeetingPlace" />
-
+                    app:layout_constraintTop_toBottomOf="@+id/spinnerCarSeat" />
 
                 <ImageView
                     android:id="@+id/imageViewCarSeat"
@@ -193,7 +181,7 @@
                     android:layout_height="24dp"
                     android:layout_marginStart="4dp"
                     android:layout_marginTop="4dp"
-                    android:text="@string/time_route"
+                    android:text="@string/pick_time"
                     android:textSize="18sp"
                     app:layout_constraintStart_toEndOf="@+id/imageViewTimeRoute"
                     app:layout_constraintTop_toBottomOf="@+id/textViewDateRoute" />
@@ -203,6 +191,11 @@
 
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/TextViewDestinationReference"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/destination_reference" />
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -215,18 +208,38 @@
             android:layout_height="wrap_content"
             android:background="@drawable/border">
 
+            <EditText
+                android:id="@+id/editTextDestinationReference"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="4dp"
+                android:autoSizeMaxTextSize="100sp"
+                android:autoSizeMinTextSize="12sp"
+                android:autoSizeStepGranularity="2sp"
+                android:autoSizeTextType="uniform"
+                android:autofillHints="@string/destination_reference"
+                android:hint="@string/point_of_reference"
+                android:inputType="textEmailAddress"
+                android:textSize="18sp"
+                app:autoSizeMaxTextSize="100sp"
+                app:autoSizeMinTextSize="16sp"
+                app:autoSizeStepGranularity="1sp"
+                app:autoSizeTextType="uniform"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <com.google.android.material.button.MaterialButton
+            <Button
                 android:id="@+id/imageViewSaveRoute"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:layout_marginBottom="4dp"
-                android:text="Unirse"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:text="@string/save_route"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editTextDestinationReference"
                 app:srcCompat="@android:drawable/checkbox_on_background" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

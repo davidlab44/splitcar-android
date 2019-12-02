@@ -1,4 +1,4 @@
-package com.globant.splitcar
+package com.globant.splitcar.ui
 
 import com.globant.splitcar.model.Route
 

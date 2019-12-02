@@ -2,7 +2,8 @@ package com.globant.splitcar.model
 
 
 import java.text.SimpleDateFormat
-import java.util.Calendar
+import java.util.*
+import kotlin.collections.ArrayList
 
 val currentDate: String = SimpleDateFormat.getDateTimeInstance().format(Calendar.getInstance().time)
 val routes: ArrayList<Route> = ArrayList()
@@ -14,7 +15,7 @@ val route1 = Route(
         currentDate,
         "17:00",
         4,
-        ""
+    "", ""
 )
 val route2 = Route(
         2,
@@ -24,7 +25,8 @@ val route2 = Route(
         currentDate,
         "16:30",
         4,
-        "Av Regional, Parque norte, Jardín botánico, Est. Universidad UdeA, Campo Valdes, Manrique Central"
+    "Av Regional, Parque norte, Jardín botánico, Est. Universidad UdeA, Campo Valdes, Manrique Central",
+    ""
 )
 val route3 = Route(
         3,
@@ -34,7 +36,7 @@ val route3 = Route(
         currentDate,
         "19:00",
         4,
-        "Las palmas, Exposiciones, La 33 hasta la UPB (Laureles)"
+    "Las palmas, Exposiciones, La 33 hasta la UPB (Laureles)", ""
 )
 
 fun addRoutes(route: Route) {
