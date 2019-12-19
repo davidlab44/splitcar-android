@@ -9,5 +9,6 @@ data class Route(
     var timeRoute: String,
     var carSeat: Long,
     var destinationReference: String,
-    var meetingPlace: String
+    var meetingPlace: String,
+    var passengerName : MutableList<String>
 )

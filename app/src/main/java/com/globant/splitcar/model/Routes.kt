@@ -15,7 +15,7 @@ val route1 = Route(
         currentDate,
         "17:00",
         4,
-    "", ""
+    "", "", mutableListOf()
 )
 val route2 = Route(
         2,
@@ -26,7 +26,7 @@ val route2 = Route(
         "16:30",
         4,
     "Av Regional, Parque norte, Jardín botánico, Est. Universidad UdeA, Campo Valdes, Manrique Central",
-    ""
+    "", mutableListOf()
 )
 val route3 = Route(
         3,
@@ -36,7 +36,7 @@ val route3 = Route(
         currentDate,
         "19:00",
         4,
-    "Las palmas, Exposiciones, La 33 hasta la UPB (Laureles)", ""
+    "Las palmas, Exposiciones, La 33 hasta la UPB (Laureles)", "", mutableListOf()
 )
 
 fun addRoutes(route: Route) {

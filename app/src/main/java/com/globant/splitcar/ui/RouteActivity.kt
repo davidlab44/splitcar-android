@@ -82,20 +82,12 @@ class RouteActivity : AppCompatActivity() {
     private fun saveFireStore() {
         val id: Long = routes.size + 1.toLong()
         val email = editTextUser.text.toString()
-        val route = Route(
-                id,
-                email,
-                autoCompleteTextViewDestinationRoute.text.toString(),
-                "Vizcaya",
-                com.globant.splitcar.model.currentDate,
-                textViewTimeRoute.text.toString(),
-                spinnerCarSeat.selectedItem as Long,
-            editTextDestinationReference.text.toString(),
-            editTextMeetingPlace.text.toString()
-        )
+        val route = Route(id, email, autoCompleteTextViewDestinationRoute.text.toString(), "Vizcaya",
+                com.globant.splitcar.model.currentDate, textViewTimeRoute.text.toString(), spinnerCarSeat.selectedItem as Long,
+                editTextDestinationReference.text.toString(), editTextMeetingPlace.text.toString(), mutableListOf())
         firebaseFirestore
                 .collection("Route")
-            .document(email)
+                .document(email)
                 .set(route)
     }
 

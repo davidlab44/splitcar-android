@@ -40,6 +40,7 @@ class JoinRouteActivity : AppCompatActivity() {
                         val carSeat = document.data?.get("carSeat") as Long
                         val meetingPlace = document.data?.get("meetingPlace") as String
                         val destinationReference = document.data?.get("destinationReference") as String
+                        val passengerName = document.data?.get("passengerName") as MutableList<String>
                         val route = Route(
                                 id,
                                 driverName,
@@ -49,7 +50,8 @@ class JoinRouteActivity : AppCompatActivity() {
                                 timeRoute,
                                 carSeat,
                                 destinationReference,
-                                meetingPlace
+                                meetingPlace,
+                                passengerName
                         )
                         bindRoute(route)
                     } else {
@@ -79,7 +81,9 @@ class JoinRouteActivity : AppCompatActivity() {
         idRoute.get().addOnSuccessListener { document ->
             if (document != null) {
                 val carSeat = document.data?.get("carSeat") as Long
+                val passengerName = email.toMutableList()
                 idRoute.update(mapOf("carSeat" to carSeat - 1))
+//                idRoute.collection("passengerName").add({ email }) Ask to Diego https://www.youtube.com/watch?v=o7d5Zeic63s
                 finish()
             }
         }
