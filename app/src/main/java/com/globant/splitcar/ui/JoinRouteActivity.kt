@@ -6,11 +6,14 @@ import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.globant.splitcar.R
+import com.globant.splitcar.adapters.PassengerAdapter
 import com.globant.splitcar.model.Route
 import com.globant.splitcar.utils.ID_USER
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_join_route.buttonSaveRoute
+import kotlinx.android.synthetic.main.activity_join_route.passenger_list
 import kotlinx.android.synthetic.main.activity_join_route.textViewCarSeatAvaiable
 import kotlinx.android.synthetic.main.activity_join_route.textViewDateRoute
 import kotlinx.android.synthetic.main.activity_join_route.textViewDestinationReference
@@ -40,7 +43,7 @@ class JoinRouteActivity : AppCompatActivity() {
                         val carSeat = document.data?.get("carSeat") as Long
                         val meetingPlace = document.data?.get("meetingPlace") as String
                         val destinationReference = document.data?.get("destinationReference") as String
-                        val passengerName = document.data?.get("passengerName") as MutableList<String>
+                        val passengerName = document.data?.get("passengerName") as MutableList<String?>
                         val route = Route(
                                 id,
                                 driverName,
@@ -54,6 +57,9 @@ class JoinRouteActivity : AppCompatActivity() {
                                 passengerName
                         )
                         bindRoute(route)
+                        passenger_list.layoutManager = LinearLayoutManager(this)
+                        passenger_list.adapter = PassengerAdapter(route.passengerName, this)
+
                     } else {
                         Log.d("Document_Null", "No such document")
                     }
@@ -74,6 +80,13 @@ class JoinRouteActivity : AppCompatActivity() {
         textViewCarSeatAvaiable.text = route.carSeat.toString()
         textViewPlace.text = route.meetingPlace
         textViewDestinationReference.text = route.destinationReference
+
+//        route.passengerName.forEach {
+//            if (it != null)
+//                appCompatTextViewPassenger1.text = it
+//            else
+//                appCompatTextViewPassenger1.text = "Disponible"
+//        }
     }
 
     private fun updateCarSeatRoutetoFirestore(email: String) {

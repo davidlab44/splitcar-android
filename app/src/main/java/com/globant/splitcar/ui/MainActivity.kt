@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity(), RouteEvents {
                         val carSeat = document.data?.get("carSeat") as Long
                         val meetingPlace = document.data?.get("meetingPlace") as String
                         val destinationReference = document.data?.get("destinationReference") as String
-                        val passengerName = document.data?.get("passengerName") as MutableList<String>
+                        val passengerName = document.data?.get("passengerName") as MutableList<String?>
                         val route = id?.let {
                             Route(
                                     it,
@@ -104,7 +104,7 @@ class MainActivity : AppCompatActivity(), RouteEvents {
                         val carSeat = document.data?.get("carSeat") as Long
                         val meetingPlace = document.data?.get("meetingPlace") as String
                         val destinationReference = document.data?.get("destinationReference") as String
-                        val passengerName = document.data?.get("passengerName") as MutableList<String>
+                        val passengerName = document.data?.get("passengerName") as MutableList<String?>
                         val route = id?.let {
                             Route(
                                     it,
