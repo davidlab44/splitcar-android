@@ -129,7 +129,6 @@ class MainActivity : AppCompatActivity(), RouteEvents {
                 .addOnFailureListener { exception ->
                     Log.d(TAG, "Error getting documents: ", exception)
                 }
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
