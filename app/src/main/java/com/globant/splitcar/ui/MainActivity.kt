@@ -2,25 +2,31 @@ package com.globant.splitcar.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.globant.splitcar.R
 import com.globant.splitcar.adapters.RouteListAdapter
 import com.globant.splitcar.model.Route
 import com.globant.splitcar.utils.ID_USER
+import com.globant.splitcar.viewmodels.RouteViewModel
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_main.coordinatorLayoutMainActivity
 import kotlinx.android.synthetic.main.activity_main.fabMakeRoute
 import kotlinx.android.synthetic.main.content_main.recyclerViewRoutes
+import kotlinx.android.synthetic.main.fragment_search.*
 
 class MainActivity : AppCompatActivity(), RouteEvents {
 
     private val firebaseFirestore = FirebaseFirestore.getInstance()
     private lateinit var routeListAdapter: RouteListAdapter
+    private lateinit var routeViewModel: RouteViewModel
 
     companion object {
         private const val TAG = "KotlinActivity"
@@ -71,6 +77,20 @@ class MainActivity : AppCompatActivity(), RouteEvents {
                 .addOnFailureListener { exception ->
                     Log.d(TAG, "Error getting documents: ", exception)
                 }
+
+        routeViewModel = ViewModelProviders.of(this).get(RouteViewModel::class.java)
+
+        editTextSearch.addTextChangedListener(object : TextWatcher {
+            override fun onTextChanged(cs: CharSequence, s: Int, b: Int, c: Int) {
+                val result = editTextSearch.text.toString()
+                if (result.isNotEmpty())
+                    routeViewModel.filterByName(result)
+                else
+                    routeViewModel.getAllRoutes()
+            }
+            override fun afterTextChanged(editable: Editable) {}
+            override fun beforeTextChanged(cs: CharSequence, i: Int, j: Int, k: Int) {}
+        })
 
         fabMakeRoute.setOnClickListener {
             val email = intent.getStringExtra("email")
