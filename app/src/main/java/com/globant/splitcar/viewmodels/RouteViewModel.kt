@@ -15,7 +15,7 @@ class RouteViewModel(application: Application) : AndroidViewModel(application) {
         return allRoutes
     }
 
-    fun filterByName(destinationReference: String) {
+    fun filterByRouteReference(destinationReference: String) {
         filteredUsers.value = repository.getFilteredRoutes(destinationReference)
     }
 }
