@@ -31,7 +31,6 @@ class MainActivity : AppCompatActivity(), RouteEvents {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         routeListAdapter = RouteListAdapter(this)
         recyclerViewRoutes.layoutManager = LinearLayoutManager(this)
         recyclerViewRoutes.adapter = routeListAdapter

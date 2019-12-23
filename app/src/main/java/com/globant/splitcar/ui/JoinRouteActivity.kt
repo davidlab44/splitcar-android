@@ -12,15 +12,7 @@ import com.globant.splitcar.adapters.PassengerAdapter
 import com.globant.splitcar.model.Route
 import com.globant.splitcar.utils.ID_USER
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.activity_join_route.buttonSaveRoute
-import kotlinx.android.synthetic.main.activity_join_route.passenger_list
-import kotlinx.android.synthetic.main.activity_join_route.textViewCarSeatAvaiable
-import kotlinx.android.synthetic.main.activity_join_route.textViewDateRoute
-import kotlinx.android.synthetic.main.activity_join_route.textViewDestinationReference
-import kotlinx.android.synthetic.main.activity_join_route.textViewDestinationRoute
-import kotlinx.android.synthetic.main.activity_join_route.textViewPickTimeRoute
-import kotlinx.android.synthetic.main.activity_join_route.textViewPlace
-import kotlinx.android.synthetic.main.activity_join_route.textViewTextUser
+import kotlinx.android.synthetic.main.activity_join_route.*
 
 class JoinRouteActivity : AppCompatActivity() {
     private val firebaseFirestore = FirebaseFirestore.getInstance()
@@ -43,7 +35,8 @@ class JoinRouteActivity : AppCompatActivity() {
                         val carSeat = document.data?.get("carSeat") as Long
                         val meetingPlace = document.data?.get("meetingPlace") as String
                         val destinationReference = document.data?.get("destinationReference") as String
-                        val passengerName = document.data?.get("passengerName") as MutableList<String?>
+                        val passengerName =
+                            document.data?.get("passengerName") as MutableList<String>
                         val route = Route(
                                 id,
                                 driverName,
