@@ -15,12 +15,10 @@ import com.globant.splitcar.adapters.RouteListAdapter
 import com.globant.splitcar.model.Route
 import com.globant.splitcar.utils.ID_USER
 import com.globant.splitcar.viewmodels.RouteViewModel
-import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.activity_main.coordinatorLayoutMainActivity
 import kotlinx.android.synthetic.main.activity_main.fabMakeRoute
 import kotlinx.android.synthetic.main.content_main.recyclerViewRoutes
-import kotlinx.android.synthetic.main.fragment_search.*
+import kotlinx.android.synthetic.main.fragment_search.editTextSearch
 
 class MainActivity : AppCompatActivity(), RouteEvents {
 
@@ -87,6 +85,7 @@ class MainActivity : AppCompatActivity(), RouteEvents {
                 else
                     routeViewModel.getAllRoutes()
             }
+
             override fun afterTextChanged(editable: Editable) {}
             override fun beforeTextChanged(cs: CharSequence, i: Int, j: Int, k: Int) {}
         })
@@ -100,7 +99,6 @@ class MainActivity : AppCompatActivity(), RouteEvents {
     }
 
     override fun onItemClicked(route: Route) {
-        Snackbar.make(coordinatorLayoutMainActivity, "$route", Snackbar.LENGTH_LONG).show()
         val intent: Intent = JoinRouteActivity.createIntent(this@MainActivity)
         intent.putExtra(ID_USER, route.driverName)
         startActivity(intent)

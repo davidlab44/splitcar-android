@@ -80,29 +80,20 @@ class JoinRouteActivity : AppCompatActivity() {
         textViewCarSeatAvaiable.text = route.carSeat.toString()
         textViewPlace.text = route.meetingPlace
         textViewDestinationReference.text = route.destinationReference
-
-//        route.passengerName.forEach {
-//            if (it != null)
-//                appCompatTextViewPassenger1.text = it
-//            else
-//                appCompatTextViewPassenger1.text = "Disponible"
-//        }
     }
-
     private fun updateCarSeatRoutetoFirestore(email: String) {
         val idRoute = firebaseFirestore.collection("Route").document(email)
         idRoute.get().addOnSuccessListener { document ->
             if (document != null) {
                 val carSeat = document.data?.get("carSeat") as Long
-                val passengerName = email.toMutableList()
+                val passengerList = document.data?.get("passengerName") as MutableList<String?>
+                passengerList.add(email)
                 idRoute.update(mapOf("carSeat" to carSeat - 1))
-//                idRoute.collection("passengerName").add({ email }) Ask to Diego https://www.youtube.com/watch?v=o7d5Zeic63s
+                idRoute.update(mapOf("passengerName" to passengerList))
                 finish()
             }
         }
-
     }
-
     override fun onOptionsItemSelected(menuItem: MenuItem): Boolean {
         when (menuItem.itemId) {
             android.R.id.home -> {
@@ -112,7 +103,6 @@ class JoinRouteActivity : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(menuItem)
     }
-
     companion object {
         fun createIntent(context: Context): Intent {
             return Intent(context, JoinRouteActivity::class.java)

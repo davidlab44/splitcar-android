@@ -10,10 +10,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.globant.splitcar.R
 import com.globant.splitcar.model.Route
 import com.globant.splitcar.model.routes
-import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_route1.autoCompleteTextViewDestinationRoute
-import kotlinx.android.synthetic.main.activity_route1.constraintLayoutActivityRoute
 import kotlinx.android.synthetic.main.activity_route1.editTextDestinationReference
 import kotlinx.android.synthetic.main.activity_route1.editTextMeetingPlace
 import kotlinx.android.synthetic.main.activity_route1.editTextUser
@@ -48,7 +46,8 @@ class RouteActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = "Crea tu Ruta"
         editTextUser.text = email
-        val arrayAdapter = ArrayAdapter(this@RouteActivity, android.R.layout.simple_spinner_item, carSeat)
+        val arrayAdapter =
+                ArrayAdapter(this@RouteActivity, android.R.layout.simple_spinner_item, carSeat)
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinnerCarSeat.adapter = arrayAdapter
         textViewDateRoute.text = currentDate
@@ -59,14 +58,18 @@ class RouteActivity : AppCompatActivity() {
             updateTimeInTextViewDateRoute()
         }
         textViewTimeRoute.setOnClickListener {
-            TimePickerDialog(this@RouteActivity, onTimeSetListener, calendar.get(Calendar.HOUR), calendar.get(Calendar.MINUTE),
-                    false).show()
+            TimePickerDialog(
+                    this@RouteActivity,
+                    onTimeSetListener,
+                    calendar.get(Calendar.HOUR),
+                    calendar.get(Calendar.MINUTE),
+                    false
+            ).show()
         }
     }
 
     private fun updateTimeInTextViewDateRoute() {
         textViewTimeRoute.text = SimpleDateFormat("HH:mm a", Locale.US).format(calendar.time)
-        Snackbar.make(constraintLayoutActivityRoute, SimpleDateFormat("HH:mm a", Locale.US).format(calendar.time), Snackbar.LENGTH_LONG).show()
     }
 
     override fun onOptionsItemSelected(menuItem: MenuItem): Boolean {
@@ -82,9 +85,18 @@ class RouteActivity : AppCompatActivity() {
     private fun saveFireStore() {
         val id: Long = routes.size + 1.toLong()
         val email = editTextUser.text.toString()
-        val route = Route(id, email, autoCompleteTextViewDestinationRoute.text.toString(), "Vizcaya",
-                com.globant.splitcar.model.currentDate, textViewTimeRoute.text.toString(), spinnerCarSeat.selectedItem as Long,
-                editTextDestinationReference.text.toString(), editTextMeetingPlace.text.toString(), mutableListOf())
+        val route = Route(
+                id,
+                email,
+                autoCompleteTextViewDestinationRoute.text.toString(),
+                "Vizcaya",
+                com.globant.splitcar.model.currentDate,
+                textViewTimeRoute.text.toString(),
+                spinnerCarSeat.selectedItem as Long,
+                editTextDestinationReference.text.toString(),
+                editTextMeetingPlace.text.toString(),
+                mutableListOf()
+        )
         firebaseFirestore
                 .collection("Route")
                 .document(email)
