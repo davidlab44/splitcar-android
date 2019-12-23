@@ -13,7 +13,6 @@ import kotlinx.android.synthetic.main.route_list_item.view.textViewDestinationRo
 import kotlinx.android.synthetic.main.route_list_item.view.textViewDriverName
 import kotlinx.android.synthetic.main.route_list_item.view.textViewTimeRoute
 
-
 class RouteListAdapter(private val routeEvents: RouteEvents) : RecyclerView.Adapter<RouteListAdapter.ViewHolder>() {
 
     private var listRoute: List<Route> = listOf()
@@ -31,30 +30,9 @@ class RouteListAdapter(private val routeEvents: RouteEvents) : RecyclerView.Adap
         notifyDataSetChanged()
     }
 
-
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bindItem(listRoute[position], routeEvents)
     }
-
-//    private fun saveFireStore() {
-//        val id: Long = routes.size + 1.toLong()
-//        val email = editTextUser.text.toString()
-//        val route = Route(
-//                id,
-//                email,
-//                autoCompleteTextViewDestinationRoute.text.toString(),
-//                "IUSH",
-//                com.globant.splitcar.model.currentDate,
-//                textViewTimeRoute.text.toString(),
-//                spinnerCarSeat.selectedItem as Long,
-//                editTextDestinationReference.text.toString(),
-//                editTextMeetingPlace.text.toString()
-//        )
-//        firebaseFirestore
-//                .collection("Route")
-//                .document(email)
-//                .set(route)
-//    }
 
     class ViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
         fun bindItem(route: Route, listener: RouteEvents) {
