@@ -98,4 +98,7 @@
     <string name="custom_auth_signin_status_user">User ID: %s</string>
     <string name="custom_auth_signin_status_failed">Error: sign in failed</string>
     <string name="error_sign_in_failed">Sign in failed, see logs for details.</string>
+    <string name="departure_time">Hora de Salida </string>
+    <string name="available_positions">Cupos </string>
+
 </resources>

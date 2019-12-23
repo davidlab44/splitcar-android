@@ -1,5 +1,6 @@
 package com.globant.splitcar.adapters
 
+import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +13,15 @@ import kotlinx.android.synthetic.main.route_list_item.view.textViewDateRoute
 import kotlinx.android.synthetic.main.route_list_item.view.textViewDestinationRoute
 import kotlinx.android.synthetic.main.route_list_item.view.textViewDriverName
 import kotlinx.android.synthetic.main.route_list_item.view.textViewTimeRoute
+
+/**
+ * RouteListAdapter
+ *
+ * connect the source of the route list founded in database firestore with the instantiated class firebaseFirestore.collection routes ("Route") that
+ * will be displayed in the recyclerViewRoutes route list found in the MainActivity activity and in the XML activity_main. xml
+ *
+ * @author juan.rendon
+ */
 
 class RouteListAdapter(private val routeEvents: RouteEvents) : RecyclerView.Adapter<RouteListAdapter.ViewHolder>() {
 
@@ -39,8 +49,8 @@ class RouteListAdapter(private val routeEvents: RouteEvents) : RecyclerView.Adap
             itemView.textViewDriverName.text = route.driverName
             itemView.textViewDestinationRoute.text = route.destinationRoute
             itemView.textViewDateRoute.text = route.dateRoute
-            itemView.textViewTimeRoute.text = "Hora de Salida " + route.timeRoute
-            itemView.spinnerCarSeat.text = "Cupos " + route.carSeat.toString()
+            itemView.textViewTimeRoute.text = Resources.getSystem().getString(R.string.departure_time) + route.timeRoute
+            itemView.spinnerCarSeat.text = Resources.getSystem().getString(R.string.available_positions) + route.carSeat.toString()
             view.setOnClickListener { listener.onItemClicked(route) }
         }
     }
