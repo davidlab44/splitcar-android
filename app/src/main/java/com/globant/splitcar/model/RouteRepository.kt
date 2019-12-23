@@ -1,15 +1,21 @@
 package com.globant.splitcar.model
 
-import android.app.Application
 import android.util.Log
+import androidx.lifecycle.MutableLiveData
 import com.google.firebase.firestore.FirebaseFirestore
 
-class RouteRepository(private val application: Application) {
+class RouteRepository {
 
     private val firebaseFirestore = FirebaseFirestore.getInstance()
+    private val allRoutesLiveData = MutableLiveData<List<Route>>()
 
-    //TODO return a LiveData<List<Route>> object instead the current List<Route>
-    fun getAllRoutes(): List<Route> {
+    init {
+        getAllInfo()
+    }
+
+    fun getAllRoutes() = allRoutesLiveData
+
+    private fun getAllInfo() {
         val mutableListRoute = mutableListOf<Route>()
         firebaseFirestore.collection("Route")
             .get()
@@ -43,11 +49,12 @@ class RouteRepository(private val application: Application) {
                         mutableListRoute.add(route)
                     }
                 }
+                allRoutesLiveData.value = mutableListRoute
             }
             .addOnFailureListener { exception ->
                 Log.d("error", "Error getting documents: ", exception)
+                allRoutesLiveData.value = emptyList()
             }
-        return mutableListRoute
     }
 
     fun getFilteredRoutes(destinationReference: String): List<Route> {
@@ -88,7 +95,11 @@ class RouteRepository(private val application: Application) {
             .addOnFailureListener { exception ->
                 Log.d("error", "Error getting documents: ", exception)
             }
+        val routeProof = Route(
+            4, "phillip.coombs@globant.com", "City Plaza Envigado", "Vizcaya",
+            currentDate, "17:00", 4, "Las vegas", "S2", mutableListOf()
+        )
+        mutableListRoute.add(routeProof)
         return mutableListRoute
     }
-
 }
