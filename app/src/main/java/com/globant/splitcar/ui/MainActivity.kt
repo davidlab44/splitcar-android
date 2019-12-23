@@ -38,7 +38,6 @@ class MainActivity : AppCompatActivity(), RouteEvents {
         routeListAdapter = RouteListAdapter(this)
         recyclerViewRoutes.layoutManager = LinearLayoutManager(this)
         val mutableListRoute = mutableListOf<Route>()
-
         firebaseFirestore.collection("Route")
                 .get()
                 .addOnSuccessListener { result ->
@@ -84,7 +83,7 @@ class MainActivity : AppCompatActivity(), RouteEvents {
             override fun onTextChanged(cs: CharSequence, s: Int, b: Int, c: Int) {
                 val result = editTextSearch.text.toString()
                 if (result.isNotEmpty())
-                    routeViewModel.filterByName(result)
+                    routeViewModel.filterByRouteReference(result)
                 else
                     routeViewModel.getAllRoutes()
             }
