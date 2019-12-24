@@ -45,7 +45,7 @@ class GoogleSignInActivity : BaseActivity(), View.OnClickListener {
             intent.putExtra("email", email)
             startActivity(intent)
         }
-//        disconnectButton.setOnClickListener(this)
+        //disconnectButton.setOnClickListener(this)
         // [START config_signin]
         // Configure Google Sign In
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)

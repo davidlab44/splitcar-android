@@ -12,7 +12,22 @@ import com.globant.splitcar.adapters.PassengerAdapter
 import com.globant.splitcar.model.Route
 import com.globant.splitcar.utils.ID_USER
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.activity_join_route.*
+import kotlinx.android.synthetic.main.activity_join_route.buttonSaveRoute
+import kotlinx.android.synthetic.main.activity_join_route.passenger_list
+import kotlinx.android.synthetic.main.activity_join_route.textViewCarSeatAvaiable
+import kotlinx.android.synthetic.main.activity_join_route.textViewDateRoute
+import kotlinx.android.synthetic.main.activity_join_route.textViewDestinationReference
+import kotlinx.android.synthetic.main.activity_join_route.textViewDestinationRoute
+import kotlinx.android.synthetic.main.activity_join_route.textViewPickTimeRoute
+import kotlinx.android.synthetic.main.activity_join_route.textViewPlace
+import kotlinx.android.synthetic.main.activity_join_route.textViewTextUser
+
+/**
+ * JoinRouteActivity
+ *
+ * It has been created with the aim of having an authenticated passenger join an available route, via email
+ * @author juan.rendon
+ */
 
 class JoinRouteActivity : AppCompatActivity() {
     private val firebaseFirestore = FirebaseFirestore.getInstance()
