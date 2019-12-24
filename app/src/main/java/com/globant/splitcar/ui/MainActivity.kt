@@ -15,7 +15,7 @@ import com.globant.splitcar.adapters.RouteListAdapter
 import com.globant.splitcar.model.Route
 import com.globant.splitcar.utils.ID_USER
 import com.globant.splitcar.viewmodels.RouteViewModel
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_main.fabMakeRoute
 import kotlinx.android.synthetic.main.content_main.recyclerViewRoutes
 import kotlinx.android.synthetic.main.fragment_search.editTextSearch
 
@@ -50,6 +50,7 @@ class MainActivity : AppCompatActivity(), RouteEvents {
                 else routeViewModel.getAllRoutes()
                 */
             }
+
             override fun afterTextChanged(editable: Editable) {}
             override fun beforeTextChanged(cs: CharSequence, i: Int, j: Int, k: Int) {}
         })
