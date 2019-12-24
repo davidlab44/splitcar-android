@@ -24,10 +24,6 @@ class MainActivity : AppCompatActivity(), RouteEvents {
     private lateinit var routeListAdapter: RouteListAdapter
     private lateinit var routeViewModel: RouteViewModel
 
-    companion object {
-        private const val TAG = "KotlinActivity"
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -47,12 +43,13 @@ class MainActivity : AppCompatActivity(), RouteEvents {
     private fun setListeners() {
         editTextSearch.addTextChangedListener(object : TextWatcher {
             override fun onTextChanged(cs: CharSequence, s: Int, b: Int, c: Int) {
-/*                val result = editTextSearch.text.toString()
+                /*
+                val result = editTextSearch.text.toString()
                 if (result.isNotEmpty())
                     routeViewModel.filterByRouteReference(result)
-                else routeViewModel.getAllRoutes()*/
+                else routeViewModel.getAllRoutes()
+                */
             }
-
             override fun afterTextChanged(editable: Editable) {}
             override fun beforeTextChanged(cs: CharSequence, i: Int, j: Int, k: Int) {}
         })

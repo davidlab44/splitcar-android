@@ -4,6 +4,13 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.firestore.FirebaseFirestore
 
+/**
+ * RouteRepository
+ * This repository provides the data to the presentation layer
+ *
+ * @author david.mazo
+ */
+
 class RouteRepository {
 
     private val firebaseFirestore = FirebaseFirestore.getInstance()
