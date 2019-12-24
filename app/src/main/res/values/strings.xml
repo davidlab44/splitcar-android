@@ -100,5 +100,5 @@
     <string name="error_sign_in_failed">Sign in failed, see logs for details.</string>
     <string name="departure_time">Hora de Salida </string>
     <string name="available_positions">Cupos </string>
-
+    <string name="create_route">Crea tu ruta</string>
 </resources>

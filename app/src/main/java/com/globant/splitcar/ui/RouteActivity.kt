@@ -44,7 +44,7 @@ class RouteActivity : AppCompatActivity() {
     private fun bindComponents() {
         val email = intent.getStringExtra("email")
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.title = "Crea tu Ruta"
+        supportActionBar?.title = getText(R.string.create_route)
         editTextUser.text = email
         val arrayAdapter =
                 ArrayAdapter(this@RouteActivity, android.R.layout.simple_spinner_item, carSeat)
