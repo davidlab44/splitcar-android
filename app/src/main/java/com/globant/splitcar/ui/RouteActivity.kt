@@ -25,6 +25,14 @@ import java.time.format.DateTimeFormatter
 import java.util.Calendar
 import java.util.Locale
 
+/**
+ * RouteActivity
+ *
+ * It was created with the aim of an authenticated driver creating a route in firebase
+ * @author juan.rendon
+ */
+
+
 class RouteActivity : AppCompatActivity() {
     private val firebaseFirestore = FirebaseFirestore.getInstance()
     private val carSeat: Array<Long> = arrayOf(1, 2, 3, 4)
