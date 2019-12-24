@@ -1,5 +1,11 @@
 package com.globant.splitcar.model
 
+/**
+ * Routes
+ *
+ * This is just an temp. hardcoded data sample, with Route objects
+ *
+ */
 
 import java.text.SimpleDateFormat
 import java.util.*
