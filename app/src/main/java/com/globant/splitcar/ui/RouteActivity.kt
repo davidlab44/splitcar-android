@@ -10,15 +10,24 @@ import androidx.appcompat.app.AppCompatActivity
 import com.globant.splitcar.R
 import com.globant.splitcar.model.Route
 import com.globant.splitcar.model.routes
+import com.globant.splitcar.utils.CARSEAT
+import com.globant.splitcar.utils.CURRENTDATE
+import com.globant.splitcar.utils.CURRENTTIME
 import com.globant.splitcar.utils.EMAIL
 import com.globant.splitcar.utils.ROUTE_OBJECT
 import com.globant.splitcar.utils.ROUTE_ORIGIN
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.activity_route1.*
+import kotlinx.android.synthetic.main.activity_route1.autoCompleteTextViewDestinationRoute
+import kotlinx.android.synthetic.main.activity_route1.editTextDestinationReference
+import kotlinx.android.synthetic.main.activity_route1.editTextMeetingPlace
+import kotlinx.android.synthetic.main.activity_route1.editTextUser
+import kotlinx.android.synthetic.main.activity_route1.imageViewSaveRoute
+import kotlinx.android.synthetic.main.activity_route1.spinnerCarSeat
+import kotlinx.android.synthetic.main.activity_route1.textViewDateRoute
+import kotlinx.android.synthetic.main.activity_route1.textViewTimeRoute
 import java.text.SimpleDateFormat
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
-import java.util.*
+import java.util.Calendar
+import java.util.Locale
 
 /**
  * RouteActivity
@@ -29,10 +38,7 @@ import java.util.*
 
 class RouteActivity : AppCompatActivity() {
     private val firebaseFirestore = FirebaseFirestore.getInstance()
-    private val carSeat: Array<Long> = arrayOf(1, 2, 3, 4)
     private var calendar = Calendar.getInstance()
-    private val currentDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))
-    private val currentTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss"))
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_route1)
@@ -48,12 +54,11 @@ class RouteActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = getText(R.string.create_route)
         editTextUser.text = email
-        val arrayAdapter =
-                ArrayAdapter(this@RouteActivity, android.R.layout.simple_spinner_item, carSeat)
+        val arrayAdapter = ArrayAdapter(this@RouteActivity, android.R.layout.simple_spinner_item, CARSEAT)
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinnerCarSeat.adapter = arrayAdapter
-        textViewDateRoute.text = currentDate
-        textViewTimeRoute.text = currentTime
+        textViewDateRoute.text = CURRENTDATE
+        textViewTimeRoute.text = CURRENTTIME
         val onTimeSetListener = TimePickerDialog.OnTimeSetListener { _, hour, minute ->
             calendar.set(Calendar.HOUR_OF_DAY, hour)
             calendar.set(Calendar.MINUTE, minute)
@@ -91,7 +96,7 @@ class RouteActivity : AppCompatActivity() {
                 id,
                 email,
                 autoCompleteTextViewDestinationRoute.text.toString(),
-            ROUTE_ORIGIN,
+                ROUTE_ORIGIN,
                 com.globant.splitcar.model.currentDate,
                 textViewTimeRoute.text.toString(),
                 spinnerCarSeat.selectedItem as Long,
@@ -100,7 +105,7 @@ class RouteActivity : AppCompatActivity() {
                 mutableListOf()
         )
         firebaseFirestore
-            .collection(ROUTE_OBJECT)
+                .collection(ROUTE_OBJECT)
                 .document(email)
                 .set(route)
     }
