@@ -17,10 +17,10 @@ import com.globant.splitcar.utils.EMAIL
 import com.globant.splitcar.utils.ROUTE_OBJECT
 import com.globant.splitcar.utils.ROUTE_ORIGIN
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.android.synthetic.main.activity_route.textViewUser
 import kotlinx.android.synthetic.main.activity_route1.autoCompleteTextViewDestinationRoute
 import kotlinx.android.synthetic.main.activity_route1.editTextDestinationReference
 import kotlinx.android.synthetic.main.activity_route1.editTextMeetingPlace
-import kotlinx.android.synthetic.main.activity_route1.editTextUser
 import kotlinx.android.synthetic.main.activity_route1.imageViewSaveRoute
 import kotlinx.android.synthetic.main.activity_route1.spinnerCarSeat
 import kotlinx.android.synthetic.main.activity_route1.textViewDateRoute
@@ -53,7 +53,7 @@ class RouteActivity : AppCompatActivity() {
         val email = intent.getStringExtra(EMAIL)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = getText(R.string.create_route)
-        editTextUser.text = email
+        textViewUser.text = email
         val arrayAdapter = ArrayAdapter(this@RouteActivity, android.R.layout.simple_spinner_item, CARSEAT)
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinnerCarSeat.adapter = arrayAdapter
@@ -91,7 +91,7 @@ class RouteActivity : AppCompatActivity() {
 
     private fun saveFireStore() {
         val id: Long = routes.size + 1.toLong()
-        val email = editTextUser.text.toString()
+        val email = textViewUser.text.toString()
         val route = Route(
                 id,
                 email,
