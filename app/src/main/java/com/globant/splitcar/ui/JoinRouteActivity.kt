@@ -30,46 +30,24 @@ import kotlinx.android.synthetic.main.activity_join_route.textViewTextUser
  */
 
 class JoinRouteActivity : AppCompatActivity() {
+
     private val firebaseFirestore = FirebaseFirestore.getInstance()
+    private val passengerAdapter = PassengerAdapter()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_join_route)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = "Unirse a la Ruta"
+        passenger_list.layoutManager = LinearLayoutManager(this)
+        passenger_list.adapter = passengerAdapter
         val email = intent.getStringExtra(ID_USER)
         val idRoute = firebaseFirestore.collection("Route").document(email)
         idRoute.get()
                 .addOnSuccessListener { document ->
-                    if (document != null) {
-                        val id = document.data?.get("id") as Long
-                        val driverName = document.data?.get("driverName") as String
-                        val destinationRoute = document.data?.get("destinationRoute") as String
-                        val originRoute = document.data?.get("originRoute") as String
-                        val dateRoute = document.data?.get("dateRoute") as String
-                        val timeRoute = document.data?.get("timeRoute") as String
-                        val carSeat = document.data?.get("carSeat") as Long
-                        val meetingPlace = document.data?.get("meetingPlace") as String
-                        val destinationReference = document.data?.get("destinationReference") as String
-                        val passengerName =
-                            document.data?.get("passengerName") as MutableList<String>
-                        val route = Route(
-                                id,
-                                driverName,
-                                destinationRoute,
-                                originRoute,
-                                dateRoute,
-                                timeRoute,
-                                carSeat,
-                                destinationReference,
-                                meetingPlace,
-                                passengerName
-                        )
+                    if (document.exists()) {
+                        val route = document.toObject(Route::class.java) ?: Route()
                         bindRoute(route)
-                        passenger_list.layoutManager = LinearLayoutManager(this)
-                        passenger_list.adapter = PassengerAdapter(route.passengerName, this)
-
-                    } else {
-                        Log.d("Document_Null", "No such document")
                     }
                 }
                 .addOnFailureListener { exception ->
@@ -81,6 +59,7 @@ class JoinRouteActivity : AppCompatActivity() {
     }
 
     private fun bindRoute(route: Route) {
+        passengerAdapter.addAll(route.passengerName)
         textViewTextUser.text = route.driverName
         textViewDestinationRoute.text = route.destinationRoute
         textViewDateRoute.text = route.dateRoute
@@ -89,6 +68,7 @@ class JoinRouteActivity : AppCompatActivity() {
         textViewPlace.text = route.meetingPlace
         textViewDestinationReference.text = route.destinationReference
     }
+
     private fun updateCarSeatRoutetoFirestore(email: String) {
         val idRoute = firebaseFirestore.collection("Route").document(email)
         idRoute.get().addOnSuccessListener { document ->
@@ -102,6 +82,7 @@ class JoinRouteActivity : AppCompatActivity() {
             }
         }
     }
+
     override fun onOptionsItemSelected(menuItem: MenuItem): Boolean {
         when (menuItem.itemId) {
             android.R.id.home -> {
@@ -111,6 +92,7 @@ class JoinRouteActivity : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(menuItem)
     }
+
     companion object {
         fun createIntent(context: Context): Intent {
             return Intent(context, JoinRouteActivity::class.java)

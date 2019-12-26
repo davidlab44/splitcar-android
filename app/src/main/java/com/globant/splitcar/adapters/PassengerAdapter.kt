@@ -1,12 +1,11 @@
 package com.globant.splitcar.adapters
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.globant.splitcar.R
-import kotlinx.android.synthetic.main.passenger_list_item.view.*
+import kotlinx.android.synthetic.main.passenger_list_item.view.passenger_name
 
 /**
  * PassengerAdapter
@@ -16,13 +15,16 @@ import kotlinx.android.synthetic.main.passenger_list_item.view.*
  * @author juan.rendon
  */
 
-class PassengerAdapter(
-    private val mutableListPassengerName: MutableList<String>,
-    val context: Context
-) : RecyclerView.Adapter<PassengerAdapter.ViewHolder>() {
+class PassengerAdapter : RecyclerView.Adapter<PassengerAdapter.ViewHolder>() {
+    private var mutableListPassengerName = mutableListOf<String>()
+
+    fun addAll(passengersMutableList: MutableList<String>) {
+        this.mutableListPassengerName = passengersMutableList
+        notifyDataSetChanged()
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(LayoutInflater.from(context).inflate(R.layout.passenger_list_item, parent, false))
+        return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.passenger_list_item, parent, false))
     }
 
     override fun getItemCount(): Int {

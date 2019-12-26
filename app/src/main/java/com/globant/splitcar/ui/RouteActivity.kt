@@ -90,7 +90,7 @@ class RouteActivity : AppCompatActivity() {
     }
 
     private fun saveFireStore() {
-        val id = UUID.randomUUID().toString().toLong()
+        val id = UUID.randomUUID().toString()
         val email = textViewUser.text.toString()
         val route = Route(
                 id,
@@ -99,7 +99,7 @@ class RouteActivity : AppCompatActivity() {
                 ROUTE_ORIGIN,
                 com.globant.splitcar.model.currentDate,
                 textViewTimeRoute.text.toString(),
-                spinnerCarSeat.selectedItem as Long,
+                spinnerCarSeat.selectedItem as Int,
                 editTextDestinationReference.text.toString(),
                 editTextMeetingPlace.text.toString(),
                 mutableListOf()
