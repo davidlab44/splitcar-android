@@ -75,38 +75,31 @@ Implement an application in Android Studio with Kotlin to share the travel route
  
 #
 #
-Historia ver el listado de las rutas disponibles  
-Como usuario  
-Quiero visualizar cada ruta con las siguientes propiedades: propietario, origen, destino, fecha, hora y cupos disponibles  
-Para identificar fácilmente la ruta en la que estoy interesado  
+1. **Ver el listado de las rutas disponibles.**
+<br />:walking: Como usuario. <br /> **_Quiero_** visualizar cada ruta con las siguientes campos: `propietario`, `origen`, `destino`, `fecha`, `hora` y `cupos disponibles`.  
+Para identificar la ruta en la que estoy interesado. 
 #  
-Historia realizar una búsqueda de los sitios principales de referencia destino  
-Como usuario  
-Quiero filtrar los sitios principales de referencia destino que son de interés para que aparezcan en el listado sólo las rutas disponibles  
-Para que al usuario pasajero pueda realizar una búsqueda de interés por los sitios principales de la ruta que estoy   creando
+2. **Realizar una búsqueda, de los sitios principales del campo `referencia destino` que han sido ingresados al crear una ruta.**
+<br />:walking: Como usuario. <br /> **_Quiero_** tener una caja de texto de busqueda donde pueda digitar `sitios de referencia`.   
+Para filtrar el listado de rutas, cada vez que digite una letra; si la caja de texto esta vacía mostrará las todas las rutas con una paginación de 10 elementos.
 #  
-Historia crear una ruta  
-Como usuario  
-Quiero crear una ruta en una vista con un formulario editable en el que pueda crear una ruta con los siguientes propiedades: propietario, destino, hora, cupos disponibles, lugar de encuentro, referencia de destino y un historial de los anteriores viajes  
-Quiero que en la vista de creación de ruta pueda acceder a los viajes anteriores  
-Quiero tener un botón para confirmar todos los datos al crear una ruta  
-Quiero poder precargar fácilmente de mis viajes anteriores la información de la hora, origen, destino, cupos, lugar de   encuentro y referencia de destino
-Quiero tener la posibilidad de seleccionar la fecha seleccionar la hora y seleccionar los cupos sin necesidad de   digitarlos  
-Quiero tener la posibilidad de escribir los lugares principales por los que voy a pasar al realizar mi ruta  
-Para crear una ruta con todos los datos que necesita un usuario con perfil pasajero  
+3. **Crear una ruta.**
+<br />:walking: Como usuario. <br /> **_Quiero_** crear una ruta en un formulario con los siguientes campos: `propietario`, `destino`, `hora`, `cupos disponibles`, `lugar de encuentro` y `referencia destino`. <br /> **_Quiero_** que en la vista de creación de ruta poder acceder a los viajes anteriores. <br /> **_Quiero_** tener un botón para confirmar todos los datos al crear una ruta. <br /> **_Quiero_** poder precargar fácilmente de mis viajes anteriores la información de la `hora`, `origen`, `destino`, `cupos`, `lugar de encuentro` y `referencia destino`. <br /> **_Quiero_** tener la posibilidad de seleccionar: `hora` y `cupos` sin necesidad de   digitarlos. <br /> **_Quiero_** tener la posibilidad de elegir los `lugares principales` por los que voy a pasar al realizar mi ruta.
+Para crear una ruta con todos los datos que necesita un usuario con perfil pasajero.  
+
+:no_entry: El usuario que cree una ruta, no puede suscribirse a ninguna ruta existente.  
+:no_entry: Si un usuario se suscribe a una ruta, no puede crear rutas hasta que finalice dicha ruta.  
+ 
+
 #  
-Historia eliminar una ruta creada  
-Como usuario  
-Quiero tener la opción de eliminar una ruta  
-Para tener la opción de borrar una ruta  
+4. **Eliminar una ruta creada.**
+<br />:walking: Como usuario. <br /> **_Quiero_** tener la opción de eliminar una ruta. 
+<br /> :email: Se enviará una notificación a cada usuario pasajero que se suscribio a la ruta eliminada.
 #  
-Historia unirse a una ruta  
-Como usuario  
-Quiero tener la opción de unirme a una ruta seleccionando una ruta disponible del listado en la vista principal
-Quiero una vista en la que pueda visualizar una ruta seleccionada con los siguientes propiedades: propietario, fecha, hora, origen, destino, cupos disponibles, lugar de encuentro para salida, referencia de destino
-Para poder unirme a la ruta que creó un propietario  
+5. **Unirse a una ruta.**
+<br />:walking: Como usuario. <br /> **_Quiero_** tener la opción de unirme a una ruta seleccionando una ruta disponible del listado en la vista principal. <br /> **_Quiero_** una vista en la que pueda visualizar una ruta seleccionada con los siguientes campos: `propietario`, `fecha`, `hora`, `origen`, `destino`, `cupos disponibles`, `lugar de encuentro`, `referencia destino`.
+Para poder unirme a la ruta que creó un propietario.  
 #  
-Historia alerta próxima a la hora de salida  
-Como usuario  
-Quiero una notificación antes de 15 minutos de la hora de salida mediante un sonido y/o vibración  
-Para llegar puntualmente al lugar de encuentro de salida  
+6. **Alerta próxima a la hora de salida.**
+<br />:walking: Como usuario. <br /> **_Quiero_** una notificación antes de 15 minutos de la hora de salida mediante un sonido y/o vibración  
+Para llegar puntualmente al lugar de encuentro de salida
