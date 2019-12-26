@@ -1,9 +1,6 @@
 package com.globant.splitcar.ui
 
-import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
@@ -16,9 +13,8 @@ import com.globant.splitcar.model.Route
 import com.globant.splitcar.utils.EMAIL
 import com.globant.splitcar.utils.ID_USER
 import com.globant.splitcar.viewmodels.RouteViewModel
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_main.fabMakeRoute
 import kotlinx.android.synthetic.main.content_main.recyclerViewRoutes
-import kotlinx.android.synthetic.main.fragment_search.editTextSearch
 
 class MainActivity : AppCompatActivity(), RouteEvents {
 
@@ -42,30 +38,16 @@ class MainActivity : AppCompatActivity(), RouteEvents {
     }
 
     private fun setListeners() {
-        editTextSearch.addTextChangedListener(object : TextWatcher {
-            override fun onTextChanged(cs: CharSequence, s: Int, b: Int, c: Int) {
-                /*
-                val result = editTextSearch.text.toString()
-                if (result.isNotEmpty())
-                    routeViewModel.filterByRouteReference(result)
-                else routeViewModel.getAllRoutes()
-                */
-            }
-
-            override fun afterTextChanged(editable: Editable) {}
-            override fun beforeTextChanged(cs: CharSequence, i: Int, j: Int, k: Int) {}
-        })
-
         fabMakeRoute.setOnClickListener {
             val email = intent.getStringExtra(EMAIL)
-            val intent: Intent = RouteActivity.createIntent(this@MainActivity)
+            val intent = RouteActivity.createIntent(this@MainActivity)
             intent.putExtra(EMAIL, email)
             startActivity(intent)
         }
     }
 
     override fun onItemClicked(route: Route) {
-        val intent: Intent = JoinRouteActivity.createIntent(this@MainActivity)
+        val intent = JoinRouteActivity.createIntent(this@MainActivity)
         intent.putExtra(ID_USER, route.driverName)
         startActivity(intent)
     }
