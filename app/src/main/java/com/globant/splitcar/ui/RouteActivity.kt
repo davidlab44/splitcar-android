@@ -10,20 +10,15 @@ import androidx.appcompat.app.AppCompatActivity
 import com.globant.splitcar.R
 import com.globant.splitcar.model.Route
 import com.globant.splitcar.model.routes
+import com.globant.splitcar.utils.EMAIL
+import com.globant.splitcar.utils.ROUTE_OBJECT
+import com.globant.splitcar.utils.ROUTE_ORIGIN
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.activity_route1.autoCompleteTextViewDestinationRoute
-import kotlinx.android.synthetic.main.activity_route1.editTextDestinationReference
-import kotlinx.android.synthetic.main.activity_route1.editTextMeetingPlace
-import kotlinx.android.synthetic.main.activity_route1.editTextUser
-import kotlinx.android.synthetic.main.activity_route1.imageViewSaveRoute
-import kotlinx.android.synthetic.main.activity_route1.spinnerCarSeat
-import kotlinx.android.synthetic.main.activity_route1.textViewDateRoute
-import kotlinx.android.synthetic.main.activity_route1.textViewTimeRoute
+import kotlinx.android.synthetic.main.activity_route1.*
 import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
-import java.util.Calendar
-import java.util.Locale
+import java.util.*
 
 /**
  * RouteActivity
@@ -31,7 +26,6 @@ import java.util.Locale
  * It was created with the aim of an authenticated driver creating a route in firebase
  * @author juan.rendon
  */
-
 
 class RouteActivity : AppCompatActivity() {
     private val firebaseFirestore = FirebaseFirestore.getInstance()
@@ -50,7 +44,7 @@ class RouteActivity : AppCompatActivity() {
     }
 
     private fun bindComponents() {
-        val email = intent.getStringExtra("email")
+        val email = intent.getStringExtra(EMAIL)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = getText(R.string.create_route)
         editTextUser.text = email
@@ -97,7 +91,7 @@ class RouteActivity : AppCompatActivity() {
                 id,
                 email,
                 autoCompleteTextViewDestinationRoute.text.toString(),
-                "Vizcaya",
+            ROUTE_ORIGIN,
                 com.globant.splitcar.model.currentDate,
                 textViewTimeRoute.text.toString(),
                 spinnerCarSeat.selectedItem as Long,
@@ -106,7 +100,7 @@ class RouteActivity : AppCompatActivity() {
                 mutableListOf()
         )
         firebaseFirestore
-                .collection("Route")
+            .collection(ROUTE_OBJECT)
                 .document(email)
                 .set(route)
     }
