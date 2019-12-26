@@ -9,7 +9,6 @@ import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import com.globant.splitcar.R
 import com.globant.splitcar.model.Route
-import com.globant.splitcar.model.routes
 import com.globant.splitcar.utils.CARSEAT
 import com.globant.splitcar.utils.CURRENTDATE
 import com.globant.splitcar.utils.CURRENTTIME
@@ -28,6 +27,7 @@ import kotlinx.android.synthetic.main.activity_route1.textViewTimeRoute
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
+import java.util.UUID
 
 /**
  * RouteActivity
@@ -90,7 +90,7 @@ class RouteActivity : AppCompatActivity() {
     }
 
     private fun saveFireStore() {
-        val id: Long = routes.size + 1.toLong()
+        val id = UUID.randomUUID().toString().toLong()
         val email = textViewUser.text.toString()
         val route = Route(
                 id,
