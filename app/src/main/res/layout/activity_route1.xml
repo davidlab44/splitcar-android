@@ -31,7 +31,7 @@
                 android:background="@drawable/border">
 
                 <TextView
-                    android:id="@+id/editTextUser"
+                    android:id="@+id/textViewUser"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
@@ -84,7 +84,7 @@
                     android:layout_marginTop="4dp"
                     android:contentDescription="@string/route_destination"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/editTextUser"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewUser"
                     app:srcCompat="@android:drawable/presence_online" />
 
                 <ImageView

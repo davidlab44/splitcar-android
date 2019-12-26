@@ -1,5 +1,8 @@
 package com.globant.splitcar.utils
 
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+
 /**
  * Constants
  *
@@ -8,12 +11,10 @@ package com.globant.splitcar.utils
  * @author juan.rendon
  */
 
-const val ID_USER: String = "idUser"
-const val EMAIL: String = "email"
-const val ROUTE_OBJECT: String = "Route"
-const val ROUTE_ORIGIN: String = "Vizcaya"
-
-
-
-
-
+const val ID_USER = "idUser"
+const val EMAIL = "email"
+const val ROUTE_OBJECT = "Route"
+const val ROUTE_ORIGIN = "Vizcaya"
+val CARSEAT = arrayOf(1, 2, 3, 4)
+val CURRENTDATE = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))
+val CURRENTTIME = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss"))
