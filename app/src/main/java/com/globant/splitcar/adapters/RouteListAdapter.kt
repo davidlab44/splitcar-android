@@ -7,11 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.globant.splitcar.R
 import com.globant.splitcar.model.Route
 import com.globant.splitcar.ui.RouteEvents
-import kotlinx.android.synthetic.main.route_list_item.view.spinnerCarSeat
-import kotlinx.android.synthetic.main.route_list_item.view.textViewDateRoute
-import kotlinx.android.synthetic.main.route_list_item.view.textViewDestinationRoute
-import kotlinx.android.synthetic.main.route_list_item.view.textViewDriverName
-import kotlinx.android.synthetic.main.route_list_item.view.textViewTimeRoute
+import kotlinx.android.synthetic.main.route_list_item.view.*
 
 /**
  * RouteListAdapter
@@ -24,13 +20,15 @@ import kotlinx.android.synthetic.main.route_list_item.view.textViewTimeRoute
 
 class RouteListAdapter(private val routeEvents: RouteEvents) : RecyclerView.Adapter<RouteListAdapter.ViewHolder>() {
 
+    // If needed we can get the context from routeEvents val
     private var listRoute: List<Route> = listOf()
+    private var filteredListRoute: List<Route> = listOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.route_list_item, parent, false))
     }
 
-    override fun getItemCount() = listRoute.size
+    override fun getItemCount() = filteredListRoute.size
 
     fun addAll(listRoute: List<Route>) {
         this.listRoute = listRoute
@@ -38,8 +36,9 @@ class RouteListAdapter(private val routeEvents: RouteEvents) : RecyclerView.Adap
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bindItem(listRoute[position], routeEvents)
+        holder.bindItem(filteredListRoute[position], routeEvents)
     }
+
 
     class ViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
         fun bindItem(route: Route, listener: RouteEvents) {

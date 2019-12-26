@@ -13,9 +13,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.globant.splitcar.R
 import com.globant.splitcar.adapters.RouteListAdapter
 import com.globant.splitcar.model.Route
+import com.globant.splitcar.utils.EMAIL
 import com.globant.splitcar.utils.ID_USER
 import com.globant.splitcar.viewmodels.RouteViewModel
-import kotlinx.android.synthetic.main.activity_main.fabMakeRoute
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.recyclerViewRoutes
 import kotlinx.android.synthetic.main.fragment_search.editTextSearch
 
@@ -56,9 +57,9 @@ class MainActivity : AppCompatActivity(), RouteEvents {
         })
 
         fabMakeRoute.setOnClickListener {
-            val email = intent.getStringExtra("email")
+            val email = intent.getStringExtra(EMAIL)
             val intent: Intent = RouteActivity.createIntent(this@MainActivity)
-            intent.putExtra("email", email)
+            intent.putExtra(EMAIL, email)
             startActivity(intent)
         }
     }

@@ -8,4 +8,6 @@ package com.globant.splitcar.utils
  * @author juan.rendon
  */
 const val ID_USER: String = "idUser"
+const val EMAIL: String = "email"
+
 
