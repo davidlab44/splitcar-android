@@ -20,15 +20,13 @@ import kotlinx.android.synthetic.main.route_list_item.view.*
 
 class RouteListAdapter(private val routeEvents: RouteEvents) : RecyclerView.Adapter<RouteListAdapter.ViewHolder>() {
 
-    // If needed we can get the context from routeEvents val
     private var listRoute: List<Route> = listOf()
-    private var filteredListRoute: List<Route> = listOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.route_list_item, parent, false))
     }
 
-    override fun getItemCount() = filteredListRoute.size
+    override fun getItemCount() = listRoute.size
 
     fun addAll(listRoute: List<Route>) {
         this.listRoute = listRoute
@@ -36,7 +34,7 @@ class RouteListAdapter(private val routeEvents: RouteEvents) : RecyclerView.Adap
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bindItem(filteredListRoute[position], routeEvents)
+        holder.bindItem(listRoute[position], routeEvents)
     }
 
 
