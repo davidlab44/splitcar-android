@@ -51,14 +51,11 @@ abstract class RoadReferenceDatabase : RoomDatabase() {
     }
 
     class PopulateDbAsyncTask(db: RoadReferenceDatabase?) : AsyncTask<Unit, Unit, Unit>() {
-        private val userDao = db?.roadReferenceDao()
-
+        private val roadReference = db?.roadReferenceDao()
         override fun doInBackground(vararg p0: Unit?) {
-            userDao?.insert(RoadReference("Bello"))
-            userDao?.insert(RoadReference("Niquia"))
-            userDao?.insert(RoadReference("Copacabana"))
+            getDefaultRoadReferenceList().forEach {
+                roadReference?.insert(it)
+            }
         }
     }
-
-
 }

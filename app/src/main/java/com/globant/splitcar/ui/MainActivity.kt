@@ -1,6 +1,7 @@
 package com.globant.splitcar.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
@@ -11,7 +12,6 @@ import com.globant.splitcar.R
 import com.globant.splitcar.adapters.RouteListAdapter
 import com.globant.splitcar.model.RoadReferenceRepository
 import com.globant.splitcar.model.Route
-import com.globant.splitcar.model.getRoadReferenceList
 import com.globant.splitcar.utils.EMAIL
 import com.globant.splitcar.utils.ID_USER
 import com.globant.splitcar.viewmodels.RouteViewModel
@@ -33,11 +33,11 @@ class MainActivity : AppCompatActivity(), RouteEvents {
         routeViewModel.getAllRoutes().observe(this, Observer {
             routeListAdapter.addAll(it)
         })
-        setListeners()
+        setFloatingActionButtonListener()
         saveDefaultData()
     }
 
-    private fun setListeners() {
+    private fun setFloatingActionButtonListener() {
         fabMakeRoute.setOnClickListener {
             val email = intent.getStringExtra(EMAIL)
             val intent = RouteActivity.createIntent(this@MainActivity)
@@ -46,10 +46,11 @@ class MainActivity : AppCompatActivity(), RouteEvents {
         }
     }
 
-    fun saveDefaultData() {
-        for (roadReference in getRoadReferenceList()) {
-            println(roadReference)
-            RoadReferenceRepository(application).saveRoadReferenceList(roadReference)
+    private fun saveDefaultData() {
+        val numberOfRecords = RoadReferenceRepository(application).getRoadReferenceList().size
+        Log.d("tag roadRepository", "There are NOT RoadRepositories saved, founded $numberOfRecords records")
+        if (RoadReferenceRepository(application).getRoadReferenceList().isEmpty()) {
+        } else {
         }
     }
 

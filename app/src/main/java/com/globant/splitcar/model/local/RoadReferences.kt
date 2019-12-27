@@ -1,9 +1,7 @@
-package com.globant.splitcar.model
-
-import com.globant.splitcar.model.local.RoadReference
+package com.globant.splitcar.model.local
 
 /**
- * Routes
+ * RoadReferences
  *
  * This is just a temp. hardcoded data sample, with a list of road reference
  *
@@ -15,6 +13,6 @@ val roadReference = listOf(
         RoadReference("Calle 10"),
         RoadReference("Avenida Guayabal"))
 
-fun getRoadReferenceList(): List<RoadReference> {
+fun getDefaultRoadReferenceList(): List<RoadReference> {
     return roadReference
 }

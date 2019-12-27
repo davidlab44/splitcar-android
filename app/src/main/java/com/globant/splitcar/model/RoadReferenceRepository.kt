@@ -14,7 +14,7 @@ import com.globant.splitcar.model.local.RoadReferenceDatabase
  * @author david.mazo
  */
 
-class RoadReferenceRepository(val application: Application) {
+class RoadReferenceRepository(private val application: Application) {
 
     private var roadReferenceDao: RoadReferenceDao
     private var allRoadReferences: LiveData<List<RoadReference>>
@@ -30,10 +30,9 @@ class RoadReferenceRepository(val application: Application) {
     fun getRoadReferenceList(): List<RoadReference> {
         return RoadReferenceDatabase.getInstance(application.applicationContext)!!.roadReferenceDao().getRoadReferences()
     }
-
+    /*
     fun saveRoadReferenceList(roadReference: RoadReference) {
         RoadReferenceDatabase.getInstance(application.applicationContext)!!.roadReferenceDao().insert(roadReference)
     }
-
-
+    */
 }
