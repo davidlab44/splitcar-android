@@ -13,7 +13,7 @@ import java.util.Calendar
 val currentDate: String = SimpleDateFormat.getDateTimeInstance().format(Calendar.getInstance().time)
 val routes: ArrayList<Route> = ArrayList()
 val route1 = Route(
-        1,
+        "1",
         "phillip.coombs@globant.com",
         "City Plaza Envigado",
         "Vizcaya",
@@ -23,7 +23,7 @@ val route1 = Route(
     "", "", mutableListOf()
 )
 val route2 = Route(
-        2,
+        "2",
         "claudia.acevedo@globant.com",
         "Manrique Central",
         "Vizcaya",
@@ -34,7 +34,7 @@ val route2 = Route(
     "", mutableListOf()
 )
 val route3 = Route(
-        3,
+        "3",
         "s.mejia@globant.com",
         "UPB",
         "Vizcaya",
