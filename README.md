@@ -76,8 +76,9 @@ Implement an application in Android Studio with Kotlin to share the travel route
 #
 #
 1. **Ver el listado de las rutas disponibles.**
-<br />:walking: Como usuario. <br /> **_Quiero_** visualizar cada ruta con las siguientes campos: `propietario`, `origen`, `destino`, `fecha`, `hora` y `cupos disponibles`.  
-Para identificar la ruta en la que estoy interesado. 
+<br />:walking: Como usuario. <br /> **_Quiero_** visualizar un listado de turas con una paginacion de 10 elementos y cada elemento debe mostrar los
+siguientes campos: `propietario`, `origen`, `destino`, `fecha`, `hora` y `cupos disponibles`. Para poder identificar la ruta en la que estoy
+interesado
 #  
 2. **Realizar una búsqueda, de los sitios principales del campo `referencia destino` que han sido ingresados al crear una ruta.**
 <br />:walking: Como usuario. <br /> **_Quiero_** tener una caja de texto de busqueda donde pueda digitar `sitios de referencia`.   
