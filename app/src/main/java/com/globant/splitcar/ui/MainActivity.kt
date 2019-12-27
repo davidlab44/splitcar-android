@@ -9,7 +9,9 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.globant.splitcar.R
 import com.globant.splitcar.adapters.RouteListAdapter
+import com.globant.splitcar.model.RoadReferenceRepository
 import com.globant.splitcar.model.Route
+import com.globant.splitcar.model.getRoadReferenceList
 import com.globant.splitcar.utils.EMAIL
 import com.globant.splitcar.utils.ID_USER
 import com.globant.splitcar.viewmodels.RouteViewModel
@@ -27,14 +29,12 @@ class MainActivity : AppCompatActivity(), RouteEvents {
         routeListAdapter = RouteListAdapter(this)
         recyclerViewRoutes.layoutManager = LinearLayoutManager(this)
         recyclerViewRoutes.adapter = routeListAdapter
-
         routeViewModel = ViewModelProviders.of(this).get(RouteViewModel::class.java)
-
         routeViewModel.getAllRoutes().observe(this, Observer {
             routeListAdapter.addAll(it)
         })
-
         setListeners()
+        saveDefaultData()
     }
 
     private fun setListeners() {
@@ -46,6 +46,13 @@ class MainActivity : AppCompatActivity(), RouteEvents {
         }
     }
 
+    fun saveDefaultData() {
+        for (roadReference in getRoadReferenceList()) {
+            println(roadReference)
+            RoadReferenceRepository(application).saveRoadReferenceList(roadReference)
+        }
+    }
+
     override fun onItemClicked(route: Route) {
         val intent = JoinRouteActivity.createIntent(this@MainActivity)
         intent.putExtra(ID_USER, route.driverName)
@@ -53,15 +60,11 @@ class MainActivity : AppCompatActivity(), RouteEvents {
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.menu_main, menu)
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
             R.id.action_settings -> true
             else -> super.onOptionsItemSelected(item)

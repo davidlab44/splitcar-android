@@ -50,6 +50,7 @@ class RouteActivity : AppCompatActivity() {
     }
 
     private fun bindComponents() {
+        // esto es una variable de clase
         val email = intent.getStringExtra(EMAIL)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = getText(R.string.create_route)
@@ -73,6 +74,9 @@ class RouteActivity : AppCompatActivity() {
                     false
             ).show()
         }
+        //Hacerle update al timepicker con lo que selecciona el usuario
+        //quitar el calendar que no se necesita
+        //un solo timepicker dialog tenerlo por fuera del onClickListener OJO sacar del listener la creacion de la instancia del timepicker
     }
 
     private fun updateTimeInTextViewDateRoute() {

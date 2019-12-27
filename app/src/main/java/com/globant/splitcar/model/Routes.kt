@@ -3,13 +3,12 @@ package com.globant.splitcar.model
 /**
  * Routes
  *
- * This is just an temp. hardcoded data sample, with Route objects
+ * This is just a temp. hardcoded data sample, with Route objects
  *
  */
 
 import java.text.SimpleDateFormat
-import java.util.*
-import kotlin.collections.ArrayList
+import java.util.Calendar
 
 val currentDate: String = SimpleDateFormat.getDateTimeInstance().format(Calendar.getInstance().time)
 val routes: ArrayList<Route> = ArrayList()
