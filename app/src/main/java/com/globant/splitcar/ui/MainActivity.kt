@@ -1,7 +1,6 @@
 package com.globant.splitcar.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
@@ -10,7 +9,6 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.globant.splitcar.R
 import com.globant.splitcar.adapters.RouteListAdapter
-import com.globant.splitcar.model.RoadReferenceRepository
 import com.globant.splitcar.model.Route
 import com.globant.splitcar.utils.EMAIL
 import com.globant.splitcar.utils.ID_USER
@@ -29,30 +27,19 @@ class MainActivity : AppCompatActivity(), RouteEvents {
         routeListAdapter = RouteListAdapter(this)
         recyclerViewRoutes.layoutManager = LinearLayoutManager(this)
         recyclerViewRoutes.adapter = routeListAdapter
-
         routeViewModel = ViewModelProviders.of(this).get(RouteViewModel::class.java)
-
         routeViewModel.getAllRoutes().observe(this, Observer {
             routeListAdapter.addAll(it)
         })
-        setFloatingActionButtonListener()
-        saveDefaultData()
+        listenFloatingActionButton()
     }
 
-    private fun setFloatingActionButtonListener() {
+    private fun listenFloatingActionButton() {
         fabCreateRoute.setOnClickListener {
             val email = intent.getStringExtra(EMAIL)
             val intent = RouteActivity.createIntent(this@MainActivity)
             intent.putExtra(EMAIL, email)
             startActivity(intent)
-        }
-    }
-
-    private fun saveDefaultData() {
-        val numberOfRecords = RoadReferenceRepository(application).getRoadReferenceList().size
-        Log.d("tag roadRepository", "There are NOT RoadRepositories saved, founded $numberOfRecords records")
-        if (RoadReferenceRepository(application).getRoadReferenceList().isEmpty()) {
-        } else {
         }
     }
 
