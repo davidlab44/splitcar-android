@@ -70,15 +70,8 @@ class CreateRouteActivity : AppCompatActivity() {
             override fun onTextChanged(charSequence: CharSequence, s: Int, b: Int, c: Int) {
                 adapter.filter.filter(charSequence)
             }
-
             override fun afterTextChanged(editable: Editable) {}
-            override fun beforeTextChanged(
-                cs: CharSequence,
-                i: Int,
-                j: Int,
-                k: Int
-            ) {
-            }
+            override fun beforeTextChanged(cs: CharSequence, i: Int, j: Int, k: Int) {}
         })
 
         roadReferenceListView.onItemClickListener = object : AdapterView.OnItemClickListener {
