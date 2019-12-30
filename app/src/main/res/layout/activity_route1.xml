@@ -195,7 +195,7 @@
         android:id="@+id/TextViewDestinationReference"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/destination_reference" />
+        android:text="@string/road_reference" />
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -219,7 +219,7 @@
                 android:autoSizeMinTextSize="12sp"
                 android:autoSizeStepGranularity="2sp"
                 android:autoSizeTextType="uniform"
-                android:autofillHints="@string/destination_reference"
+                android:autofillHints="@string/road_reference"
                 android:hint="@string/point_of_reference"
                 android:inputType="textEmailAddress"
                 android:textSize="18sp"
