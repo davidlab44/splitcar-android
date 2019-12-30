@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/root_layout"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
+    android:background="#f8fdf8"
     android:orientation="vertical"
-    android:padding="4dp">
+    android:padding="16dp">
 
     <LinearLayout
         android:id="@+id/linearLayoutActivityRoute"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="4dp">
 
@@ -198,31 +200,28 @@
         android:autoSizeTextType="uniform"
         android:hint="@string/point_of_reference"
         android:inputType="textEmailAddress"
-        android:textSize="18sp"
-        app:autoSizeMaxTextSize="100sp"
-        app:autoSizeMinTextSize="16sp"
-        app:autoSizeStepGranularity="1sp"
-        app:autoSizeTextType="uniform"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textSize="18sp" />
 
     <ListView
         android:id="@+id/roadReferenceListView"
         android:layout_width="match_parent"
-        android:layout_height="230dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="130dp" />
 
     <Button
         android:id="@+id/imageViewSaveRoute"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/save_route"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/roadReferenceSearchInput"
-        app:srcCompat="@android:drawable/checkbox_on_background" />
+        android:text="@string/save_route" />
+
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Show Popup Window"
+        android:textAllCaps="false" />
 </LinearLayout>
+
+
+
+

@@ -13,8 +13,8 @@ import com.globant.splitcar.model.Route
 import com.globant.splitcar.utils.EMAIL
 import com.globant.splitcar.utils.ID_USER
 import com.globant.splitcar.viewmodels.RouteViewModel
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.content_main.*
+import kotlinx.android.synthetic.main.activity_main.fabCreateRoute
+import kotlinx.android.synthetic.main.content_main.recyclerViewRoutes
 
 class MainActivity : AppCompatActivity(), RouteEvents {
 
@@ -40,6 +40,7 @@ class MainActivity : AppCompatActivity(), RouteEvents {
             val intent = CreateRouteActivity.createIntent(this@MainActivity)
             intent.putExtra(EMAIL, email)
             startActivity(intent)
+            //startActivity(MainActivityPro.createIntent(this@MainActivity))
         }
     }
 
