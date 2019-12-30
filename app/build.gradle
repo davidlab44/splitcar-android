@@ -86,13 +86,14 @@ dependencies {
     implementation 'com.google.firebase:firebase-core:17.2.1'
     // FileTree
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    // Third party libraries
     annotationProcessor 'androidx.room:room-compiler:2.2.2'
+    // Third party libraries
+    implementation 'com.github.mancj:MaterialSearchBar:0.8.2'
     // Test
     implementation 'android.arch.lifecycle:extensions:1.1.1'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-    //Lottie
+    // Lottie
     implementation 'com.airbnb.android:lottie:3.3.1'
 }
 

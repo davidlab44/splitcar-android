@@ -13,8 +13,8 @@ import com.globant.splitcar.model.Route
 import com.globant.splitcar.utils.EMAIL
 import com.globant.splitcar.utils.ID_USER
 import com.globant.splitcar.viewmodels.RouteViewModel
-import kotlinx.android.synthetic.main.activity_main.fabCreateRoute
-import kotlinx.android.synthetic.main.content_main.recyclerViewRoutes
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.content_main.*
 
 class MainActivity : AppCompatActivity(), RouteEvents {
 
@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity(), RouteEvents {
     private fun listenFloatingActionButton() {
         fabCreateRoute.setOnClickListener {
             val email = intent.getStringExtra(EMAIL)
-            val intent = RouteActivity.createIntent(this@MainActivity)
+            val intent = CreateRouteActivity.createIntent(this@MainActivity)
             intent.putExtra(EMAIL, email)
             startActivity(intent)
         }

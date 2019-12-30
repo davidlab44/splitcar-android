@@ -4,58 +4,102 @@ import android.app.TimePickerDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.MenuItem
+import android.view.View
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.globant.splitcar.R
 import com.globant.splitcar.model.Route
-import com.globant.splitcar.utils.CARSEAT
-import com.globant.splitcar.utils.CURRENTDATE
-import com.globant.splitcar.utils.CURRENTTIME
-import com.globant.splitcar.utils.EMAIL
-import com.globant.splitcar.utils.ROUTE_OBJECT
-import com.globant.splitcar.utils.ROUTE_ORIGIN
+import com.globant.splitcar.model.currentDate
+import com.globant.splitcar.utils.*
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.activity_route.textViewUser
-import kotlinx.android.synthetic.main.activity_route1.autoCompleteTextViewDestinationRoute
-import kotlinx.android.synthetic.main.activity_route1.editTextDestinationReference
-import kotlinx.android.synthetic.main.activity_route1.editTextMeetingPlace
-import kotlinx.android.synthetic.main.activity_route1.imageViewSaveRoute
-import kotlinx.android.synthetic.main.activity_route1.spinnerCarSeat
-import kotlinx.android.synthetic.main.activity_route1.textViewDateRoute
-import kotlinx.android.synthetic.main.activity_route1.textViewTimeRoute
+import kotlinx.android.synthetic.main.activity_create_route.*
 import java.text.SimpleDateFormat
-import java.util.Calendar
-import java.util.Locale
-import java.util.UUID
+import java.util.*
+
 
 /**
- * RouteActivity
+ * CreateRouteActivity
  *
- * It was created with the aim of an authenticated driver creating a route in firebase
- * @author juan.rendon
+ * This class create a route by a driver user
+ *
+ * @author david.mazo
  */
 
-class RouteActivity : AppCompatActivity() {
+class CreateRouteActivity : AppCompatActivity() {
     private val firebaseFirestore = FirebaseFirestore.getInstance()
     private var calendar = Calendar.getInstance()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_route1)
+        setContentView(R.layout.activity_create_route)
         bindComponents()
         imageViewSaveRoute.setOnClickListener {
             saveFireStore()
             finish()
         }
+
+        roadReferenceSearchInput.hint = "Search.."
+        var galaxies = arrayOf(
+            "Sombrero",
+            "Cartwheel",
+            "Pinwheel",
+            "StarBust",
+            "Whirlpool",
+            "Ring Nebular",
+            "Own Nebular",
+            "Centaurus A",
+            "Virgo Stellar Stream",
+            "Canis Majos Overdensity",
+            "Mayall's Object",
+            "Leo",
+            "Milky Way",
+            "IC 1011",
+            "Messier 81",
+            "Andromeda",
+            "Messier 87"
+        )
+        val adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, galaxies)
+        roadReferenceListView.adapter = adapter
+
+        roadReferenceSearchInput.addTextChangedListener(object : TextWatcher {
+            override fun onTextChanged(charSequence: CharSequence, s: Int, b: Int, c: Int) {
+                adapter.filter.filter(charSequence)
+            }
+
+            override fun afterTextChanged(editable: Editable) {}
+            override fun beforeTextChanged(
+                cs: CharSequence,
+                i: Int,
+                j: Int,
+                k: Int
+            ) {
+            }
+        })
+
+        roadReferenceListView.onItemClickListener = object : AdapterView.OnItemClickListener {
+            override fun onItemClick(adapterView: AdapterView<*>, view: View, i: Int, l: Long) {
+                Toast.makeText(
+                    this@CreateRouteActivity,
+                    adapter.getItem(i)!!.toString(),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
     }
 
     private fun bindComponents() {
-        // esto es una variable de clase
+        // TODO esto es una variable de clase
         val email = intent.getStringExtra(EMAIL)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = getText(R.string.create_route)
         textViewUser.text = email
-        val arrayAdapter = ArrayAdapter(this@RouteActivity, android.R.layout.simple_spinner_item, CARSEAT)
+        val arrayAdapter =
+            ArrayAdapter(this@CreateRouteActivity, android.R.layout.simple_spinner_item, CARSEAT)
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinnerCarSeat.adapter = arrayAdapter
         textViewDateRoute.text = CURRENTDATE
@@ -67,16 +111,17 @@ class RouteActivity : AppCompatActivity() {
         }
         textViewTimeRoute.setOnClickListener {
             TimePickerDialog(
-                    this@RouteActivity,
+                this@CreateRouteActivity,
                     onTimeSetListener,
                     calendar.get(Calendar.HOUR),
                     calendar.get(Calendar.MINUTE),
                     false
             ).show()
         }
-        //Hacerle update al timepicker con lo que selecciona el usuario
-        //quitar el calendar que no se necesita
-        //un solo timepicker dialog tenerlo por fuera del onClickListener OJO sacar del listener la creacion de la instancia del timepicker
+        // TODO Hacerle update al timepicker con lo que selecciona el usuario
+        // TODO validar que la fecha seleccionada solo sea la de hoy y que la hora no sea anterior a la hora actual
+        // TODO quitar el calendar que no se necesita
+        // TODO un solo timepicker dialog tenerlo por fuera del onClickListener OJO sacar del listener la creacion de la instancia del timepicker
     }
 
     private fun updateTimeInTextViewDateRoute() {
@@ -101,10 +146,10 @@ class RouteActivity : AppCompatActivity() {
                 email,
                 autoCompleteTextViewDestinationRoute.text.toString(),
                 ROUTE_ORIGIN,
-                com.globant.splitcar.model.currentDate,
+            currentDate,
                 textViewTimeRoute.text.toString(),
                 spinnerCarSeat.selectedItem as Int,
-                editTextDestinationReference.text.toString(),
+            roadReferenceSearchInput.text.toString(),
                 editTextMeetingPlace.text.toString(),
                 mutableListOf()
         )
@@ -116,7 +161,7 @@ class RouteActivity : AppCompatActivity() {
 
     companion object {
         fun createIntent(context: Context): Intent {
-            return Intent(context, RouteActivity::class.java)
+            return Intent(context, CreateRouteActivity::class.java)
         }
     }
 }

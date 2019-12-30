@@ -13,12 +13,6 @@
         android:orientation="vertical"
         android:padding="4dp">
 
-        <TextView
-            android:id="@+id/textViewYourTrip"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/your_trip" />
-
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -191,58 +185,44 @@
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/TextViewDestinationReference"
+    <EditText
+        android:id="@+id/roadReferenceSearchInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/road_reference" />
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="4dp"
+        android:autoSizeMaxTextSize="100sp"
+        android:autoSizeMinTextSize="12sp"
+        android:autoSizeStepGranularity="2sp"
+        android:autoSizeTextType="uniform"
+        android:hint="@string/point_of_reference"
+        android:inputType="textEmailAddress"
+        android:textSize="18sp"
+        app:autoSizeMaxTextSize="100sp"
+        app:autoSizeMinTextSize="16sp"
+        app:autoSizeStepGranularity="1sp"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.cardview.widget.CardView
+    <ListView
+        android:id="@+id/roadReferenceListView"
+        android:layout_width="match_parent"
+        android:layout_height="230dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/imageViewSaveRoute"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayoutDestinationReference"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/border">
-
-            <EditText
-                android:id="@+id/editTextDestinationReference"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginEnd="4dp"
-                android:autoSizeMaxTextSize="100sp"
-                android:autoSizeMinTextSize="12sp"
-                android:autoSizeStepGranularity="2sp"
-                android:autoSizeTextType="uniform"
-                android:autofillHints="@string/road_reference"
-                android:hint="@string/point_of_reference"
-                android:inputType="textEmailAddress"
-                android:textSize="18sp"
-                app:autoSizeMaxTextSize="100sp"
-                app:autoSizeMinTextSize="16sp"
-                app:autoSizeStepGranularity="1sp"
-                app:autoSizeTextType="uniform"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <Button
-                android:id="@+id/imageViewSaveRoute"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="@string/save_route"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextDestinationReference"
-                app:srcCompat="@android:drawable/checkbox_on_background" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
-
+        android:text="@string/save_route"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/roadReferenceSearchInput"
+        app:srcCompat="@android:drawable/checkbox_on_background" />
 </LinearLayout>
