@@ -37,6 +37,7 @@ import java.util.*
 class CreateRouteActivity : AppCompatActivity() {
     private val firebaseFirestore = FirebaseFirestore.getInstance()
     private var calendar = Calendar.getInstance()
+    private val email = intent.getStringExtra(EMAIL)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -163,8 +164,6 @@ class CreateRouteActivity : AppCompatActivity() {
 
 
     private fun bindComponents() {
-        // TODO esto es una variable de clase
-        val email = intent.getStringExtra(EMAIL)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = getText(R.string.create_route)
         textViewUser.text = email
