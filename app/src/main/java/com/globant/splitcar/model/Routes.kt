@@ -7,41 +7,35 @@ package com.globant.splitcar.model
  *
  */
 
-import java.text.SimpleDateFormat
-import java.util.Calendar
 
-val currentDate: String = SimpleDateFormat.getDateTimeInstance().format(Calendar.getInstance().time)
 val routes: ArrayList<Route> = ArrayList()
 val route1 = Route(
         "1",
         "phillip.coombs@globant.com",
         "City Plaza Envigado",
         "Vizcaya",
-        currentDate,
         "17:00",
         4,
-    "", "", mutableListOf()
+        "", "", mutableListOf()
 )
 val route2 = Route(
         "2",
         "claudia.acevedo@globant.com",
         "Manrique Central",
         "Vizcaya",
-        currentDate,
         "16:30",
         4,
-    "Av Regional, Parque norte, Jardín botánico, Est. Universidad UdeA, Campo Valdes, Manrique Central",
-    "", mutableListOf()
+        "Av Regional, Parque norte, Jardín botánico, Est. Universidad UdeA, Campo Valdes, Manrique Central",
+        "", mutableListOf()
 )
 val route3 = Route(
         "3",
         "s.mejia@globant.com",
         "UPB",
         "Vizcaya",
-        currentDate,
         "19:00",
         4,
-    "Las palmas, Exposiciones, La 33 hasta la UPB (Laureles)", "", mutableListOf()
+        "Las palmas, Exposiciones, La 33 hasta la UPB (Laureles)", "", mutableListOf()
 )
 
 fun addRoutes(route: Route) {

@@ -15,7 +15,6 @@ import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_join_route.buttonSaveRoute
 import kotlinx.android.synthetic.main.activity_join_route.passenger_list
 import kotlinx.android.synthetic.main.activity_join_route.textViewCarSeatAvaiable
-import kotlinx.android.synthetic.main.activity_join_route.textViewDateRoute
 import kotlinx.android.synthetic.main.activity_join_route.textViewDestinationReference
 import kotlinx.android.synthetic.main.activity_join_route.textViewDestinationRoute
 import kotlinx.android.synthetic.main.activity_join_route.textViewPickTimeRoute
@@ -62,7 +61,6 @@ class JoinRouteActivity : AppCompatActivity() {
         passengerAdapter.addAll(route.passengerName)
         textViewTextUser.text = route.driverName
         textViewDestinationRoute.text = route.destinationRoute
-        textViewDateRoute.text = route.dateRoute
         textViewPickTimeRoute.text = route.timeRoute
         textViewCarSeatAvaiable.text = route.carSeat.toString()
         textViewPlace.text = route.meetingPlace

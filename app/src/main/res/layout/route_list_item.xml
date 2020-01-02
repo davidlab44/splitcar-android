@@ -47,16 +47,6 @@
                 app:layout_constraintTop_toBottomOf="@id/textViewDriverName" />
 
             <TextView
-                android:id="@+id/textViewDateRoute"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="4dp"
-                android:text="TextView"
-                app:layout_constraintStart_toEndOf="@id/imageViewRoute"
-                app:layout_constraintTop_toBottomOf="@id/textViewDestinationRoute" />
-
-            <TextView
                 android:id="@+id/textViewTimeRoute"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -64,7 +54,7 @@
                 android:layout_marginTop="4dp"
                 android:text="TextView"
                 app:layout_constraintStart_toEndOf="@+id/textView2"
-                app:layout_constraintTop_toBottomOf="@+id/textViewDateRoute" />
+                app:layout_constraintTop_toBottomOf="@+id/textViewDestinationRoute" />
 
             <TextView
                 android:id="@+id/spinnerCarSeat"
@@ -84,7 +74,7 @@
                 android:layout_marginTop="4dp"
                 android:text="@string/departure_time"
                 app:layout_constraintStart_toEndOf="@+id/imageViewRoute"
-                app:layout_constraintTop_toBottomOf="@+id/textViewDateRoute" />
+                app:layout_constraintTop_toBottomOf="@+id/textViewDestinationRoute" />
 
             <TextView
                 android:id="@+id/textView3"

@@ -16,5 +16,4 @@ const val EMAIL = "email"
 const val ROUTE_OBJECT = "Route"
 const val ROUTE_ORIGIN = "Vizcaya"
 val CARSEAT = arrayOf(1, 2, 3, 4)
-val CURRENTDATE = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))
 val CURRENTTIME = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss"))
