@@ -95,7 +95,6 @@ class CreateRouteActivity : AppCompatActivity() {
 
     //TODO change this component wich is a non focusable dialog for androidx.fragment.app.DialogFragment
     private fun showRoadReferencesDialog() {
-        // Set a click listener for button widget
         button.setOnClickListener {
             // Initialize a new layout inflater instance
             val inflater: LayoutInflater =
