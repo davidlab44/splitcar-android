@@ -14,39 +14,16 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.LinearLayout
-import android.widget.PopupWindow
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.globant.splitcar.R
 import com.globant.splitcar.model.Route
 import com.globant.splitcar.model.currentDate
-import com.globant.splitcar.utils.CARSEAT
-import com.globant.splitcar.utils.CURRENTDATE
-import com.globant.splitcar.utils.CURRENTTIME
-import com.globant.splitcar.utils.EMAIL
-import com.globant.splitcar.utils.ROUTE_OBJECT
-import com.globant.splitcar.utils.ROUTE_ORIGIN
+import com.globant.splitcar.utils.*
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.activity_create_route.autoCompleteTextViewDestinationRoute
-import kotlinx.android.synthetic.main.activity_create_route.button
-import kotlinx.android.synthetic.main.activity_create_route.editTextMeetingPlace
-import kotlinx.android.synthetic.main.activity_create_route.imageViewSaveRoute
-import kotlinx.android.synthetic.main.activity_create_route.roadReferenceListView
-import kotlinx.android.synthetic.main.activity_create_route.roadReferenceSearchInput
-import kotlinx.android.synthetic.main.activity_create_route.root_layout
-import kotlinx.android.synthetic.main.activity_create_route.spinnerCarSeat
-import kotlinx.android.synthetic.main.activity_create_route.textViewDateRoute
-import kotlinx.android.synthetic.main.activity_create_route.textViewTimeRoute
-import kotlinx.android.synthetic.main.activity_create_route.textViewUser
+import kotlinx.android.synthetic.main.activity_create_route.*
 import java.text.SimpleDateFormat
-import java.util.Calendar
-import java.util.Locale
-import java.util.UUID
+import java.util.*
 
 
 /**
@@ -115,21 +92,22 @@ class CreateRouteActivity : AppCompatActivity() {
         showRoadReferencesDialog()
     }
 
+    //TODO change this component wich is a non focusable dialog for androidx.fragment.app.DialogFragment
     private fun showRoadReferencesDialog() {
         // Set a click listener for button widget
         button.setOnClickListener {
             // Initialize a new layout inflater instance
             val inflater: LayoutInflater =
-                    getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+                getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
             // Inflate a custom view using layout inflater
             val view = inflater.inflate(R.layout.another_view, null)
 
             // Initialize a new instance of popup window
             val popupWindow = PopupWindow(
-                    view, // Custom view to show in popup window
-                    LinearLayout.LayoutParams.WRAP_CONTENT, // Width of popup window
-                    LinearLayout.LayoutParams.WRAP_CONTENT // Window height
+                view, // Custom view to show in popup window
+                LinearLayout.LayoutParams.WRAP_CONTENT, // Width of popup window
+                LinearLayout.LayoutParams.WRAP_CONTENT // Window height
             )
 
             // Set an elevation for the popup window
@@ -175,10 +153,10 @@ class CreateRouteActivity : AppCompatActivity() {
             // Finally, show the popup window on app
             TransitionManager.beginDelayedTransition(root_layout)
             popupWindow.showAtLocation(
-                    root_layout, // Location to display popup window
-                    Gravity.CENTER, // Exact position of layout to display popup
-                    0, // X offset
-                    0 // Y offset
+                root_layout, // Location to display popup window
+                Gravity.CENTER, // Exact position of layout to display popup
+                0, // X offset
+                0 // Y offset
             )
         }
     }
