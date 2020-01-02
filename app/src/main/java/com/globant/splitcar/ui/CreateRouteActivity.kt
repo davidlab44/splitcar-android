@@ -60,12 +60,12 @@ import java.util.UUID
 class CreateRouteActivity : AppCompatActivity() {
     private val firebaseFirestore = FirebaseFirestore.getInstance()
     private var calendar = Calendar.getInstance()
-    private val email = intent.getStringExtra(EMAIL)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_route)
-        bindComponents()
+        val email = intent.getStringExtra(EMAIL)
+        bindComponents(email)
         imageViewSaveRoute.setOnClickListener {
             saveFireStore()
             finish()
@@ -185,7 +185,7 @@ class CreateRouteActivity : AppCompatActivity() {
     }
 
 
-    private fun bindComponents() {
+    private fun bindComponents(email: String) {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = getText(R.string.create_route)
         textViewUser.text = email
