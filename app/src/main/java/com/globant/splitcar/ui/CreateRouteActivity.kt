@@ -20,13 +20,11 @@ import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.PopupWindow
 import android.widget.TextView
-import android.widget.TimePicker
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.globant.splitcar.R
 import com.globant.splitcar.model.Route
 import com.globant.splitcar.utils.CARSEAT
-import com.globant.splitcar.utils.DateModel
 import com.globant.splitcar.utils.EMAIL
 import com.globant.splitcar.utils.PLACES
 import com.globant.splitcar.utils.ROUTE_OBJECT
@@ -55,7 +53,6 @@ import java.util.UUID
 
 class CreateRouteActivity : AppCompatActivity() {
     private val firebaseFirestore = FirebaseFirestore.getInstance()
-//    private var calendar = Calendar.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,7 +68,6 @@ class CreateRouteActivity : AppCompatActivity() {
         val places = PLACES
         val adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, places)
         roadReferenceListView.adapter = adapter
-
         roadReferenceSearchInput.addTextChangedListener(object : TextWatcher {
             override fun onTextChanged(charSequence: CharSequence, s: Int, b: Int, c: Int) {
                 adapter.filter.filter(charSequence)
@@ -90,7 +86,6 @@ class CreateRouteActivity : AppCompatActivity() {
                 ).show()
             }
         }
-
         showRoadReferencesDialog()
     }
 
@@ -162,7 +157,6 @@ class CreateRouteActivity : AppCompatActivity() {
         }
     }
 
-
     private fun bindComponents(email: String) {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = getText(R.string.create_route)
@@ -171,28 +165,31 @@ class CreateRouteActivity : AppCompatActivity() {
                 ArrayAdapter(this@CreateRouteActivity, android.R.layout.simple_spinner_item, CARSEAT)
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinnerCarSeat.adapter = arrayAdapter
-        val timePicker = TimePicker(this@CreateRouteActivity)
         textViewTimeRoute.hint = "Elige una hora"
-        val onTimeSetListener = TimePickerDialog.OnTimeSetListener { timePicker, _, _ ->
-            val dateModel = DateModel()
-            dateModel.hour = timePicker.hour
-            dateModel.minute = timePicker.minute
-            textViewTimeRoute.text = "${dateModel.hour}:${dateModel.minute}"
-        }
         textViewTimeRoute.setOnClickListener {
-            TimePickerDialog(
-                    this@CreateRouteActivity,
-                    onTimeSetListener,
-                    timePicker.hour,
-                    timePicker.minute,
-                    false
-            ).show()
+            OnClickTime()
         }
     }
 
-    // TODO Hacerle update al timepicker con lo que selecciona el usuario
+    private fun OnClickTime() {
+        TimePickerDialog(
+                this@CreateRouteActivity,
+                TimePickerDialog.OnTimeSetListener { picker, hourofDay, minute ->
+                    textViewTimeRoute.text = String.format("%02d", hourofDay).plus(":").plus(String.format("%02d", minute))
+
+                },
+                5,
+                44,
+                false
+        ).show()
+        //TODO Sacar el TimePickerDialog
+        //TODO Guardar la hora selecccionada y pasarlas al TimePickerDialog.OnTimeSetListener
+        //TODO Calcular hourOfDay current
+        //TODO Calcular minute current
+
+    }
+
     // TODO validar que la fecha seleccionada solo sea la de hoy y que la hora no sea anterior a la hora actual
-    // TODO quitar el calendar que no se necesita
     // TODO un solo timepicker dialog tenerlo por fuera del onClickListener OJO sacar del listener la creacion de la instancia del timepicker
     // TODO Delete Screen Firebase
 
