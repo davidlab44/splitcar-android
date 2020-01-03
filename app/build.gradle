@@ -67,6 +67,7 @@ dependencies {
     implementation "com.android.support:design:$design_version"
     implementation 'com.google.android.material:material:1.0.0'
     implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     kapt "android.arch.lifecycle:compiler:1.1.0"
     implementation "android.arch.persistence.room:runtime:1.0.0"
     kapt "android.arch.persistence.room:compiler:1.0.0"
@@ -95,6 +96,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     // Lottie
     implementation 'com.airbnb.android:lottie:3.3.1'
+    implementation 'androidx.fragment:fragment-ktx:1.1.0'
 }
 
 apply plugin: 'com.google.gms.google-services'
