@@ -20,13 +20,15 @@ import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.PopupWindow
 import android.widget.TextView
+import android.widget.TimePicker
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.globant.splitcar.R
 import com.globant.splitcar.model.Route
 import com.globant.splitcar.utils.CARSEAT
-import com.globant.splitcar.utils.CURRENTTIME
+import com.globant.splitcar.utils.DateModel
 import com.globant.splitcar.utils.EMAIL
+import com.globant.splitcar.utils.PLACES
 import com.globant.splitcar.utils.ROUTE_OBJECT
 import com.globant.splitcar.utils.ROUTE_ORIGIN
 import com.google.firebase.firestore.FirebaseFirestore
@@ -40,9 +42,6 @@ import kotlinx.android.synthetic.main.activity_create_route.root_layout
 import kotlinx.android.synthetic.main.activity_create_route.spinnerCarSeat
 import kotlinx.android.synthetic.main.activity_create_route.textViewTimeRoute
 import kotlinx.android.synthetic.main.activity_create_route.textViewUser
-import java.text.SimpleDateFormat
-import java.util.Calendar
-import java.util.Locale
 import java.util.UUID
 
 
@@ -56,7 +55,7 @@ import java.util.UUID
 
 class CreateRouteActivity : AppCompatActivity() {
     private val firebaseFirestore = FirebaseFirestore.getInstance()
-    private var calendar = Calendar.getInstance()
+//    private var calendar = Calendar.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,26 +68,8 @@ class CreateRouteActivity : AppCompatActivity() {
         }
 
         roadReferenceSearchInput.hint = "Search.."
-        var galaxies = arrayOf(
-                "Sombrero",
-                "Cartwheel",
-                "Pinwheel",
-                "StarBust",
-                "Whirlpool",
-                "Ring Nebular",
-                "Own Nebular",
-                "Centaurus A",
-                "Virgo Stellar Stream",
-                "Canis Majos Overdensity",
-                "Mayall's Object",
-                "Leo",
-                "Milky Way",
-                "IC 1011",
-                "Messier 81",
-                "Andromeda",
-                "Messier 87"
-        )
-        val adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, galaxies)
+        val places = PLACES
+        val adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, places)
         roadReferenceListView.adapter = adapter
 
         roadReferenceSearchInput.addTextChangedListener(object : TextWatcher {
@@ -190,30 +171,30 @@ class CreateRouteActivity : AppCompatActivity() {
                 ArrayAdapter(this@CreateRouteActivity, android.R.layout.simple_spinner_item, CARSEAT)
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinnerCarSeat.adapter = arrayAdapter
-        textViewTimeRoute.text = CURRENTTIME
-        val onTimeSetListener = TimePickerDialog.OnTimeSetListener { _, hour, minute ->
-            calendar.set(Calendar.HOUR_OF_DAY, hour)
-            calendar.set(Calendar.MINUTE, minute)
-            updateTimeInTextViewDateRoute()
+        val timePicker = TimePicker(this@CreateRouteActivity)
+        textViewTimeRoute.hint = "Elige una hora"
+        val onTimeSetListener = TimePickerDialog.OnTimeSetListener { timePicker, _, _ ->
+            val dateModel = DateModel()
+            dateModel.hour = timePicker.hour
+            dateModel.minute = timePicker.minute
+            textViewTimeRoute.text = "${dateModel.hour}:${dateModel.minute}"
         }
         textViewTimeRoute.setOnClickListener {
             TimePickerDialog(
                     this@CreateRouteActivity,
                     onTimeSetListener,
-                    calendar.get(Calendar.HOUR),
-                    calendar.get(Calendar.MINUTE),
+                    timePicker.hour,
+                    timePicker.minute,
                     false
             ).show()
         }
-        // TODO Hacerle update al timepicker con lo que selecciona el usuario
-        // TODO validar que la fecha seleccionada solo sea la de hoy y que la hora no sea anterior a la hora actual
-        // TODO quitar el calendar que no se necesita
-        // TODO un solo timepicker dialog tenerlo por fuera del onClickListener OJO sacar del listener la creacion de la instancia del timepicker
     }
 
-    private fun updateTimeInTextViewDateRoute() {
-        textViewTimeRoute.text = SimpleDateFormat("HH:mm a", Locale.US).format(calendar.time)
-    }
+    // TODO Hacerle update al timepicker con lo que selecciona el usuario
+    // TODO validar que la fecha seleccionada solo sea la de hoy y que la hora no sea anterior a la hora actual
+    // TODO quitar el calendar que no se necesita
+    // TODO un solo timepicker dialog tenerlo por fuera del onClickListener OJO sacar del listener la creacion de la instancia del timepicker
+    // TODO Delete Screen Firebase
 
     override fun onOptionsItemSelected(menuItem: MenuItem): Boolean {
         when (menuItem.itemId) {
