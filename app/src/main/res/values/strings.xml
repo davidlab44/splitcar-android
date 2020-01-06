@@ -14,7 +14,7 @@
     <string name="meeting_place">Cúal es el lugar de Encuentro</string>
     <string name="car_seat">Cupos Disponibles</string>
     <string name="pick_time">Elige una hora</string>
-    <string name="road_reference">Referencia Destino</string>
+    <string name="road_reference">Referencias Destino</string>
     <string name="point_of_reference">Lugares por donde va a pasar la ruta</string>
     <string name="title_activity_login">Sign in</string>
     <string name="prompt_email">Email</string>

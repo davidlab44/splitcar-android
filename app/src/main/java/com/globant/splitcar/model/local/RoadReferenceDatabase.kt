@@ -6,7 +6,6 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
-import com.globant.splitcar.utils.PLACES
 
 /**
  * RoadReferenceDatabase
@@ -54,8 +53,8 @@ abstract class RoadReferenceDatabase : RoomDatabase() {
     class PopulateDbAsyncTask(db: RoadReferenceDatabase?) : AsyncTask<Unit, Unit, Unit>() {
         private val roadReference = db?.roadReferenceDao()
         override fun doInBackground(vararg p0: Unit?) {
-            PLACES.forEach {
-                roadReference?.insertPlaces(it)
+            getDefaultRoadReferenceList().forEach {
+                roadReference?.insert(it)
             }
         }
     }

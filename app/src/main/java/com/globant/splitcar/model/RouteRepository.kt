@@ -33,4 +33,8 @@ class RouteRepository {
                     allRoutesLiveData.value = emptyList()
                 }
     }
+
+    fun saveRoadReferences(placesList: MutableList<String>) {
+        //TODO save placesList in firebase within current Route
+    }
 }

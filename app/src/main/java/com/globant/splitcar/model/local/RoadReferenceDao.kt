@@ -20,9 +20,6 @@ interface RoadReferenceDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(roadReference: RoadReference)
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertPlaces(string: String)
-
     @Update
     fun update(roadReference: RoadReference)
 
