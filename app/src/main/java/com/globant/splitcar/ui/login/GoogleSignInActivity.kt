@@ -171,4 +171,5 @@ class GoogleSignInActivity : BaseActivity(), View.OnClickListener {
         private const val TAG = "GoogleActivity"
         private const val RC_SIGN_IN = 9001
     }
+    //TODO skip this screen directly to MainActivity
 }
