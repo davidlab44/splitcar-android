@@ -14,6 +14,7 @@ const val ROUTE_OBJECT = "Route"
 const val ROUTE_ORIGIN = "Vizcaya"
 val CARSEAT = arrayOf(1, 2, 3, 4)
 
+/*
 val PLACES = arrayOf(
         "1er Parque de Laureles",
         "Vizcaya",
@@ -38,4 +39,8 @@ val PLACES = arrayOf(
         "Atrio Iglesia San Gregorio Magno",
         "Atrio Iglesia San Judas Tadeo",
         "Atrio Parroquia Santa Maria de Jesús")
+*/
+
+val PLACES = arrayOf("Vizcaya")
+
 

@@ -32,9 +32,10 @@ interface RoadReferenceDao {
     @Query("SELECT * FROM road_reference_table ORDER BY name DESC")
     fun getAllRoadReferences(): LiveData<List<RoadReference>>
 
-    @Query("SELECT * FROM road_reference_table WHERE name LIKE :name")
-    fun getFilteredRoadReferences(name: String): List<RoadReference>
+    @Query("SELECT * FROM road_reference_table WHERE name LIKE :roadReferenceHash LIMIT 10")
+    fun getFilteredRoadReferences(roadReferenceHash: String): List<RoadReference>
 
-    @Query("SELECT * FROM road_reference_table ORDER BY name DESC")
+    @Query("SELECT * FROM road_reference_table ORDER BY name DESC LIMIT 10")
     fun getRoadReferences(): List<RoadReference>
+
 }
