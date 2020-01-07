@@ -29,6 +29,8 @@ import com.globant.splitcar.utils.EMAIL
 import com.globant.splitcar.utils.PLACES
 import com.globant.splitcar.utils.ROUTE_OBJECT
 import com.globant.splitcar.utils.ROUTE_ORIGIN
+import com.globant.splitcar.utils.TIMEPICKERHOUR
+import com.globant.splitcar.utils.TIMEPICKERMINUTE
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_create_route.autoCompleteTextViewDestinationRoute
 import kotlinx.android.synthetic.main.activity_create_route.button
@@ -167,26 +169,22 @@ class CreateRouteActivity : AppCompatActivity() {
         spinnerCarSeat.adapter = arrayAdapter
         textViewTimeRoute.hint = "Elige una hora"
         textViewTimeRoute.setOnClickListener {
-            OnClickTime()
+            pickTime()
         }
     }
 
-    private fun OnClickTime() {
+    private fun pickTime() {
         TimePickerDialog(
                 this@CreateRouteActivity,
-                TimePickerDialog.OnTimeSetListener { picker, hourofDay, minute ->
-                    textViewTimeRoute.text = String.format("%02d", hourofDay).plus(":").plus(String.format("%02d", minute))
-
+                TimePickerDialog.OnTimeSetListener { picker, hourOfDay, minute ->
+                    textViewTimeRoute.text = String.format("%02d", hourOfDay).plus(":").plus(String.format("%02d", minute))
+                    TIMEPICKERHOUR = hourOfDay
+                    TIMEPICKERMINUTE = minute
                 },
-                5,
-                44,
+                TIMEPICKERHOUR,
+                TIMEPICKERMINUTE,
                 false
         ).show()
-        //TODO Sacar el TimePickerDialog
-        //TODO Guardar la hora selecccionada y pasarlas al TimePickerDialog.OnTimeSetListener
-        //TODO Calcular hourOfDay current
-        //TODO Calcular minute current
-
     }
 
     // TODO validar que la fecha seleccionada solo sea la de hoy y que la hora no sea anterior a la hora actual
