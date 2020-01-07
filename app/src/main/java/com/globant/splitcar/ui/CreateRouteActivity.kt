@@ -194,7 +194,6 @@ class CreateRouteActivity : AppCompatActivity() {
             timePickerDialog.show()
         }
     }
-    // TODO Delete Screen Firebase
 
     override fun onOptionsItemSelected(menuItem: MenuItem): Boolean {
         when (menuItem.itemId) {

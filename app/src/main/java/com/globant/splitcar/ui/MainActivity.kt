@@ -61,4 +61,6 @@ class MainActivity : AppCompatActivity(), RouteEvents {
             else -> super.onOptionsItemSelected(item)
         }
     }
+//TODO change recyclerview's lottie
+//TODO add a progressbar before load MainActivity
 }
