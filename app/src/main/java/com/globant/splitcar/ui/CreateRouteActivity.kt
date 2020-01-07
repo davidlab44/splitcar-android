@@ -31,17 +31,20 @@ import com.globant.splitcar.utils.ROUTE_OBJECT
 import com.globant.splitcar.utils.ROUTE_ORIGIN
 import com.globant.splitcar.utils.TIMEPICKERHOUR
 import com.globant.splitcar.utils.TIMEPICKERMINUTE
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_create_route.autoCompleteTextViewDestinationRoute
 import kotlinx.android.synthetic.main.activity_create_route.button
 import kotlinx.android.synthetic.main.activity_create_route.editTextMeetingPlace
 import kotlinx.android.synthetic.main.activity_create_route.imageViewSaveRoute
+import kotlinx.android.synthetic.main.activity_create_route.linearLayoutActivityRoute
 import kotlinx.android.synthetic.main.activity_create_route.roadReferenceListView
 import kotlinx.android.synthetic.main.activity_create_route.roadReferenceSearchInput
 import kotlinx.android.synthetic.main.activity_create_route.root_layout
 import kotlinx.android.synthetic.main.activity_create_route.spinnerCarSeat
 import kotlinx.android.synthetic.main.activity_create_route.textViewTimeRoute
 import kotlinx.android.synthetic.main.activity_create_route.textViewUser
+import java.time.LocalTime
 import java.util.UUID
 
 
@@ -168,28 +171,29 @@ class CreateRouteActivity : AppCompatActivity() {
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinnerCarSeat.adapter = arrayAdapter
         textViewTimeRoute.hint = "Elige una hora"
+        val onTimeSetListener = TimePickerDialog.OnTimeSetListener { _, hourOfDay, minute ->
+            val pickTimeString = String.format("%02d", hourOfDay).plus(":").plus(String.format("%02d", minute))
+            val pickTimeLocalTime = LocalTime.parse(pickTimeString)
+            val localTime = LocalTime.now()
+            if (localTime < pickTimeLocalTime) {
+                textViewTimeRoute.text = pickTimeString
+                TIMEPICKERHOUR = hourOfDay
+                TIMEPICKERMINUTE = minute
+            } else {
+                Snackbar.make(linearLayoutActivityRoute, "Selecciona una hora posterior", Snackbar.LENGTH_LONG).show()
+            }
+        }
         val timePickerDialog = TimePickerDialog(
                 this@CreateRouteActivity,
-                TimePickerDialog.OnTimeSetListener { picker, hourOfDay, minute ->
-                    textViewTimeRoute.text = String.format("%02d", hourOfDay).plus(":").plus(String.format("%02d", minute))
-                    TIMEPICKERHOUR = hourOfDay
-                    TIMEPICKERMINUTE = minute
-                },
+                onTimeSetListener,
                 TIMEPICKERHOUR,
                 TIMEPICKERMINUTE,
                 false
         )
         textViewTimeRoute.setOnClickListener {
-            pickTime(timePickerDialog)
+            timePickerDialog.show()
         }
     }
-
-    private fun pickTime(timePickerDialog: TimePickerDialog) {
-        timePickerDialog.show()
-    }
-
-    // TODO validar que la fecha seleccionada solo sea la de hoy y que la hora no sea anterior a la hora actual
-    // TODO un solo timepicker dialog tenerlo por fuera del onClickListener OJO sacar del listener la creacion de la instancia del timepicker
     // TODO Delete Screen Firebase
 
     override fun onOptionsItemSelected(menuItem: MenuItem): Boolean {
