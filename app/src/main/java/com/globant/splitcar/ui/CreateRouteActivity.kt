@@ -4,19 +4,13 @@ import android.app.TimePickerDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.MenuItem
-import android.view.View
-import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.globant.splitcar.R
 import com.globant.splitcar.model.Route
 import com.globant.splitcar.utils.CARSEAT
 import com.globant.splitcar.utils.EMAIL
-import com.globant.splitcar.utils.PLACES
 import com.globant.splitcar.utils.ROUTE_OBJECT
 import com.globant.splitcar.utils.ROUTE_ORIGIN
 import com.globant.splitcar.utils.TIMEPICKERHOUR
@@ -32,7 +26,6 @@ import kotlinx.android.synthetic.main.activity_create_route.textViewTimeRoute
 import kotlinx.android.synthetic.main.activity_create_route.textViewUser
 import kotlinx.android.synthetic.main.activity_route.linearLayoutActivityRoute
 import kotlinx.android.synthetic.main.activity_route.roadReferenceSearchInput
-import kotlinx.android.synthetic.main.road_references_dialog.roadReferenceListView
 import java.time.LocalTime
 import java.util.UUID
 
@@ -60,28 +53,6 @@ class CreateRouteActivity : AppCompatActivity() {
             finish()
         }
 
-        roadReferenceSearchInput.hint = "Search.."
-        val places = PLACES
-        val adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, places)
-        roadReferenceListView.adapter = adapter
-        roadReferenceSearchInput.addTextChangedListener(object : TextWatcher {
-            override fun onTextChanged(charSequence: CharSequence, s: Int, b: Int, c: Int) {
-                adapter.filter.filter(charSequence)
-            }
-
-            override fun afterTextChanged(editable: Editable) {}
-            override fun beforeTextChanged(cs: CharSequence, i: Int, j: Int, k: Int) {}
-        })
-
-        roadReferenceListView.onItemClickListener = object : AdapterView.OnItemClickListener {
-            override fun onItemClick(adapterView: AdapterView<*>, view: View, i: Int, l: Long) {
-                Toast.makeText(
-                        this@CreateRouteActivity,
-                        adapter.getItem(i)!!.toString(),
-                        Toast.LENGTH_SHORT
-                ).show()
-            }
-        }
         showRoadReferencesDialog()
     }
 
