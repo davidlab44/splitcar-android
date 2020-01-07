@@ -15,18 +15,15 @@ import androidx.fragment.app.DialogFragment
 import com.globant.splitcar.R
 import com.globant.splitcar.model.RouteRepository
 import com.globant.splitcar.utils.PLACES
-import kotlinx.android.synthetic.main.road_references_dialog.closeDialogButton
-import kotlinx.android.synthetic.main.road_references_dialog.roadReferenceListView
-import kotlinx.android.synthetic.main.road_references_dialog.roadReferenceSearchInput
+import kotlinx.android.synthetic.main.road_references_dialog.*
 
 class RoadReferencesDialog(private val application: Application) : DialogFragment() {
-    /*
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        return MyDialog().
-    }
-    */
 
     var placesList: MutableList<String> = mutableListOf()
+
+    //override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {}
+
+    //override fun onCreate(savedInstanceState: Bundle?) {}
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.road_references_dialog, container, false)
@@ -42,6 +39,7 @@ class RoadReferencesDialog(private val application: Application) : DialogFragmen
     }
 
     private fun createLisViewAdapter(): ArrayAdapter<String> {
+        //TODO get list of 10 places
         val adapter = ArrayAdapter<String>(application.applicationContext, android.R.layout.simple_list_item_1, PLACES)
         roadReferenceListView.adapter = adapter
         return adapter
@@ -52,7 +50,6 @@ class RoadReferencesDialog(private val application: Application) : DialogFragmen
             override fun onTextChanged(charSequence: CharSequence, s: Int, b: Int, c: Int) {
                 adapter.filter.filter(charSequence)
             }
-
             override fun afterTextChanged(editable: Editable) {}
             override fun beforeTextChanged(cs: CharSequence, i: Int, j: Int, k: Int) {}
         })

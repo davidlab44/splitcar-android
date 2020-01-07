@@ -7,6 +7,13 @@
     android:layout_height="match_parent"
     tools:context=".ui.MainActivity">
 
+    <ProgressBar
+        android:id="@+id/progressBar1"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:padding="10dp"
+        android:visibility="gone" />
+
     <include layout="@layout/fragment_search" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
