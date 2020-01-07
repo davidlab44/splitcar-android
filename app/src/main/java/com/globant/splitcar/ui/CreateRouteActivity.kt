@@ -168,13 +168,7 @@ class CreateRouteActivity : AppCompatActivity() {
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinnerCarSeat.adapter = arrayAdapter
         textViewTimeRoute.hint = "Elige una hora"
-        textViewTimeRoute.setOnClickListener {
-            pickTime()
-        }
-    }
-
-    private fun pickTime() {
-        TimePickerDialog(
+        val timePickerDialog = TimePickerDialog(
                 this@CreateRouteActivity,
                 TimePickerDialog.OnTimeSetListener { picker, hourOfDay, minute ->
                     textViewTimeRoute.text = String.format("%02d", hourOfDay).plus(":").plus(String.format("%02d", minute))
@@ -184,7 +178,14 @@ class CreateRouteActivity : AppCompatActivity() {
                 TIMEPICKERHOUR,
                 TIMEPICKERMINUTE,
                 false
-        ).show()
+        )
+        textViewTimeRoute.setOnClickListener {
+            pickTime(timePickerDialog)
+        }
+    }
+
+    private fun pickTime(timePickerDialog: TimePickerDialog) {
+        timePickerDialog.show()
     }
 
     // TODO validar que la fecha seleccionada solo sea la de hoy y que la hora no sea anterior a la hora actual
