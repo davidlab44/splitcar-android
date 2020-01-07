@@ -9,19 +9,22 @@ import android.widget.ArrayAdapter
 import android.widget.TimePicker
 import androidx.appcompat.app.AppCompatActivity
 import com.globant.splitcar.R
-import com.globant.splitcar.model.RoadReferenceRepository
 import com.globant.splitcar.model.Route
-import com.globant.splitcar.utils.*
+import com.globant.splitcar.utils.CARSEAT
+import com.globant.splitcar.utils.DateModel
+import com.globant.splitcar.utils.EMAIL
+import com.globant.splitcar.utils.ROUTE_OBJECT
+import com.globant.splitcar.utils.ROUTE_ORIGIN
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.activity_create_route.*
 import kotlinx.android.synthetic.main.activity_create_route.autoCompleteTextViewDestinationRoute
+import kotlinx.android.synthetic.main.activity_create_route.button
 import kotlinx.android.synthetic.main.activity_create_route.editTextMeetingPlace
 import kotlinx.android.synthetic.main.activity_create_route.imageViewSaveRoute
 import kotlinx.android.synthetic.main.activity_create_route.spinnerCarSeat
 import kotlinx.android.synthetic.main.activity_create_route.textViewTimeRoute
 import kotlinx.android.synthetic.main.activity_create_route.textViewUser
 import kotlinx.android.synthetic.main.activity_route.roadReferenceSearchInput
-import java.util.*
+import java.util.UUID
 
 /**
  * CreateRouteActivity
@@ -58,7 +61,6 @@ class CreateRouteActivity : AppCompatActivity() {
     }
 
     private fun lauchDialog() {
-        val records = RoadReferenceRepository(application).getRoadReferenceList()
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         val prev = supportFragmentManager.findFragmentByTag("dialog")
         if (prev != null) {

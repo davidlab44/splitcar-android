@@ -31,8 +31,8 @@ class RoadReferenceRepository(private val application: Application) {
         return RoadReferenceDatabase.getInstance(application.applicationContext)!!.roadReferenceDao().getRoadReferences()
     }
 
-    fun getRoadReferenceFilteredList(roadReferenceHash: String): List<RoadReference> {
-        return RoadReferenceDatabase.getInstance(application.applicationContext)!!.roadReferenceDao().getFilteredRoadReferences(roadReferenceHash)
+    fun getFilteredRoadReferenceList(roadReferenceHash: String): List<RoadReference> {
+        return RoadReferenceDatabase.getInstance(application.applicationContext)!!.roadReferenceDao().getFilteredRoadReferences("%$roadReferenceHash%")
     }
 
     /*
