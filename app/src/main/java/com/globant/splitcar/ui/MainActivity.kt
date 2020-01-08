@@ -32,8 +32,6 @@ class MainActivity : AppCompatActivity(), RouteEvents {
             routeListAdapter.addAll(it)
         })
         listenFloatingActionButton()
-
-
     }
 
     private fun listenFloatingActionButton() {
@@ -42,7 +40,6 @@ class MainActivity : AppCompatActivity(), RouteEvents {
             val intent = CreateRouteActivity.createIntent(this@MainActivity)
             intent.putExtra(EMAIL, email)
             startActivity(intent)
-            //startActivity(MainActivityPro.createIntent(this@MainActivity))
         }
     }
 

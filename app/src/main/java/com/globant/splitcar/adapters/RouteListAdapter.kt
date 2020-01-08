@@ -7,7 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.globant.splitcar.R
 import com.globant.splitcar.model.Route
 import com.globant.splitcar.ui.RouteEvents
-import kotlinx.android.synthetic.main.route_list_item.view.spinnerCarSeat
+import kotlinx.android.synthetic.main.route_list_item.view.carSeatTextView
+import kotlinx.android.synthetic.main.route_list_item.view.roadReferenceTextView
 import kotlinx.android.synthetic.main.route_list_item.view.textViewDestinationRoute
 import kotlinx.android.synthetic.main.route_list_item.view.textViewDriverName
 import kotlinx.android.synthetic.main.route_list_item.view.textViewTimeRoute
@@ -45,7 +46,10 @@ class RouteListAdapter(private val routeEvents: RouteEvents) : RecyclerView.Adap
             itemView.textViewDriverName.text = route.driverName
             itemView.textViewDestinationRoute.text = route.destinationRoute
             itemView.textViewTimeRoute.text = route.timeRoute
-            itemView.spinnerCarSeat.text = route.carSeat.toString()
+            itemView.carSeatTextView.text = route.carSeat.toString()
+            var destinationReferenceValue = ""
+            route.destinationReference.forEach { it -> destinationReferenceValue += "$it " }
+            itemView.roadReferenceTextView.text = destinationReferenceValue
             view.setOnClickListener { listener.onItemClicked(route) }
         }
     }

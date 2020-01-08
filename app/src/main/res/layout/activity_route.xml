@@ -116,7 +116,7 @@
                     app:srcCompat="@android:drawable/ic_lock_idle_alarm" />
 
                 <Spinner
-                    android:id="@+id/spinnerCarSeat"
+                    android:id="@+id/carSeatTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
@@ -140,7 +140,7 @@
                     android:textColor="#0097A7"
                     android:textSize="18sp"
                     app:layout_constraintStart_toEndOf="@+id/imageViewRouteMeetingPlace"
-                    app:layout_constraintTop_toBottomOf="@+id/spinnerCarSeat" />
+                    app:layout_constraintTop_toBottomOf="@+id/carSeatTextView" />
 
                 <ImageView
                     android:id="@+id/imageViewCarSeat"

@@ -170,7 +170,7 @@
                     android:textSize="18sp" />
 
                 <Spinner
-                    android:id="@+id/spinnerCarSeat"
+                    android:id="@+id/carSeatTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"

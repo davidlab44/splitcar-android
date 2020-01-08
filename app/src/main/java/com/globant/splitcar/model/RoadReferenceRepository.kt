@@ -27,10 +27,12 @@ class RoadReferenceRepository(private val application: Application) {
         allRoadReferences = roadReferenceDao.getAllRoadReferences()
     }
 
+    //TODO eliminar los assert null
     fun getRoadReferenceList(): List<RoadReference> {
         return RoadReferenceDatabase.getInstance(application.applicationContext)!!.roadReferenceDao().getRoadReferences()
     }
 
+    //TODO eliminar los assert null
     fun getFilteredRoadReferenceList(roadReferenceHash: String): List<RoadReference> {
         return RoadReferenceDatabase.getInstance(application.applicationContext)!!.roadReferenceDao().getFilteredRoadReferences("%$roadReferenceHash%")
     }

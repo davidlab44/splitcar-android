@@ -19,13 +19,12 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_create_route.autoCompleteTextViewDestinationRoute
 import kotlinx.android.synthetic.main.activity_create_route.button
+import kotlinx.android.synthetic.main.activity_create_route.carSeatTextView
 import kotlinx.android.synthetic.main.activity_create_route.editTextMeetingPlace
 import kotlinx.android.synthetic.main.activity_create_route.imageViewSaveRoute
-import kotlinx.android.synthetic.main.activity_create_route.spinnerCarSeat
 import kotlinx.android.synthetic.main.activity_create_route.textViewTimeRoute
 import kotlinx.android.synthetic.main.activity_create_route.textViewUser
 import kotlinx.android.synthetic.main.activity_route.linearLayoutActivityRoute
-import kotlinx.android.synthetic.main.activity_route.roadReferenceSearchInput
 import java.time.LocalTime
 import java.util.UUID
 
@@ -80,7 +79,7 @@ class CreateRouteActivity : AppCompatActivity() {
         val arrayAdapter =
                 ArrayAdapter(this@CreateRouteActivity, android.R.layout.simple_spinner_item, CARSEAT)
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spinnerCarSeat.adapter = arrayAdapter
+        carSeatTextView.adapter = arrayAdapter
         textViewTimeRoute.hint = "Elige una hora"
         val onTimeSetListener = TimePickerDialog.OnTimeSetListener { _, hourOfDay, minute ->
             val pickTimeString = String.format("%02d", hourOfDay).plus(":").plus(String.format("%02d", minute))
@@ -122,11 +121,12 @@ class CreateRouteActivity : AppCompatActivity() {
         val route = Route(
                 id,
                 email,
-                autoCompleteTextViewDestinationRoute.text.toString(),
+                "Barbosa",
                 ROUTE_ORIGIN,
                 textViewTimeRoute.text.toString(),
-                spinnerCarSeat.selectedItem as Int,
-                roadReferenceSearchInput.text.toString(),
+                carSeatTextView.selectedItem as Int,
+                //roadReferenceSearchInput.text.toString(),
+                mutableListOf(),
                 editTextMeetingPlace.text.toString(),
                 mutableListOf()
         )
