@@ -7,7 +7,7 @@
     android:padding="4dp">
 
     <LinearLayout
-        android:id="@+id/linearLayoutActivityRoute"
+        android:id="@+id/linearLayoutActivityJoinRoute"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -25,7 +25,7 @@
             android:layout_margin="8dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintLayoutActivityRoute"
+                android:id="@+id/constraintLayoutActivityJoinRoute"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/border">

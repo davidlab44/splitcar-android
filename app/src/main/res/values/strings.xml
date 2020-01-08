@@ -104,4 +104,5 @@
     <string name="departure_time">Hora de Salida </string>
     <string name="available_positions">Cupos </string>
     <string name="create_route">Crea tu ruta</string>
+    <string name="pick_time_after">Selecciona una hora posterior</string>
 </resources>

@@ -1,8 +1,5 @@
 package com.globant.splitcar.utils
 
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
-
 /**
  * Constants
  *
@@ -16,8 +13,6 @@ const val EMAIL = "email"
 const val ROUTE_OBJECT = "Route"
 const val ROUTE_ORIGIN = "Vizcaya"
 val CARSEAT = arrayOf(1, 2, 3, 4)
-var TIMEPICKERHOUR = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH")).toInt()
-var TIMEPICKERMINUTE = LocalDateTime.now().format(DateTimeFormatter.ofPattern("mm")).toInt()
 var PLACES = arrayOf(
         "1er Parque de Laureles",
         "Vizcaya",

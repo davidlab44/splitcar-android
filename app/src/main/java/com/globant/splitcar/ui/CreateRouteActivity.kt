@@ -14,8 +14,6 @@ import com.globant.splitcar.utils.CARSEAT
 import com.globant.splitcar.utils.EMAIL
 import com.globant.splitcar.utils.ROUTE_OBJECT
 import com.globant.splitcar.utils.ROUTE_ORIGIN
-import com.globant.splitcar.utils.TIMEPICKERHOUR
-import com.globant.splitcar.utils.TIMEPICKERMINUTE
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_create_route.autoCompleteTextViewDestinationRoute
@@ -23,11 +21,12 @@ import kotlinx.android.synthetic.main.activity_create_route.button
 import kotlinx.android.synthetic.main.activity_create_route.carSeatTextView
 import kotlinx.android.synthetic.main.activity_create_route.editTextMeetingPlace
 import kotlinx.android.synthetic.main.activity_create_route.imageViewSaveRoute
+import kotlinx.android.synthetic.main.activity_create_route.linearLayoutActivityCreateRoute
 import kotlinx.android.synthetic.main.activity_create_route.roadReferencesSelectedTextView
 import kotlinx.android.synthetic.main.activity_create_route.textViewTimeRoute
 import kotlinx.android.synthetic.main.activity_create_route.textViewUser
-import kotlinx.android.synthetic.main.activity_route.linearLayoutActivityRoute
 import java.time.LocalTime
+import java.time.format.DateTimeFormatter
 import java.util.UUID
 
 /**
@@ -87,33 +86,41 @@ class CreateRouteActivity : AppCompatActivity() {
     private fun bindComponents(email: String) {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = getText(R.string.create_route)
-        textViewUser.text = email
         val arrayAdapter = ArrayAdapter(this@CreateRouteActivity, android.R.layout.simple_spinner_item, CARSEAT)
-        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         carSeatTextView.adapter = arrayAdapter
-        textViewTimeRoute.hint = "Elige una hora"
+        textViewUser.text = email
+        var pickHour = LocalTime.now().hour
+        var pickMinute = LocalTime.now().minute
+        val timeFormatter = DateTimeFormatter.ofPattern("HH:mm a")
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        textViewTimeRoute.hint = getText(R.string.pick_time)
         val onTimeSetListener = TimePickerDialog.OnTimeSetListener { _, hourOfDay, minute ->
-            val pickTimeString = String.format("%02d", hourOfDay).plus(":").plus(String.format("%02d", minute))
-            val pickTimeLocalTime = LocalTime.parse(pickTimeString)
-            val localTime = LocalTime.now()
-            if (localTime < pickTimeLocalTime) {
-                textViewTimeRoute.text = pickTimeString
-                TIMEPICKERHOUR = hourOfDay
-                TIMEPICKERMINUTE = minute
+            val (pickTime, pickTimeStringAMPM) = returnPairLocalTimeAndTimeCastAMPM(hourOfDay, minute, timeFormatter)
+            if (LocalTime.now() < pickTime) {
+                textViewTimeRoute.text = pickTimeStringAMPM
+                pickHour = hourOfDay
+                pickMinute = minute
             } else {
-                Snackbar.make(linearLayoutActivityRoute, getString(R.string.later_hour), Snackbar.LENGTH_LONG).show()
+                Snackbar.make(linearLayoutActivityCreateRoute, getText(R.string.pick_time_after).toString(), Snackbar.LENGTH_LONG).show()
             }
         }
         val timePickerDialog = TimePickerDialog(
                 this@CreateRouteActivity,
                 onTimeSetListener,
-                TIMEPICKERHOUR,
-                TIMEPICKERMINUTE,
+                pickHour,
+                pickMinute,
                 false
         )
         textViewTimeRoute.setOnClickListener {
             timePickerDialog.show()
         }
+    }
+
+    private fun returnPairLocalTimeAndTimeCastAMPM(hourOfDay: Int, minute: Int, timeFormatter: DateTimeFormatter?): Pair<LocalTime, String> {
+        val pickTimeString = String.format("%02d", hourOfDay).plus(":").plus(String.format("%02d", minute))
+        val pickTime = LocalTime.parse(pickTimeString)
+        val pickTimeStringAMPM = pickTime.format(timeFormatter)
+        return Pair(pickTime, pickTimeStringAMPM)
     }
 
     override fun onOptionsItemSelected(menuItem: MenuItem): Boolean {
