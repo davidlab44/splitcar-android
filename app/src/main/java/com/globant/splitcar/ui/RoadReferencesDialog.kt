@@ -1,7 +1,6 @@
 package com.globant.splitcar.ui
 
 import android.app.Application
-import android.app.Dialog
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -20,22 +19,8 @@ import kotlinx.android.synthetic.main.road_references_dialog.roadReferenceSearch
 
 class RoadReferencesDialog(private val application: Application) : DialogFragment() {
 
-    //override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {}
-
-    //override fun onCreate(savedInstanceState: Bundle?) {}
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.road_references_dialog, container, false)
-    }
-
-    override fun setupDialog(dialog: Dialog, style: Int) {
-        super.setupDialog(dialog, style)
-        dialog.setOnDismissListener {
-
-        }
-        dialog.setOnCancelListener {
-
-        }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -58,7 +43,6 @@ class RoadReferencesDialog(private val application: Application) : DialogFragmen
                 if (charSequence.isNotEmpty())
                     roadReferenceListView.adapter = createLisViewAdapter(charSequence.toString())
             }
-
             override fun afterTextChanged(editable: Editable) {}
             override fun beforeTextChanged(cs: CharSequence, i: Int, j: Int, k: Int) {}
         })

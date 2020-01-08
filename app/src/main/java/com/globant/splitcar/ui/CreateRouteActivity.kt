@@ -60,7 +60,7 @@ class CreateRouteActivity : AppCompatActivity() {
         if (hasFocus) {
             var roadReferenceText = ""
             RoadReferenceRepository(application).getRoadReferencesSelected().forEach {
-                roadReferenceText += "$it "
+                roadReferenceText += "$it \n"
             }
             roadReferencesSelectedTextView.text = roadReferenceText
         }
