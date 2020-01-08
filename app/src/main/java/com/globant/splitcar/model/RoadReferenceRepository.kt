@@ -37,6 +37,21 @@ class RoadReferenceRepository(private val application: Application) {
         return RoadReferenceDatabase.getInstance(application.applicationContext)!!.roadReferenceDao().getFilteredRoadReferences("%$roadReferenceHash%")
     }
 
+    //TODO eliminar los assert null
+    fun updateRoadReferenceSelectedField(roadReferenceName: String) {
+        RoadReferenceDatabase.getInstance(application.applicationContext)!!.roadReferenceDao().updateRoadReferenceSelectedField(roadReferenceName)
+    }
+
+    //TODO eliminar los assert null
+    fun getRoadReferencesSelected(): List<RoadReference> {
+        return RoadReferenceDatabase.getInstance(application.applicationContext)!!.roadReferenceDao().getRoadReferencesSelected()
+    }
+
+    //TODO eliminar los assert null
+    fun rollBackRoadReferenceSelected() {
+        RoadReferenceDatabase.getInstance(application.applicationContext)!!.roadReferenceDao().rollBackRoadReferenceSelected()
+    }
+
     /*
     fun saveRoadReferenceList(roadReference: RoadReference) {
         RoadReferenceDatabase.getInstance(application.applicationContext)!!.roadReferenceDao().insert(roadReference)

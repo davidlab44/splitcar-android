@@ -37,4 +37,15 @@ interface RoadReferenceDao {
 
     @Query("SELECT * FROM road_reference_table ORDER BY name DESC LIMIT 10")
     fun getRoadReferences(): List<RoadReference>
+
+    @Query("UPDATE road_reference_table SET selected = 1 WHERE name LIKE :roadReferenceName ")
+    fun updateRoadReferenceSelectedField(roadReferenceName: String)
+
+    @Query("SELECT * FROM road_reference_table WHERE selected = 1")
+    fun getRoadReferencesSelected(): List<RoadReference>
+
+    @Query("UPDATE road_reference_table SET selected = 0 WHERE selected = 1 ")
+    fun rollBackRoadReferenceSelected()
+
+
 }

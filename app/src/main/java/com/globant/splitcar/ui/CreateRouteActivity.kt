@@ -8,6 +8,7 @@ import android.view.MenuItem
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import com.globant.splitcar.R
+import com.globant.splitcar.model.RoadReferenceRepository
 import com.globant.splitcar.model.Route
 import com.globant.splitcar.utils.CARSEAT
 import com.globant.splitcar.utils.EMAIL
@@ -51,7 +52,6 @@ class CreateRouteActivity : AppCompatActivity() {
             saveFireStore()
             finish()
         }
-
         showRoadReferencesDialog()
     }
 
@@ -134,6 +134,11 @@ class CreateRouteActivity : AppCompatActivity() {
                 .collection(ROUTE_OBJECT)
                 .document(email)
                 .set(route)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        RoadReferenceRepository(application).rollBackRoadReferenceSelected()
     }
 
     companion object {

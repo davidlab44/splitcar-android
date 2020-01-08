@@ -6,6 +6,7 @@ import android.content.DialogInterface
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -48,13 +49,12 @@ class RoadReferencesDialog(private val application: Application) : DialogFragmen
         val adapter = createLisViewAdapter("")
         roadReferenceListView.adapter = adapter
         listenTextChange()
-        listenRoadReferenceListView(adapter)
+        addRoadReferenceToArray(adapter)
         closeDialogButton.setOnClickListener { dismiss() }
     }
 
     private fun createLisViewAdapter(roadReferenceHash: String): ArrayAdapter<RoadReference> {
-        val roadReferenceList = RoadReferenceRepository(application).getFilteredRoadReferenceList(roadReferenceHash)
-        return ArrayAdapter(application.applicationContext, android.R.layout.simple_list_item_1, roadReferenceList)
+        return ArrayAdapter(application.applicationContext, android.R.layout.simple_list_item_1, RoadReferenceRepository(application).getFilteredRoadReferenceList(roadReferenceHash))
     }
 
     private fun listenTextChange() {
@@ -68,9 +68,12 @@ class RoadReferencesDialog(private val application: Application) : DialogFragmen
         })
     }
 
-    private fun listenRoadReferenceListView(adapter: ArrayAdapter<RoadReference>) {
-        roadReferenceListView.onItemClickListener = AdapterView.OnItemClickListener { _, _, i, _ ->
+    private fun addRoadReferenceToArray(adapter: ArrayAdapter<RoadReference>) {
+        roadReferenceListView.onItemClickListener = AdapterView.OnItemClickListener { a, b, i, x ->
             placesList.add(adapter.getItem(i)!!.toString())
+            RoadReferenceRepository(application).updateRoadReferenceSelectedField(adapter.getItem(i)!!.toString())
+            val cant = RoadReferenceRepository(application).getRoadReferencesSelected().size
+            Log.e("TAG #33", "$placesList")
         }
     }
 

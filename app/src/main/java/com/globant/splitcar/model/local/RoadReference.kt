@@ -15,6 +15,7 @@ import androidx.room.PrimaryKey
 data class RoadReference(var name: String) {
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0
+    var selected: Int = 0
 
     override fun toString(): String {
         return name
