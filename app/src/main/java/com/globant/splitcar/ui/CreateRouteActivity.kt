@@ -40,7 +40,7 @@ import java.util.UUID
 class CreateRouteActivity : AppCompatActivity() {
 
     private val firebaseFirestore = FirebaseFirestore.getInstance()
-    private var xxxRoadReferencesSelected = arrayOf<String>()
+    private var arrayOfRoadReferencesSelected = arrayOf<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,37 +51,37 @@ class CreateRouteActivity : AppCompatActivity() {
             saveFireStore()
         }
         autoCompleteTextViewDestinationRoute.setOnClickListener {
-            val fragmentTransaction = supportFragmentManager.beginTransaction()
-            val prev = supportFragmentManager.findFragmentByTag("dialog")
-            if (prev != null) {
-                fragmentTransaction.remove(prev)
-            }
-            fragmentTransaction.addToBackStack(null)
-            val dialogFragment = RoadReferencesDialog(application)
-            dialogFragment.show(fragmentTransaction, "dialog")
+            launchDialogFragment()
         }
         button.setOnClickListener {
-            val fragmentTransaction = supportFragmentManager.beginTransaction()
-            val prev = supportFragmentManager.findFragmentByTag("dialog")
-            if (prev != null) {
-                fragmentTransaction.remove(prev)
-            }
-            fragmentTransaction.addToBackStack(null)
-            val dialogFragment = RoadReferencesDialog(application)
-            dialogFragment.show(fragmentTransaction, "dialog")
+            launchDialogFragment()
         }
+        //TODO set backgrounds as styles within layout activity_create_route
+        //TODO implementar darkmode
+        //TODO validate active routes for this email
+        //TODO if there an active route do not allow to create a new one
+        //TODO if there an active route for this user do not allow to join to a route
+    }
+
+    private fun launchDialogFragment() {
+        val fragmentTransaction = supportFragmentManager.beginTransaction()
+        val prev = supportFragmentManager.findFragmentByTag("dialog")
+        if (prev != null) {
+            fragmentTransaction.remove(prev)
+        }
+        fragmentTransaction.addToBackStack(null)
+        val dialogFragment = RoadReferencesDialog(application)
+        dialogFragment.show(fragmentTransaction, "dialog")
     }
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
         if (hasFocus) {
-            var indexOfArrayRoadReferences = 0
             var roadReferenceText = ""
-            val cuantas = RoadReferenceRepository(application).getRoadReferencesSelected().size
+            val selectedRoadReferences = RoadReferenceRepository(application).getRoadReferencesSelected().size
             RoadReferenceRepository(application).getRoadReferencesSelected().forEach {
-                xxxRoadReferencesSelected = Array(cuantas, { i -> it.toString() })
+                arrayOfRoadReferencesSelected = Array(selectedRoadReferences, { i -> it.toString() })
                 roadReferenceText += "$it \n"
-                indexOfArrayRoadReferences++
             }
             roadReferencesSelectedTextView.text = roadReferenceText
         }
@@ -137,7 +137,7 @@ class CreateRouteActivity : AppCompatActivity() {
                 validateHourOfRoute(textViewTimeRoute.text.toString()) &&
                 validateMeetingPlace(editTextMeetingPlace.text.toString()) &&
                 validateAvailableSeats(carSeatTextView.selectedItem.toString()) &&
-                validateRoadReferences(xxxRoadReferencesSelected.toMutableList())
+                validateRoadReferences(arrayOfRoadReferencesSelected.toMutableList())
         ) {
             firebaseFirestore
                     .collection(ROUTE_OBJECT)
@@ -149,7 +149,7 @@ class CreateRouteActivity : AppCompatActivity() {
                             ROUTE_ORIGIN,
                             textViewTimeRoute.text.toString(),
                             carSeatTextView.selectedItem as Int,
-                            xxxRoadReferencesSelected.toMutableList(),
+                            arrayOfRoadReferencesSelected.toMutableList(),
                             editTextMeetingPlace.text.toString(),
                             mutableListOf()
                     )
