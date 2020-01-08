@@ -49,7 +49,6 @@ class CreateRouteActivity : AppCompatActivity() {
         bindComponents(email)
         imageViewSaveRoute.setOnClickListener {
             saveFireStore()
-            finish()
         }
         autoCompleteTextViewDestinationRoute.setOnClickListener {
             val fragmentTransaction = supportFragmentManager.beginTransaction()
@@ -109,15 +108,8 @@ class CreateRouteActivity : AppCompatActivity() {
                 Snackbar.make(linearLayoutActivityCreateRoute, getText(R.string.pick_time_after).toString(), Snackbar.LENGTH_LONG).show()
             }
         }
-        val timePickerDialog = TimePickerDialog(
-                this@CreateRouteActivity,
-                onTimeSetListener,
-                pickHour,
-                pickMinute,
-                false
-        )
         textViewTimeRoute.setOnClickListener {
-            timePickerDialog.show()
+            TimePickerDialog(this@CreateRouteActivity, onTimeSetListener, pickHour, pickMinute, false).show()
         }
     }
 
@@ -162,6 +154,7 @@ class CreateRouteActivity : AppCompatActivity() {
                             mutableListOf()
                     )
                     )
+            finish()
         } else {
             Snackbar.make(linearLayoutActivityCreateRoute, getText(R.string.try_again).toString(), Snackbar.LENGTH_LONG).show()
         }
