@@ -38,7 +38,9 @@ import java.util.UUID
  */
 
 class CreateRouteActivity : AppCompatActivity() {
+
     private val firebaseFirestore = FirebaseFirestore.getInstance()
+    private var xxxRoadReferencesSelected = arrayOf<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,41 +48,44 @@ class CreateRouteActivity : AppCompatActivity() {
         val email = intent.getStringExtra(EMAIL)
         bindComponents(email)
         imageViewSaveRoute.setOnClickListener {
-            lauchDialog()
-        }
-        autoCompleteTextViewDestinationRoute.setOnClickListener {
             saveFireStore()
             finish()
         }
-        showRoadReferencesDialog()
+        autoCompleteTextViewDestinationRoute.setOnClickListener {
+            val fragmentTransaction = supportFragmentManager.beginTransaction()
+            val prev = supportFragmentManager.findFragmentByTag("dialog")
+            if (prev != null) {
+                fragmentTransaction.remove(prev)
+            }
+            fragmentTransaction.addToBackStack(null)
+            val dialogFragment = RoadReferencesDialog(application)
+            dialogFragment.show(fragmentTransaction, "dialog")
+        }
+        button.setOnClickListener {
+            val fragmentTransaction = supportFragmentManager.beginTransaction()
+            val prev = supportFragmentManager.findFragmentByTag("dialog")
+            if (prev != null) {
+                fragmentTransaction.remove(prev)
+            }
+            fragmentTransaction.addToBackStack(null)
+            val dialogFragment = RoadReferencesDialog(application)
+            dialogFragment.show(fragmentTransaction, "dialog")
+        }
     }
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
         if (hasFocus) {
+            var indexOfArrayRoadReferences = 0
             var roadReferenceText = ""
+            val cuantas = RoadReferenceRepository(application).getRoadReferencesSelected().size
             RoadReferenceRepository(application).getRoadReferencesSelected().forEach {
+                xxxRoadReferencesSelected = Array(cuantas, { i -> it.toString() })
                 roadReferenceText += "$it \n"
+                indexOfArrayRoadReferences++
             }
             roadReferencesSelectedTextView.text = roadReferenceText
         }
-    }
-
-    private fun showRoadReferencesDialog() {
-        button.setOnClickListener {
-            lauchDialog()
-        }
-    }
-
-    private fun lauchDialog() {
-        val fragmentTransaction = supportFragmentManager.beginTransaction()
-        val prev = supportFragmentManager.findFragmentByTag("dialog")
-        if (prev != null) {
-            fragmentTransaction.remove(prev)
-        }
-        fragmentTransaction.addToBackStack(null)
-        val dialogFragment = RoadReferencesDialog(application)
-        dialogFragment.show(fragmentTransaction, "dialog")
     }
 
     private fun bindComponents(email: String) {
@@ -136,22 +141,50 @@ class CreateRouteActivity : AppCompatActivity() {
     private fun saveFireStore() {
         val id = UUID.randomUUID().toString()
         val email = textViewUser.text.toString()
-        val route = Route(
-                id,
-                email,
-                "Barbosa",
-                ROUTE_ORIGIN,
-                textViewTimeRoute.text.toString(),
-                carSeatTextView.selectedItem as Int,
-                //roadReferenceSearchInput.text.toString(),
-                mutableListOf(),
-                editTextMeetingPlace.text.toString(),
-                mutableListOf()
-        )
-        firebaseFirestore
-                .collection(ROUTE_OBJECT)
-                .document(email)
-                .set(route)
+        if (validateRouteDestinationField("Barbosa") &&
+                validateHourOfRoute(textViewTimeRoute.text.toString()) &&
+                validateMeetingPlace(editTextMeetingPlace.text.toString()) &&
+                validateAvailableSeats(carSeatTextView.selectedItem.toString()) &&
+                validateRoadReferences(xxxRoadReferencesSelected.toMutableList())
+        ) {
+            firebaseFirestore
+                    .collection(ROUTE_OBJECT)
+                    .document(email)
+                    .set(Route(
+                            id,
+                            email,
+                            "Barbosa",
+                            ROUTE_ORIGIN,
+                            textViewTimeRoute.text.toString(),
+                            carSeatTextView.selectedItem as Int,
+                            xxxRoadReferencesSelected.toMutableList(),
+                            editTextMeetingPlace.text.toString(),
+                            mutableListOf()
+                    )
+                    )
+        } else {
+            Snackbar.make(linearLayoutActivityCreateRoute, getText(R.string.try_again).toString(), Snackbar.LENGTH_LONG).show()
+        }
+    }
+
+    private fun validateRouteDestinationField(destinationRoute: String): Boolean {
+        return destinationRoute.trim().isNotEmpty()
+    }
+
+    private fun validateHourOfRoute(hourOfRoute: String): Boolean {
+        return hourOfRoute.trim().isNotEmpty()
+    }
+
+    private fun validateMeetingPlace(meetingPlace: String): Boolean {
+        return meetingPlace.trim().isNotEmpty()
+    }
+
+    private fun validateAvailableSeats(availableSeats: String): Boolean {
+        return availableSeats.trim().isNotEmpty()
+    }
+
+    private fun validateRoadReferences(roadReferences: MutableList<String?>): Boolean {
+        return roadReferences.isNotEmpty()
     }
 
     override fun onDestroy() {
@@ -164,5 +197,4 @@ class CreateRouteActivity : AppCompatActivity() {
             return Intent(context, CreateRouteActivity::class.java)
         }
     }
-
 }
