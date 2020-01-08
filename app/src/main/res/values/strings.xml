@@ -27,6 +27,8 @@
     <string name="login_failed">"Login failed"</string>
     <string name="loading">Loading…</string>
     <string name="search">Search…</string>
+    <string name="later_hour">Selecciona una hora posterior</string>
+    <string name="pick_an_hour">Elige una hora</string>
     <string name="desc_firebase_lockup">Firebase logo and name</string>
     <string name="label_google_sign_in">Firebase + Google Sign In</string>
     <string name="desc_google_sign_in">Use a Google Sign In credential to authenticate with Firebase.</string>

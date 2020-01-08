@@ -23,6 +23,7 @@ import kotlinx.android.synthetic.main.activity_create_route.button
 import kotlinx.android.synthetic.main.activity_create_route.carSeatTextView
 import kotlinx.android.synthetic.main.activity_create_route.editTextMeetingPlace
 import kotlinx.android.synthetic.main.activity_create_route.imageViewSaveRoute
+import kotlinx.android.synthetic.main.activity_create_route.roadReferencesSelectedTextView
 import kotlinx.android.synthetic.main.activity_create_route.textViewTimeRoute
 import kotlinx.android.synthetic.main.activity_create_route.textViewUser
 import kotlinx.android.synthetic.main.activity_route.linearLayoutActivityRoute
@@ -55,6 +56,17 @@ class CreateRouteActivity : AppCompatActivity() {
         showRoadReferencesDialog()
     }
 
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
+        if (hasFocus) {
+            var roadReferenceText = ""
+            RoadReferenceRepository(application).getRoadReferencesSelected().forEach {
+                roadReferenceText += "$it "
+            }
+            roadReferencesSelectedTextView.text = roadReferenceText
+        }
+    }
+
     private fun showRoadReferencesDialog() {
         button.setOnClickListener {
             lauchDialog()
@@ -76,8 +88,7 @@ class CreateRouteActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = getText(R.string.create_route)
         textViewUser.text = email
-        val arrayAdapter =
-                ArrayAdapter(this@CreateRouteActivity, android.R.layout.simple_spinner_item, CARSEAT)
+        val arrayAdapter = ArrayAdapter(this@CreateRouteActivity, android.R.layout.simple_spinner_item, CARSEAT)
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         carSeatTextView.adapter = arrayAdapter
         textViewTimeRoute.hint = "Elige una hora"
@@ -90,7 +101,7 @@ class CreateRouteActivity : AppCompatActivity() {
                 TIMEPICKERHOUR = hourOfDay
                 TIMEPICKERMINUTE = minute
             } else {
-                Snackbar.make(linearLayoutActivityRoute, "Selecciona una hora posterior", Snackbar.LENGTH_LONG).show()
+                Snackbar.make(linearLayoutActivityRoute, getString(R.string.later_hour), Snackbar.LENGTH_LONG).show()
             }
         }
         val timePickerDialog = TimePickerDialog(
