@@ -18,10 +18,20 @@ import com.globant.splitcar.utils.ROUTE_OBJECT
 import com.globant.splitcar.utils.ROUTE_ORIGIN
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.activity_create_route.*
+import kotlinx.android.synthetic.main.activity_create_route.carSeatTextView
+import kotlinx.android.synthetic.main.activity_create_route.destinationReferenceTextView
+import kotlinx.android.synthetic.main.activity_create_route.destinationRouteButton
+import kotlinx.android.synthetic.main.activity_create_route.editTextMeetingPlace
+import kotlinx.android.synthetic.main.activity_create_route.imageViewSaveRoute
+import kotlinx.android.synthetic.main.activity_create_route.imageViewTimeRoute
+import kotlinx.android.synthetic.main.activity_create_route.linearLayoutActivityCreateRoute
+import kotlinx.android.synthetic.main.activity_create_route.roadReferenceDialogFragmentButton
+import kotlinx.android.synthetic.main.activity_create_route.roadReferencesSelectedListView
+import kotlinx.android.synthetic.main.activity_create_route.textViewTimeRoute
+import kotlinx.android.synthetic.main.activity_create_route.textViewUser
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
-import java.util.*
+import java.util.UUID
 
 /**
  * CreateRouteActivity
@@ -47,23 +57,19 @@ class CreateRouteActivity : AppCompatActivity() {
         imageViewSaveRoute.setOnClickListener {
             saveFireStore()
         }
-        autoCompleteTextViewDestinationRoute.setOnClickListener {
-            launchDialogFragment()
+        destinationRouteButton.setOnClickListener {
+            launchDialogFragment("route_destination")
         }
-        button.setOnClickListener {
-            launchDialogFragment()
+        if (RoadReferenceRepository(application).getDestinationReference().isNotEmpty())
+            destinationReferenceTextView.text = "Destination " + RoadReferenceRepository(application).getDestinationReference()
+        roadReferenceDialogFragmentButton.setOnClickListener {
+            launchDialogFragment("road_reference")
         }
         roadReferencesSelectedListView.onItemClickListener =
             AdapterView.OnItemClickListener { _, _, i, _ ->
-                val cuantas = RoadReferenceRepository(application).getRoadReferencesSelected().size
+                //val cuantas = RoadReferenceRepository(application).getRoadReferencesSelected().size
                 RoadReferenceRepository(application).unselectRoadReference(adapter.getItem(i).toString())
-                val qq = RoadReferenceRepository(application).getRoadReferencesSelected().size
-                val qq2 = RoadReferenceRepository(application).getRoadReferencesSelected().size
-                roadReferencesSelectedListView.adapter = ArrayAdapter(
-                    application.applicationContext,
-                    android.R.layout.simple_list_item_1,
-                    RoadReferenceRepository(application).getRoadReferencesSelected()
-                )
+                roadReferencesSelectedListView.adapter = ArrayAdapter(application.applicationContext, android.R.layout.simple_list_item_1, RoadReferenceRepository(application).getRoadReferencesSelected())
             }
         //TODO set backgrounds as styles within layout activity_create_route
         //TODO implementar darkmode
@@ -72,23 +78,22 @@ class CreateRouteActivity : AppCompatActivity() {
         //TODO if there an active route for this user do not allow to join to a route
     }
 
-    private fun launchDialogFragment() {
+    private fun launchDialogFragment(trigger: String) {
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         val prev = supportFragmentManager.findFragmentByTag("dialog")
         if (prev != null) {
             fragmentTransaction.remove(prev)
         }
         fragmentTransaction.addToBackStack(null)
-        val dialogFragment = RoadReferencesDialog(application)
+        val dialogFragment = RoadReferencesDialogFragment(application)
+        val mArgs = Bundle()
+        mArgs.putString("trigger", trigger)
+        dialogFragment.arguments = mArgs
         dialogFragment.show(fragmentTransaction, "dialog")
     }
 
     private fun createLisViewAdapter(): ArrayAdapter<RoadReference> {
-        return ArrayAdapter(
-            application.applicationContext,
-            android.R.layout.simple_list_item_1,
-            RoadReferenceRepository(application).getRoadReferencesSelected()
-        )
+        return ArrayAdapter(application.applicationContext, android.R.layout.simple_list_item_1, RoadReferenceRepository(application).getRoadReferencesSelected())
     }
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
@@ -96,15 +101,7 @@ class CreateRouteActivity : AppCompatActivity() {
         if (hasFocus) {
             adapter = createLisViewAdapter()
             roadReferencesSelectedListView.adapter = adapter
-            /*
-            var roadReferenceText = ""
-            val selectedRoadReferences = RoadReferenceRepository(application).getRoadReferencesSelected().size
-            RoadReferenceRepository(application).getRoadReferencesSelected().forEach {
-                arrayOfRoadReferencesSelected = Array(selectedRoadReferences) { _ -> it.toString() }
-                roadReferenceText += "$it \n"
-            }
-            roadReferencesSelectedListView.text = roadReferenceText
-            */
+            destinationReferenceTextView.text = RoadReferenceRepository(application).getDestinationReference()
         }
     }
 
@@ -118,7 +115,6 @@ class CreateRouteActivity : AppCompatActivity() {
         var pickMinute = LocalTime.now().minute
         val timeFormatter = DateTimeFormatter.ofPattern("HH:mm a")
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        textViewTimeRoute.hint = getText(R.string.pick_time)
         val onTimeSetListener = TimePickerDialog.OnTimeSetListener { _, hourOfDay, minute ->
             val (pickTime, pickTimeStringAMPM) = returnPairLocalTimeAndTimeCastAMPM(hourOfDay, minute, timeFormatter)
             if (LocalTime.now() < pickTime) {
@@ -129,7 +125,7 @@ class CreateRouteActivity : AppCompatActivity() {
                 Snackbar.make(linearLayoutActivityCreateRoute, getText(R.string.pick_time_after).toString(), Snackbar.LENGTH_LONG).show()
             }
         }
-        textViewTimeRoute.setOnClickListener {
+        imageViewTimeRoute.setOnClickListener {
             TimePickerDialog(this@CreateRouteActivity, onTimeSetListener, pickHour, pickMinute, false).show()
         }
     }

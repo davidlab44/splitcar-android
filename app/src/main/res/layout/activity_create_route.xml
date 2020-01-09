@@ -11,7 +11,6 @@
         android:layout_width="368dp"
         android:layout_height="608dp"
         android:layout_margin="8dp"
-        android:background="#E8E8E8"
         app:layout_constraintBottom_toTopOf="@+id/imageViewSaveRoute"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.074"
@@ -23,7 +22,6 @@
             android:id="@+id/linearLayoutActivityCreateRoute"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#E8E8E8"
             android:orientation="vertical">
 
             <LinearLayout
@@ -32,16 +30,6 @@
                 android:background="#E8E8E8"
                 android:orientation="horizontal"
                 android:padding="8dp">
-
-                <ImageView
-                    android:id="@+id/imageViewRouteUser"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_marginTop="8dp"
-                    android:contentDescription="@string/route_user"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@android:drawable/ic_menu_edit" />
 
                 <TextView
                     android:id="@+id/textViewUser"
@@ -60,31 +48,48 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#FAFAFA"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:padding="8dp">
 
-                <ImageView
-                    android:id="@+id/imageViewRouteDestination"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_marginTop="4dp"
-                    android:contentDescription="@string/route_destination"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textViewUser"
-                    app:srcCompat="@android:drawable/presence_online" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
-                <AutoCompleteTextView
-                    android:id="@+id/autoCompleteTextViewDestinationRoute"
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginTop="6dp"
+                        android:gravity="center_vertical"
+                        android:text="@string/destination_reference"
+                        android:textSize="14sp"
+                        app:layout_constraintStart_toEndOf="@+id/imageViewRouteUser"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/destinationRouteButton"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginLeft="50dp"
+                        android:layout_marginTop="8dp"
+                        android:contentDescription="@string/route_user"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@android:drawable/ic_menu_edit" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/destinationReferenceTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
-                    android:hint="@string/destination_route"
-                    android:textSize="18sp"
-                    app:layout_constraintStart_toEndOf="@+id/imageViewRouteDestination"
-                    app:layout_constraintTop_toTopOf="@+id/imageViewRouteDestination" />
+                    android:layout_marginTop="6dp"
+                    android:textSize="12sp"
+                    android:textStyle="italic"
+                    app:layout_constraintStart_toEndOf="@+id/imageViewRouteUser"
+                    app:layout_constraintTop_toTopOf="parent" />
             </LinearLayout>
-
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -117,22 +122,19 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_marginTop="4dp"
-                    android:contentDescription="@string/time_route" />
+                    android:layout_marginLeft="24dp"
+                    android:contentDescription="@string/car_seat"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewTimeRoute"
+                    app:srcCompat="@android:drawable/ic_menu_upload" />
+
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#FAFAFA"
                 android:orientation="horizontal"
                 android:padding="8dp">
-
-                <ImageView
-                    android:id="@+id/imageViewRouteMeetingPlace"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_marginTop="4dp"
-                    android:contentDescription="@string/meeting_place" />
 
                 <EditText
                     android:id="@+id/editTextMeetingPlace"
@@ -153,16 +155,6 @@
                 android:background="#E8E8E8"
                 android:orientation="horizontal"
                 android:padding="8dp">
-
-                <ImageView
-                    android:id="@+id/imageViewCarSeat"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_marginTop="4dp"
-                    android:contentDescription="@string/car_seat"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textViewTimeRoute"
-                    app:srcCompat="@android:drawable/ic_menu_upload" />
 
                 <TextView
                     android:id="@+id/textViewCarSeat"
@@ -188,7 +180,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#FAFAFA"
                 android:orientation="vertical"
                 android:padding="8dp">
 
@@ -204,7 +195,7 @@
                         android:text="@string/road_reference" />
 
                     <ImageButton
-                        android:id="@+id/button"
+                        android:id="@+id/roadReferenceDialogFragmentButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="3dp"
@@ -216,7 +207,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/border"
-                    android:padding="@dimen/button_horizontal_margin" />
+                    android:layout_margin="8dp" />
             </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>

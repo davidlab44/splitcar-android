@@ -38,7 +38,7 @@ class RoadReferenceRepository(private val application: Application) {
     }
 
     //TODO eliminar los assert null
-    fun updateRoadReferenceSelectedField(roadReferenceName: String) {
+    fun setRoadReferencesSelected(roadReferenceName: String) {
         RoadReferenceDatabase.getInstance(application.applicationContext)!!.roadReferenceDao().updateRoadReferenceSelectedField(roadReferenceName)
     }
 
@@ -58,10 +58,17 @@ class RoadReferenceRepository(private val application: Application) {
             .unselectRoadReference(roadReferenceToUnselect)
     }
 
-
-    /*
-    fun saveRoadReferenceList(roadReference: RoadReference) {
-        RoadReferenceDatabase.getInstance(application.applicationContext)!!.roadReferenceDao().insert(roadReference)
+    //TODO eliminar los assert null
+    fun setDestinationReferenceSelected(roadReferenceName: String) {
+        RoadReferenceDatabase.getInstance(application.applicationContext)!!.roadReferenceDao().rollBackDestinationReferenceSelected()
+        RoadReferenceDatabase.getInstance(application.applicationContext)!!.roadReferenceDao().setDestinationReferenceSelected(roadReferenceName)
     }
-    */
+
+    fun getDestinationReference(): String {
+        var destinationReference = ""
+        RoadReferenceDatabase.getInstance(application.applicationContext)!!.roadReferenceDao().getDestinationReference().forEach {
+            destinationReference += it.name
+        }
+        return destinationReference
+    }
 }

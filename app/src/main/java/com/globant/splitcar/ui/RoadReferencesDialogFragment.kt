@@ -17,7 +17,9 @@ import kotlinx.android.synthetic.main.road_references_dialog.closeDialogButton
 import kotlinx.android.synthetic.main.road_references_dialog.roadReferenceListView
 import kotlinx.android.synthetic.main.road_references_dialog.roadReferenceSearchInput
 
-class RoadReferencesDialog(private val application: Application) : DialogFragment() {
+class RoadReferencesDialogFragment(private val application: Application) : DialogFragment() {
+
+    private lateinit var dialogFragmentTrigger: String
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.road_references_dialog, container, false)
@@ -25,6 +27,7 @@ class RoadReferencesDialog(private val application: Application) : DialogFragmen
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        dialogFragmentTrigger = arguments?.getString("trigger", "").toString()
         roadReferenceSearchInput.hint = application.applicationContext.getString(R.string.search)
         val adapter = createLisViewAdapter("")
         roadReferenceListView.adapter = adapter
@@ -50,7 +53,11 @@ class RoadReferencesDialog(private val application: Application) : DialogFragmen
 
     private fun selectRoadReference(adapter: ArrayAdapter<RoadReference>) {
         roadReferenceListView.onItemClickListener = AdapterView.OnItemClickListener { _, _, i, _ ->
-            RoadReferenceRepository(application).updateRoadReferenceSelectedField(adapter.getItem(i)!!.toString())
+            when (dialogFragmentTrigger) {
+                "route_destination" -> RoadReferenceRepository(application).setDestinationReferenceSelected(adapter.getItem(i)!!.toString())
+                "road_reference" -> RoadReferenceRepository(application).setRoadReferencesSelected(adapter.getItem(i)!!.toString())
+                else -> dismiss()
+            }
         }
     }
 }

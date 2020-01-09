@@ -11,9 +11,9 @@
     <string name="save_route">Guardar ruta</string>
     <string name="date_route">Fecha de Ruta</string>
     <string name="time_route">Tiempo de Ruta</string>
-    <string name="meeting_place">Cúal es el lugar de Encuentro</string>
+    <string name="meeting_place">Punto de Encuentro</string>
     <string name="car_seat">Cupos Disponibles</string>
-    <string name="pick_time">Elige una hora</string>
+    <string name="pick_time">Hora</string>
     <string name="road_reference">Referencias Destino</string>
     <string name="point_of_reference">Lugares por donde va a pasar la ruta</string>
     <string name="title_activity_login">Sign in</string>
@@ -106,4 +106,5 @@
     <string name="create_route">Crea tu ruta</string>
     <string name="pick_time_after">Selecciona una hora posterior</string>
     <string name="try_again">Faltan adatos importantes</string>
+    <string name="destination_reference">Destino:</string>
 </resources>
