@@ -52,6 +52,13 @@ class RoadReferenceRepository(private val application: Application) {
         RoadReferenceDatabase.getInstance(application.applicationContext)!!.roadReferenceDao().rollBackRoadReferenceSelected()
     }
 
+    //TODO eliminar los assert null
+    fun unselectRoadReference(roadReferenceToUnselect: String) {
+        RoadReferenceDatabase.getInstance(application.applicationContext)!!.roadReferenceDao()
+            .unselectRoadReference(roadReferenceToUnselect)
+    }
+
+
     /*
     fun saveRoadReferenceList(roadReference: RoadReference) {
         RoadReferenceDatabase.getInstance(application.applicationContext)!!.roadReferenceDao().insert(roadReference)

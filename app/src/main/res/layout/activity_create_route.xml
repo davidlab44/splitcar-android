@@ -20,9 +20,10 @@
         app:layout_constraintVertical_bias="0.0">
 
         <LinearLayout
+            android:id="@+id/linearLayoutActivityCreateRoute"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/linearLayoutActivityCreateRoute"
+            android:background="#E8E8E8"
             android:orientation="vertical">
 
             <LinearLayout
@@ -210,13 +211,12 @@
                         android:src="@drawable/ic_add_24px" />
                 </LinearLayout>
 
-                <TextView
-                    android:id="@+id/roadReferencesSelectedTextView"
+                <ListView
+                    android:id="@+id/roadReferencesSelectedListView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/border"
                     android:padding="@dimen/button_horizontal_margin" />
-
             </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>

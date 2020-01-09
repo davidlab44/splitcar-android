@@ -5,29 +5,23 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import com.globant.splitcar.R
 import com.globant.splitcar.model.RoadReferenceRepository
 import com.globant.splitcar.model.Route
+import com.globant.splitcar.model.local.RoadReference
 import com.globant.splitcar.utils.CARSEAT
 import com.globant.splitcar.utils.EMAIL
 import com.globant.splitcar.utils.ROUTE_OBJECT
 import com.globant.splitcar.utils.ROUTE_ORIGIN
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.activity_create_route.autoCompleteTextViewDestinationRoute
-import kotlinx.android.synthetic.main.activity_create_route.button
-import kotlinx.android.synthetic.main.activity_create_route.carSeatTextView
-import kotlinx.android.synthetic.main.activity_create_route.editTextMeetingPlace
-import kotlinx.android.synthetic.main.activity_create_route.imageViewSaveRoute
-import kotlinx.android.synthetic.main.activity_create_route.linearLayoutActivityCreateRoute
-import kotlinx.android.synthetic.main.activity_create_route.roadReferencesSelectedTextView
-import kotlinx.android.synthetic.main.activity_create_route.textViewTimeRoute
-import kotlinx.android.synthetic.main.activity_create_route.textViewUser
+import kotlinx.android.synthetic.main.activity_create_route.*
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
-import java.util.UUID
+import java.util.*
 
 /**
  * CreateRouteActivity
@@ -41,10 +35,13 @@ class CreateRouteActivity : AppCompatActivity() {
 
     private val firebaseFirestore = FirebaseFirestore.getInstance()
     private var arrayOfRoadReferencesSelected = arrayOf<String>()
+    lateinit var adapter: ArrayAdapter<RoadReference>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_route)
+        adapter = createLisViewAdapter()
+        roadReferencesSelectedListView.adapter = adapter
         val email = intent.getStringExtra(EMAIL)
         bindComponents(email)
         imageViewSaveRoute.setOnClickListener {
@@ -56,6 +53,18 @@ class CreateRouteActivity : AppCompatActivity() {
         button.setOnClickListener {
             launchDialogFragment()
         }
+        roadReferencesSelectedListView.onItemClickListener =
+            AdapterView.OnItemClickListener { _, _, i, _ ->
+                val cuantas = RoadReferenceRepository(application).getRoadReferencesSelected().size
+                RoadReferenceRepository(application).unselectRoadReference(adapter.getItem(i).toString())
+                val qq = RoadReferenceRepository(application).getRoadReferencesSelected().size
+                val qq2 = RoadReferenceRepository(application).getRoadReferencesSelected().size
+                roadReferencesSelectedListView.adapter = ArrayAdapter(
+                    application.applicationContext,
+                    android.R.layout.simple_list_item_1,
+                    RoadReferenceRepository(application).getRoadReferencesSelected()
+                )
+            }
         //TODO set backgrounds as styles within layout activity_create_route
         //TODO implementar darkmode
         //TODO validate active routes for this email
@@ -74,16 +83,28 @@ class CreateRouteActivity : AppCompatActivity() {
         dialogFragment.show(fragmentTransaction, "dialog")
     }
 
+    private fun createLisViewAdapter(): ArrayAdapter<RoadReference> {
+        return ArrayAdapter(
+            application.applicationContext,
+            android.R.layout.simple_list_item_1,
+            RoadReferenceRepository(application).getRoadReferencesSelected()
+        )
+    }
+
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
         if (hasFocus) {
+            adapter = createLisViewAdapter()
+            roadReferencesSelectedListView.adapter = adapter
+            /*
             var roadReferenceText = ""
             val selectedRoadReferences = RoadReferenceRepository(application).getRoadReferencesSelected().size
             RoadReferenceRepository(application).getRoadReferencesSelected().forEach {
-                arrayOfRoadReferencesSelected = Array(selectedRoadReferences, { i -> it.toString() })
+                arrayOfRoadReferencesSelected = Array(selectedRoadReferences) { _ -> it.toString() }
                 roadReferenceText += "$it \n"
             }
-            roadReferencesSelectedTextView.text = roadReferenceText
+            roadReferencesSelectedListView.text = roadReferenceText
+            */
         }
     }
 

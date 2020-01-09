@@ -1,12 +1,7 @@
 package com.globant.splitcar.model.local
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
-import androidx.room.Update
+import androidx.room.*
 
 /**
  * RoadReferenceDatabase
@@ -46,6 +41,10 @@ interface RoadReferenceDao {
 
     @Query("UPDATE road_reference_table SET selected = 0 WHERE selected = 1 ")
     fun rollBackRoadReferenceSelected()
+
+    @Query("UPDATE road_reference_table SET selected = 0 WHERE name LIKE :roadReferenceToUnselect ")
+    fun unselectRoadReference(roadReferenceToUnselect: String)
+
 
 
 }
