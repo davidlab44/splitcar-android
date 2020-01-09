@@ -13,7 +13,9 @@ import androidx.fragment.app.DialogFragment
 import com.globant.splitcar.R
 import com.globant.splitcar.model.RoadReferenceRepository
 import com.globant.splitcar.model.local.RoadReference
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.road_references_dialog.closeDialogButton
+import kotlinx.android.synthetic.main.road_references_dialog.linearLayoutRoadReferencesDialog
 import kotlinx.android.synthetic.main.road_references_dialog.roadReferenceListView
 import kotlinx.android.synthetic.main.road_references_dialog.roadReferenceSearchInput
 
@@ -50,7 +52,9 @@ class RoadReferencesDialog(private val application: Application) : DialogFragmen
 
     private fun selectRoadReference(adapter: ArrayAdapter<RoadReference>) {
         roadReferenceListView.onItemClickListener = AdapterView.OnItemClickListener { _, _, i, _ ->
-            RoadReferenceRepository(application).updateRoadReferenceSelectedField(adapter.getItem(i)!!.toString())
+            val selectRoadReferenceString = adapter.getItem(i)!!.toString()
+            RoadReferenceRepository(application).updateRoadReferenceSelectedField(selectRoadReferenceString)
+            Snackbar.make(linearLayoutRoadReferencesDialog, "$selectRoadReferenceString Agregado", Snackbar.LENGTH_LONG).show()
         }
     }
 }
