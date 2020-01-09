@@ -105,6 +105,5 @@
     <string name="available_positions">Cupos </string>
     <string name="create_route">Crea tu ruta</string>
     <string name="pick_time_after">Selecciona una hora posterior</string>
-    <string name="try_again">Faltan adatos importantes</string>
-    <string name="destination_reference">Destino:</string>
+    <string name="try_again">Faltan campos obligatorios</string>
 </resources>
