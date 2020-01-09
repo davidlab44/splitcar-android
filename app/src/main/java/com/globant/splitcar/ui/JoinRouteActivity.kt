@@ -44,9 +44,9 @@ class JoinRouteActivity : AppCompatActivity() {
         idRoute.get().addOnSuccessListener { document ->
             if (document.exists()) {
                 val route = document.toObject(Route::class.java) ?: Route()
+                bindRoute(route)
                 if (route.carSeat == 0) {
                     buttonSaveRoute.isEnabled = false
-                    bindRoute(route)
                 } else {
                     buttonSaveRoute.setOnClickListener {
                         updateCarSeatRoutetoFirestore(email)
