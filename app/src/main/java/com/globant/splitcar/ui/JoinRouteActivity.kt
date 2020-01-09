@@ -41,19 +41,22 @@ class JoinRouteActivity : AppCompatActivity() {
         passenger_list.adapter = passengerAdapter
         val email = intent.getStringExtra(ID_USER)
         val idRoute = firebaseFirestore.collection("Route").document(email)
-        idRoute.get()
-                .addOnSuccessListener { document ->
-                    if (document.exists()) {
-                        val route = document.toObject(Route::class.java) ?: Route()
-                        bindRoute(route)
+        idRoute.get().addOnSuccessListener { document ->
+            if (document.exists()) {
+                val route = document.toObject(Route::class.java) ?: Route()
+                if (route.carSeat == 0) {
+                    buttonSaveRoute.isEnabled = false
+                    bindRoute(route)
+                } else {
+                    buttonSaveRoute.setOnClickListener {
+                        updateCarSeatRoutetoFirestore(email)
                     }
                 }
+            }
+        }
                 .addOnFailureListener { exception ->
                     Log.d("Failed", "get failed with ", exception)
                 }
-        buttonSaveRoute.setOnClickListener {
-            updateCarSeatRoutetoFirestore(email)
-        }
     }
 
     private fun bindRoute(route: Route) {
@@ -95,5 +98,4 @@ class JoinRouteActivity : AppCompatActivity() {
             return Intent(context, JoinRouteActivity::class.java)
         }
     }
-
 }
