@@ -107,4 +107,5 @@
     <string name="pick_time_after">Selecciona una hora posterior</string>
     <string name="try_again">Faltan campos obligatorios</string>
     <string name="destination_reference">Lugares de Referencia</string>
+    <string name="road_reference_title">Lugares de referencia</string>
 </resources>

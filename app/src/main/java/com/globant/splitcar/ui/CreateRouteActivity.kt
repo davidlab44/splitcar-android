@@ -68,8 +68,13 @@ class CreateRouteActivity : AppCompatActivity() {
         roadReferencesSelectedListView.onItemClickListener =
             AdapterView.OnItemClickListener { _, _, i, _ ->
                 //val cuantas = RoadReferenceRepository(application).getRoadReferencesSelected().size
+                /*
+                */
                 RoadReferenceRepository(application).unselectRoadReference(adapter.getItem(i).toString())
-                roadReferencesSelectedListView.adapter = ArrayAdapter(application.applicationContext, android.R.layout.simple_list_item_1, RoadReferenceRepository(application).getRoadReferencesSelected())
+                /*
+                adapter = ArrayAdapter(application.applicationContext, android.R.layout.simple_list_item_1, RoadReferenceRepository(application)
+                        .getRoadReferencesSelected())
+                */
             }
         //TODO set backgrounds as styles within layout activity_create_route
         //TODO implementar darkmode
@@ -86,9 +91,9 @@ class CreateRouteActivity : AppCompatActivity() {
         }
         fragmentTransaction.addToBackStack(null)
         val dialogFragment = RoadReferencesDialogFragment(application)
-        val mArgs = Bundle()
-        mArgs.putString("trigger", trigger)
-        dialogFragment.arguments = mArgs
+        val dialogFragmentBundle = Bundle()
+        dialogFragmentBundle.putString("trigger", trigger)
+        dialogFragment.arguments = dialogFragmentBundle
         dialogFragment.show(fragmentTransaction, "dialog")
     }
 

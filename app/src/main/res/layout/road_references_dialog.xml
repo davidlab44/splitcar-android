@@ -7,10 +7,9 @@
     android:padding="20dp">
 
     <TextView
-        android:id="@+id/text_view"
+        android:id="@+id/dialogFragmentTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Lugares de referencia"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
 
     <EditText
@@ -32,11 +31,4 @@
         android:id="@+id/roadReferenceListView"
         android:layout_width="match_parent"
         android:layout_height="230dp" />
-
-    <Button
-        android:id="@+id/closeDialogButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:text="Guardar" />
 </LinearLayout>
